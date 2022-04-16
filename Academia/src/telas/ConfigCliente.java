@@ -319,7 +319,9 @@ public class ConfigCliente extends javax.swing.JFrame {
                 pnlFoto.setIcon(new ImageIcon(imgFit));
                 flag =0;
                 }
-            }
+            JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
+                    }
+        
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

@@ -11,7 +11,7 @@ package classes;
 public class Funcionario extends Pessoa {
     private String trabalhando ;
     private String chave;    
-    private String saldo;
+    private int saldo =0;
 
     public Funcionario() {
     }
@@ -37,11 +37,11 @@ public class Funcionario extends Pessoa {
         this.chave = chave;
     }
 
-    public String getSaldo() {
+    public int getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(String saldo) {
+    public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
     

@@ -238,6 +238,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pagamento"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PersonalPaymentTextMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -110,6 +110,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         PersonalPaymentIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/debit-card.png"))); // NOI18N
 
         PersonalPaymentText.setText("Pagamento");
+        PersonalPaymentText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PersonalPaymentTextMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -279,6 +284,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btnExitPersonalActionPerformed
+
+    private void PersonalPaymentTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalPaymentTextMouseClicked
+        new PagamentoPersonal().setVisible(true);
+        
+    }//GEN-LAST:event_PersonalPaymentTextMouseClicked
 
     /**
      * @param args the command line arguments

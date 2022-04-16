@@ -34,7 +34,6 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         else{
             this.setVisible(false);
             TelaInicio.flag1 = 0;
-            new TelaAcaoCliente().setVisible(false);
         }
     }
 
