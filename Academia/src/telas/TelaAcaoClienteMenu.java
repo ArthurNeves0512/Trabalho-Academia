@@ -4,6 +4,9 @@
  */
 package telas;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author MASTER
@@ -15,6 +18,16 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
      */
     public TelaAcaoClienteMenu() {
         initComponents();
+         for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
+            if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+         
+                NomeCliente.setText(TelaInicio.cadastrosClientes.get(i).getNome());
+                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
+                Image imFit = imcon.getImage();
+                Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon.setIcon(new ImageIcon(imgFit));
+            }
+        }
     }
 
     /**
@@ -45,7 +58,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BackgroundPanelBlack.setBackground(new java.awt.Color(0, 0, 0));
         BackgroundPanelBlack.setPreferredSize(new java.awt.Dimension(600, 500));
@@ -59,6 +72,11 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         ConfigText.setText("Configurações");
+        ConfigText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConfigTextMouseClicked(evt);
+            }
+        });
 
         SettIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/settings-icon(1).png"))); // NOI18N
 
@@ -77,9 +95,9 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ConfigText)
-                    .addComponent(SettIcon))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SettIcon)
+                    .addComponent(ConfigText))
                 .addGap(13, 13, 13))
         );
 
@@ -164,7 +182,6 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnClose.setBackground(new java.awt.Color(255, 255, 255));
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2cross-rounded-outline.png"))); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +189,6 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setBackground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Sair");
 
         javax.swing.GroupLayout MenuSideBarLayout = new javax.swing.GroupLayout(MenuSideBar);
@@ -187,10 +203,10 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
                 .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MenuSideBarLayout.createSequentialGroup()
                         .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(NomeCliente)
-                                .addGroup(MenuSideBarLayout.createSequentialGroup()
-                                    .addGap(36, 36, 36)
+                            .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(NomeCliente)
                                     .addComponent(ImageIcon)))
                             .addGroup(MenuSideBarLayout.createSequentialGroup()
                                 .addContainerGap()
@@ -248,6 +264,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -255,6 +272,12 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoCliente().setVisible(true);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void ConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfigTextMouseClicked
+        // TODO add your handling code here:
+        
+        new ConfigCliente().setVisible(true);
+    }//GEN-LAST:event_ConfigTextMouseClicked
 
     /**
      * @param args the command line arguments

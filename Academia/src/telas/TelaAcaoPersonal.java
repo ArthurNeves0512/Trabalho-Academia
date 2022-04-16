@@ -4,6 +4,9 @@
  */
 package telas;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author MASTER
@@ -28,13 +31,15 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
         PersonalBackgroundMenuWhite = new javax.swing.JPanel();
         btnPersonalMenu = new javax.swing.JButton();
+        btnOff = new javax.swing.JButton();
+        btnOn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        PersonalBackgroundMenuWhite.setBackground(new java.awt.Color(255, 255, 255));
+        PersonalBackgroundMenuWhite.setBackground(new java.awt.Color(0, 207, 137));
         PersonalBackgroundMenuWhite.setMinimumSize(new java.awt.Dimension(600, 500));
 
-        btnPersonalMenu.setBackground(new java.awt.Color(255, 255, 255));
         btnPersonalMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/4menu-three-outlined-rounded-lines-symbol.png"))); // NOI18N
         btnPersonalMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,21 +47,63 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
             }
         });
 
+        btnOff.setText("OFF");
+        btnOff.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOffActionPerformed(evt);
+            }
+        });
+
+        btnOn.setText("ON");
+        btnOn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("TRABALHANDO");
+
         javax.swing.GroupLayout PersonalBackgroundMenuWhiteLayout = new javax.swing.GroupLayout(PersonalBackgroundMenuWhite);
         PersonalBackgroundMenuWhite.setLayout(PersonalBackgroundMenuWhiteLayout);
         PersonalBackgroundMenuWhiteLayout.setHorizontalGroup(
             PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPersonalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                        .addComponent(btnPersonalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                .addContainerGap(260, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
+            .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                    .addGap(107, 107, 107)
+                    .addComponent(btnOn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(309, Short.MAX_VALUE)))
         );
         PersonalBackgroundMenuWhiteLayout.setVerticalGroup(
             PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnPersonalMenu)
-                .addContainerGap(456, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160))
+            .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                    .addContainerGap(266, Short.MAX_VALUE)
+                    .addComponent(btnOn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(161, 161, 161)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -71,6 +118,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPersonalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalMenuActionPerformed
@@ -78,6 +126,23 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoPersonalMenu().setVisible(true);
     }//GEN-LAST:event_btnPersonalMenuActionPerformed
+
+    private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
+     for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("sim");
+            }
+        }
+    }//GEN-LAST:event_btnOnActionPerformed
+
+    private void btnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffActionPerformed
+        // TODO add your handling code here:
+        for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("não");
+            }
+        }
+    }//GEN-LAST:event_btnOffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +181,9 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PersonalBackgroundMenuWhite;
+    private javax.swing.JButton btnOff;
+    private javax.swing.JButton btnOn;
     private javax.swing.JButton btnPersonalMenu;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

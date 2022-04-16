@@ -31,13 +31,12 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 500));
 
         TelaAcaoClienteBackground.setBackground(new java.awt.Color(255, 255, 255));
         TelaAcaoClienteBackground.setPreferredSize(new java.awt.Dimension(600, 500));
 
-        btnMenu.setBackground(new java.awt.Color(255, 255, 255));
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/4menu-three-outlined-rounded-lines-symbol.png"))); // NOI18N
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,9 +52,17 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Foto", "Nome", "Endereço", "Sexo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
 
         javax.swing.GroupLayout TelaAcaoClienteBackgroundLayout = new javax.swing.GroupLayout(TelaAcaoClienteBackground);
@@ -63,37 +70,37 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         TelaAcaoClienteBackgroundLayout.setHorizontalGroup(
             TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addGroup(TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(564, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         TelaAcaoClienteBackgroundLayout.setVerticalGroup(
             TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(59, 59, 59)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
+            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed

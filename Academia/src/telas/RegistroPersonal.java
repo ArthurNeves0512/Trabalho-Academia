@@ -1,22 +1,23 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
 
+import classes.Funcionario;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import static telas.TelaInicio.cadastrosPersonal;
 /**
  *
  * @author arthur
  */
 public class RegistroPersonal extends javax.swing.JFrame {
-
+String getImagemSelecionada;
     /**
      * Creates new form RegistroPersonal
      */
@@ -68,17 +69,18 @@ public class RegistroPersonal extends javax.swing.JFrame {
         cmbSexo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         btnUpload = new javax.swing.JButton();
-        icon = new javax.swing.JLabel();
         btnNovo = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        jPanel3 = new javax.swing.JPanel();
+        icon = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 500));
 
+        jPanel1.setBackground(new java.awt.Color(81, 200, 148));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 500));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
@@ -133,6 +135,22 @@ public class RegistroPersonal extends javax.swing.JFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(81, 200, 148));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        icon.setBackground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -177,31 +195,31 @@ public class RegistroPersonal extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnUpload)
-                        .addGap(132, 132, 132))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpar)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnNovo)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSalvar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnLimpar)
+                            .addGap(56, 56, 56))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addGap(67, 67, 67))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnUpload)
+                            .addGap(132, 132, 132)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -225,7 +243,14 @@ public class RegistroPersonal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,12 +258,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpload)))
+                    .addComponent(btnUpload, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -268,18 +288,18 @@ public class RegistroPersonal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
         );
 
         pack();
@@ -293,7 +313,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
         int selecionado = pegandoImagem.showOpenDialog(this);
         if(selecionado == JFileChooser.APPROVE_OPTION){
             File arquivo = pegandoImagem.getSelectedFile();
-            String getImagemSelecionada = arquivo.getAbsolutePath();
+            getImagemSelecionada = arquivo.getAbsolutePath();
             JOptionPane.showMessageDialog(null, getImagemSelecionada);
              ImageIcon imIco= new ImageIcon(getImagemSelecionada);
             Image imFit = imIco.getImage();
@@ -365,6 +385,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+            Funcionario funcionario = new Funcionario( txtNome.getText(), txtSenha.getText(), txtCpf.getText(),
+                    getImagemSelecionada, txtEndereco.getText(),
+                    txtTelefone.getText(), txtEmail.getText(), txtIdade.getText(), String.valueOf(cmbSexo.getSelectedItem()), txtCep.getText());
+            cadastrosPersonal.add(funcionario);
+           
             icon.setIcon(null);
             txtCep.setText("");
             txtCpf.setText("");
@@ -374,7 +399,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
             txtNome.setText("");
             txtTelefone.setText("");
             txtSenha.setText("");
-        
+            
         }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -451,6 +476,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;

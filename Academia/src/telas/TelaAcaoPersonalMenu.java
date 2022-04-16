@@ -4,6 +4,10 @@
  */
 package telas;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author MASTER
@@ -15,6 +19,17 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
      */
     public TelaAcaoPersonalMenu() {
         initComponents();
+        for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+         
+                PersonalName.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
+                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
+                Image imFit = imcon.getImage();
+                Image imgFit = imFit.getScaledInstance(PersonalIconImage.getWidth(), PersonalIconImage.getHeight(), Image.SCALE_SMOOTH);
+                PersonalIconImage.setIcon(new ImageIcon(imgFit));
+            }
+        }
+        
     }
 
     /**
@@ -45,14 +60,13 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         PersonalHelpText = new javax.swing.JLabel();
         btnExitPersonal = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PersonalMenuBackground.setBackground(new java.awt.Color(0, 0, 0));
         PersonalMenuBackground.setMinimumSize(new java.awt.Dimension(600, 500));
 
         PersonalMenuBar.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnPersonalExit.setBackground(new java.awt.Color(255, 255, 255));
         btnPersonalExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2cross-rounded-outline.png"))); // NOI18N
         btnPersonalExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,8 +186,12 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnExitPersonal.setBackground(new java.awt.Color(255, 255, 255));
         btnExitPersonal.setText("Sair");
+        btnExitPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitPersonalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PersonalMenuBarLayout = new javax.swing.GroupLayout(PersonalMenuBar);
         PersonalMenuBar.setLayout(PersonalMenuBarLayout);
@@ -248,6 +266,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPersonalExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalExitActionPerformed
@@ -255,6 +274,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoPersonal().setVisible(true);
     }//GEN-LAST:event_btnPersonalExitActionPerformed
+
+    private void btnExitPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitPersonalActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExitPersonalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,6 +311,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAcaoPersonalMenu().setVisible(true);
+                
             }
         });
     }

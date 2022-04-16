@@ -4,19 +4,30 @@
  */
 package telas;
 
+import classes.Cliente;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
-
+import java.util.ArrayList;
+import classes.Funcionario;
 /**
  *
  * @author arthur
  */
 public class TelaInicio extends javax.swing.JFrame {
-
+static   ArrayList<Cliente> cadastrosClientes;
+static  ArrayList<Funcionario> cadastrosPersonal;
+private int flag =0;
+static String cpfEscolhido;
     /**
      * Creates new form TelaInicio
      */
     public TelaInicio() {
         initComponents();
+        cadastrosPersonal = new ArrayList<Funcionario>();
+        cadastrosClientes = new ArrayList<Cliente>();
+        
     }
 
     /**
@@ -130,7 +141,26 @@ public class TelaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        flag =0;
+        for (int i =0; i<cadastrosClientes.size(); i ++){
+            if(cadastrosClientes.get(i).getCpf().equals(txtCpf.getText()) && cadastrosClientes.get(i).getSenha().equals(txtSenha.getText())){      
+                new TelaAcaoCliente().setVisible(true);
+                flag = 1;
+                cpfEscolhido =cadastrosClientes.get(i).getCpf();
+            }
+            
+        }
+        for (int i =0; i<cadastrosPersonal.size(); i ++){
+            if(cadastrosPersonal.get(i).getCpf().equals(txtCpf.getText()) && cadastrosPersonal.get(i).getSenha().equals(txtSenha.getText())){      
+                new TelaAcaoPersonal().setVisible(true);
+                flag =1;
+                cpfEscolhido =cadastrosPersonal.get(i).getCpf();
+            }
+        }
+        
+        if (flag ==0){
+                JOptionPane.showMessageDialog(null, "não possuimos cadastro ligados com esse cpf e essa senha", "atenção", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
