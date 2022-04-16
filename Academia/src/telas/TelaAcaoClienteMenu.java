@@ -11,12 +11,14 @@ import javax.swing.ImageIcon;
  *
  * @author MASTER
  */
+
 public class TelaAcaoClienteMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaAcaoClienteMenu
      */
     public TelaAcaoClienteMenu() {
+        if(TelaInicio.flag1!=1){
         initComponents();
          for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
             if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
@@ -27,6 +29,12 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
                 Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon.setIcon(new ImageIcon(imgFit));
             }
+        }
+        }
+        else{
+            this.setVisible(false);
+            TelaInicio.flag1 = 0;
+            new TelaAcaoCliente().setVisible(false);
         }
     }
 
@@ -309,7 +317,9 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new TelaAcaoClienteMenu().setVisible(true);
+                
             }
         });
     }

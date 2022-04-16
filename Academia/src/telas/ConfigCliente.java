@@ -10,13 +10,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import classes.Cliente;
 /**
  *
  * @author arthur
  */
 public class ConfigCliente extends javax.swing.JFrame {
     String getImagemSelecionada;
+    int flag;
     /**
      * Creates new form ConfigCliente
      */
@@ -29,6 +30,7 @@ public class ConfigCliente extends javax.swing.JFrame {
                 txtNome.setText(TelaInicio.cadastrosClientes.get(i).getNome());
                 ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
                 Image imFit = imcon.getImage();
+                
                 Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
                 pnlFoto.setIcon(new ImageIcon(imgFit));
                 txtCep.setText(TelaInicio.cadastrosClientes.get(i).getCep());txtEmail.setText(TelaInicio.cadastrosClientes.get(i).getEmail());
@@ -40,10 +42,11 @@ public class ConfigCliente extends javax.swing.JFrame {
                 
                 
                 
-                imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
-                imFit = imcon.getImage();
-                imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-                pnlFoto.setIcon(new ImageIcon(imgFit));
+//                imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
+//                System.out.println(imcon +"opa ");
+//                imFit = imcon.getImage();
+//                imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
+//                pnlFoto.setIcon(new ImageIcon(imgFit));
              
             }
         }
@@ -109,6 +112,11 @@ public class ConfigCliente extends javax.swing.JFrame {
         });
 
         btnApagar.setText("Apagar Conta");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("IMC:");
 
@@ -284,7 +292,8 @@ public class ConfigCliente extends javax.swing.JFrame {
             Image imFit = imIco.getImage();
             Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
             pnlFoto.setIcon(new ImageIcon(imgFit));
-            System.out.println(getImagemSelecionada);
+            System.out.println(getImagemSelecionada +"veremos aqui");
+            flag =1;
             
         }
     }//GEN-LAST:event_btnUploadActionPerformed
@@ -300,15 +309,33 @@ public class ConfigCliente extends javax.swing.JFrame {
                 TelaInicio.cadastrosClientes.get(i).setAltura(Float.parseFloat(txtAltura.getText()));               
                 TelaInicio.cadastrosClientes.get(i).setCpf(txtCpf.getText());
               
+                if(flag==1){
+               
+                System.out.println(getImagemSelecionada);
                 TelaInicio.cadastrosClientes.get(i).setFoto(getImagemSelecionada);
                 ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
                 Image imFit = imcon.getImage();
                 Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
                 pnlFoto.setIcon(new ImageIcon(imgFit));
-             
+                flag =0;
+                }
             }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "sim","opa", JOptionPane.CLOSED_OPTION);
+        for (int i =0; i <TelaInicio.cadastrosClientes.size();i ++){
+            if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+               System.out.println(TelaInicio.cadastrosClientes.remove(i).getNome());
+                new TelaAcaoClienteMenu().setVisible(false);
+                
+               this.setVisible(false);
+               TelaInicio.flag1 =1;
+            }
+        }
+    }//GEN-LAST:event_btnApagarActionPerformed
 
     /**
      * @param args the command line arguments

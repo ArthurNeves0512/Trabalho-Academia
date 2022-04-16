@@ -20,6 +20,7 @@ static   ArrayList<Cliente> cadastrosClientes;
 static  ArrayList<Funcionario> cadastrosPersonal;
 private int flag =0;
 static String cpfEscolhido;
+static int flag1;
     /**
      * Creates new form TelaInicio
      */
@@ -39,6 +40,7 @@ static String cpfEscolhido;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSpinner1 = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         txtCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -213,6 +215,7 @@ static String cpfEscolhido;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

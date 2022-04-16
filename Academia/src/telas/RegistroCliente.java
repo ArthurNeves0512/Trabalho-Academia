@@ -409,7 +409,7 @@ String getImagemSelecionada;
         }
         else{
             JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, txtSenha.getText(), "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+            
             Cliente cliente = new Cliente(Float.parseFloat(txtPeso.getText()), Float.parseFloat(txtAltura.getText()),
                     txtNome.getText(), txtSenha.getText(), txtCpf.getText(), getImagemSelecionada, txtEndereco.getText(),
                     txtTelefone.getText(), txtEmail.getText(), txtIdade.getText(), String.valueOf(cmbSexo.getSelectedItem()), txtCep.getText());
@@ -448,7 +448,7 @@ String getImagemSelecionada;
             Image imFit = imIco.getImage();
             Image imgFit = imFit.getScaledInstance(icon.getWidth(), icon.getHeight(), Image.SCALE_SMOOTH);
             icon.setIcon(new ImageIcon(imgFit));
-            System.out.println(getImagemSelecionada);
+            
         }
  
         
