@@ -18,6 +18,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonalMenu
      */
     public TelaAcaoPersonalMenu() {
+        if(TelaInicio.flag2 !=1){
         initComponents();
         for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
@@ -28,6 +29,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
                 Image imgFit = imFit.getScaledInstance(PersonalIconImage.getWidth(), PersonalIconImage.getHeight(), Image.SCALE_SMOOTH);
                 PersonalIconImage.setIcon(new ImageIcon(imgFit));
             }
+        }
+        }
+        else{
+            this.setVisible(false);
+            TelaInicio.flag2 = 0;
         }
         
     }
@@ -83,6 +89,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         PersonalConfigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/settings-icon(1).png"))); // NOI18N
 
         PersonalConfigText.setText("Configuração");
+        PersonalConfigText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PersonalConfigTextMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,6 +300,10 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         new PagamentoPersonal().setVisible(true);
         
     }//GEN-LAST:event_PersonalPaymentTextMouseClicked
+
+    private void PersonalConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalConfigTextMouseClicked
+        new ConfigPersonal().setVisible(true);
+    }//GEN-LAST:event_PersonalConfigTextMouseClicked
 
     /**
      * @param args the command line arguments

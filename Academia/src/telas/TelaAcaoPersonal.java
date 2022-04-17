@@ -18,7 +18,15 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonal
      */
     public TelaAcaoPersonal() {
+        if(TelaInicio.flag2 !=1){
+            
+        
         initComponents();
+        }
+        else{
+            this.setVisible(false);
+            TelaInicio.flag2 = 0;
+        }
     }
 
     /**
@@ -32,8 +40,6 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
         PersonalBackgroundMenuWhite = new javax.swing.JPanel();
         btnPersonalMenu = new javax.swing.JButton();
-        btnOff = new javax.swing.JButton();
-        btnOn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnOnAndOff = new javax.swing.JToggleButton();
 
@@ -46,22 +52,6 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         btnPersonalMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPersonalMenuActionPerformed(evt);
-            }
-        });
-
-        btnOff.setText("OFF");
-        btnOff.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOffActionPerformed(evt);
-            }
-        });
-
-        btnOn.setText("ON");
-        btnOn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnOn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOnActionPerformed(evt);
             }
         });
 
@@ -85,23 +75,13 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
                         .addComponent(btnPersonalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                        .addGap(0, 250, Short.MAX_VALUE)
-                        .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                                .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(138, 138, 138))))))
-            .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+                        .addGap(0, 254, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                    .addGap(107, 107, 107)
-                    .addComponent(btnOn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(309, Short.MAX_VALUE)))
+                .addGap(243, 243, 243))
         );
         PersonalBackgroundMenuWhiteLayout.setVerticalGroup(
             PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,15 +91,8 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
                 .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
-            .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                    .addContainerGap(266, Short.MAX_VALUE)
-                    .addComponent(btnOn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(161, 161, 161)))
+                .addGap(169, 169, 169))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,6 +116,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         new TelaAcaoPersonalMenu().setVisible(true);
     }//GEN-LAST:event_btnPersonalMenuActionPerformed
 
+<<<<<<< HEAD
     private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
      for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
@@ -160,6 +134,8 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOffActionPerformed
 
+=======
+>>>>>>> 421e6f53324743ccd125937d689c017b800dbf16
     private void btnOnAndOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnAndOffActionPerformed
         // TODO add your handling code here:
         
@@ -222,8 +198,6 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PersonalBackgroundMenuWhite;
-    private javax.swing.JButton btnOff;
-    private javax.swing.JButton btnOn;
     private javax.swing.JToggleButton btnOnAndOff;
     private javax.swing.JButton btnPersonalMenu;
     private javax.swing.JLabel jLabel1;

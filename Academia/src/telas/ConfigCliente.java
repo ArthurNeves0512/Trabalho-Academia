@@ -18,6 +18,7 @@ import classes.Cliente;
 public class ConfigCliente extends javax.swing.JFrame {
     String getImagemSelecionada;
     int flag;
+    int mu;
     /**
      * Creates new form ConfigCliente
      */
@@ -25,6 +26,7 @@ public class ConfigCliente extends javax.swing.JFrame {
         initComponents();
         txtImc.setEnabled(false);
         txtCpf.setEnabled(false);
+        
         for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
             if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                 txtNome.setText(TelaInicio.cadastrosClientes.get(i).getNome());
@@ -39,17 +41,11 @@ public class ConfigCliente extends javax.swing.JFrame {
                 txtPeso.setText(String.valueOf(TelaInicio.cadastrosClientes.get(i).getPeso()));txtAltura.setText(String.valueOf(TelaInicio.cadastrosClientes.get(i).getAltura()));               
                 txtCpf.setText(TelaInicio.cadastrosClientes.get(i).getCpf());
                 txtImc.setText(String.valueOf(TelaInicio.cadastrosClientes.get(i).calculoImc()));
-                
-                
-                
-//                imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
-//                System.out.println(imcon +"opa ");
-//                imFit = imcon.getImage();
-//                imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-//                pnlFoto.setIcon(new ImageIcon(imgFit));
+            }  
              
             }
-        }
+        
+        
     }
 
     /**
@@ -327,7 +323,6 @@ public class ConfigCliente extends javax.swing.JFrame {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "sim","opa", JOptionPane.CLOSED_OPTION);
         for (int i =0; i <TelaInicio.cadastrosClientes.size();i ++){
             if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                System.out.println(TelaInicio.cadastrosClientes.remove(i).getNome());

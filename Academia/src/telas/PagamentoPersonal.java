@@ -24,7 +24,7 @@ public class PagamentoPersonal extends javax.swing.JFrame {
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                 txtSaldo.setText(String.valueOf(TelaInicio.cadastrosPersonal.get(i).getSaldo()));
                 txtChaveCadastrada.setText(TelaInicio.cadastrosPersonal.get(i).getChave());
-                System.out.println(TelaInicio.cadastrosPersonal.get(i).getChave());
+                
                 
             }
             }
