@@ -29,7 +29,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         TelaAcaoClienteBackground = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TabelaPersonalOnline = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -43,7 +43,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaPersonalOnline.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -69,7 +69,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(TabelaPersonalOnline);
 
         javax.swing.GroupLayout TelaAcaoClienteBackgroundLayout = new javax.swing.GroupLayout(TelaAcaoClienteBackground);
         TelaAcaoClienteBackground.setLayout(TelaAcaoClienteBackgroundLayout);
@@ -151,9 +151,9 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaPersonalOnline;
     private javax.swing.JPanel TelaAcaoClienteBackground;
     private javax.swing.JButton btnMenu;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
