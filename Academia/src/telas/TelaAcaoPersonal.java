@@ -168,11 +168,21 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
             System.out.println("entrei no if");
             //dizer que o personal esta online
             btnOnAndOff.setText("Desativar");
+            for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("sim");
+            }
+        }
         }else
         {
             System.out.println("entrei no else");
             //dizer que o personal esta online
             btnOnAndOff.setText("Ativar");
+            for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("não");
+            }
+        }
         }
     }//GEN-LAST:event_btnOnAndOffActionPerformed
 
