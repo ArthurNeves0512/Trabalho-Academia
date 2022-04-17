@@ -21,6 +21,7 @@ static  ArrayList<Funcionario> cadastrosPersonal;
 private int flag =0;
 static String cpfEscolhido;
 static int flag1;
+static int flag2;
     /**
      * Creates new form TelaInicio
      */
