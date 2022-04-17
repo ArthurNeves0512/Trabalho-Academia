@@ -116,7 +116,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         new TelaAcaoPersonalMenu().setVisible(true);
     }//GEN-LAST:event_btnPersonalMenuActionPerformed
 
-<<<<<<< HEAD
+
     private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
      for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
@@ -134,8 +134,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOffActionPerformed
 
-=======
->>>>>>> 421e6f53324743ccd125937d689c017b800dbf16
+
     private void btnOnAndOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnAndOffActionPerformed
         // TODO add your handling code here:
         

@@ -42,7 +42,7 @@ public class Funcionario extends Pessoa {
     }
 
     public void setSaldo(int saldo) {
-        this.saldo = saldo;
+        this.saldo = this.saldo+saldo;
     }
     
 }

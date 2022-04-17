@@ -4,6 +4,7 @@
  */
 package telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +18,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
      */
     public TelaAcaoCliente() {
         initComponents();
+        carregarTabelaClientes();
     }
 
     /**
@@ -32,6 +34,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         btnMenu = new javax.swing.JButton();
         ScrollPanelTable = new javax.swing.JScrollPane();
         TabelaPersonalOnline = new javax.swing.JTable();
+        btnSelecionarServico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,29 +74,48 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabelaPersonalOnline.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaPersonalOnlineMouseClicked(evt);
+            }
+        });
         ScrollPanelTable.setViewportView(TabelaPersonalOnline);
+
+        btnSelecionarServico.setText("Selecionar");
+        btnSelecionarServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarServicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TelaAcaoClienteBackgroundLayout = new javax.swing.GroupLayout(TelaAcaoClienteBackground);
         TelaAcaoClienteBackground.setLayout(TelaAcaoClienteBackgroundLayout);
         TelaAcaoClienteBackgroundLayout.setHorizontalGroup(
             TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(564, Short.MAX_VALUE))
+                .addGroup(TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(81, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSelecionarServico)
+                .addGap(29, 29, 29))
         );
         TelaAcaoClienteBackgroundLayout.setVerticalGroup(
             TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(62, 62, 62)
                 .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(btnSelecionarServico)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,6 +138,22 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoClienteMenu().setVisible(true);
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void TabelaPersonalOnlineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaPersonalOnlineMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaPersonalOnlineMouseClicked
+
+    private void btnSelecionarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarServicoActionPerformed
+        // TODO add your handling code here:
+        if(TabelaPersonalOnline.getSelectedRow()==-1)
+        {
+            JOptionPane.showMessageDialog(null, "Você deve selecionar ao menos 1 funcionário.", "Dados Cadastrais", JOptionPane.INFORMATION_MESSAGE);
+        }else
+        {
+            this.setVisible(false);
+            new TelaContratacaoServico().setVisible(true);
+        }
+    }//GEN-LAST:event_btnSelecionarServicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,5 +214,6 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     private javax.swing.JTable TabelaPersonalOnline;
     private javax.swing.JPanel TelaAcaoClienteBackground;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnSelecionarServico;
     // End of variables declaration//GEN-END:variables
 }

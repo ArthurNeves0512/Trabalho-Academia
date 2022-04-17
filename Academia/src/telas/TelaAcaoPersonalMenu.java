@@ -19,17 +19,17 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
      */
     public TelaAcaoPersonalMenu() {
         if(TelaInicio.flag2 !=1){
-        initComponents();
-        for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-         
-                PersonalName.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
-                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
-                Image imFit = imcon.getImage();
-                Image imgFit = imFit.getScaledInstance(PersonalIconImage.getWidth(), PersonalIconImage.getHeight(), Image.SCALE_SMOOTH);
-                PersonalIconImage.setIcon(new ImageIcon(imgFit));
+            initComponents();
+            for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
+                if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+
+                    PersonalName.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
+                    ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
+                    Image imFit = imcon.getImage();
+                    Image imgFit = imFit.getScaledInstance(PersonalIconImage.getWidth(), PersonalIconImage.getHeight(), Image.SCALE_SMOOTH);
+                    PersonalIconImage.setIcon(new ImageIcon(imgFit));
+                }
             }
-        }
         }
         else{
             this.setVisible(false);
