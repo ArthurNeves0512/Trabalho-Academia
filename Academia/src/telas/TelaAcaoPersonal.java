@@ -146,7 +146,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
     private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
      for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("sim");
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(true);
             }
         }
     }//GEN-LAST:event_btnOnActionPerformed
@@ -155,7 +155,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         // TODO add your handling code here:
         for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("não");
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(false);
             }
         }
     }//GEN-LAST:event_btnOffActionPerformed
@@ -165,22 +165,20 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         
         if(btnOnAndOff.isSelected())
         {
-            System.out.println("entrei no if");
             //dizer que o personal esta online
             btnOnAndOff.setText("Desativar");
             for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("sim");
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(true);
             }
         }
         }else
         {
-            System.out.println("entrei no else");
             //dizer que o personal esta online
             btnOnAndOff.setText("Ativar");
             for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando("não");
+                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(false);
             }
         }
         }

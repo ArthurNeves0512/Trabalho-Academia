@@ -4,6 +4,8 @@
  */
 package telas;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MASTER
@@ -28,7 +30,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
 
         TelaAcaoClienteBackground = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        ScrollPanelTable = new javax.swing.JScrollPane();
         TabelaPersonalOnline = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,7 +71,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(TabelaPersonalOnline);
+        ScrollPanelTable.setViewportView(TabelaPersonalOnline);
 
         javax.swing.GroupLayout TelaAcaoClienteBackgroundLayout = new javax.swing.GroupLayout(TelaAcaoClienteBackground);
         TelaAcaoClienteBackground.setLayout(TelaAcaoClienteBackgroundLayout);
@@ -81,7 +83,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 .addContainerGap(564, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaAcaoClienteBackgroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
         TelaAcaoClienteBackgroundLayout.setVerticalGroup(
@@ -90,7 +92,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(117, Short.MAX_VALUE))
         );
 
@@ -149,11 +151,30 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void carregarTabelaClientes() //carrega os personal online pra tabela
+    {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Foto","Nome","Endereço", "Sexo", "Chave Pix"},0);
+        
+        for(int i=0; i<TelaInicio.cadastrosPersonal.size(); i++)
+        {
+            if(TelaInicio.cadastrosPersonal.get(i).getTrabalhando())
+            {
+                //adiciona os personal que estao online
+                Object linha[] = new Object[]{TelaInicio.cadastrosPersonal.get(i).getFoto(), TelaInicio.cadastrosPersonal.get(i).getNome(), TelaInicio.cadastrosPersonal.get(i).getEndereco(), TelaInicio.cadastrosPersonal.get(i).getSexo(), TelaInicio.cadastrosPersonal.get(i).getChave()};
+            
+                modelo.addRow(linha);
+            }
+            
+        }
+        
+        TabelaPersonalOnline.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollPanelTable;
     private javax.swing.JTable TabelaPersonalOnline;
     private javax.swing.JPanel TelaAcaoClienteBackground;
     private javax.swing.JButton btnMenu;
-    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

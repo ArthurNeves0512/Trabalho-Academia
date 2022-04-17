@@ -9,7 +9,7 @@ package classes;
  * @author arthur
  */
 public class Funcionario extends Pessoa {
-    private String trabalhando ;
+    private boolean trabalhando;
     private String chave;    
     private int saldo =0;
 
@@ -21,11 +21,11 @@ public class Funcionario extends Pessoa {
     }
 
     
-    public String getTrabalhando() {
+    public boolean getTrabalhando() {
         return trabalhando;
     }
 
-    public void setTrabalhando(String trabalhando) {
+    public void setTrabalhando(boolean trabalhando) {
         this.trabalhando = trabalhando;
     }
 
