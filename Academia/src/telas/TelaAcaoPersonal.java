@@ -6,6 +6,7 @@ package telas;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -34,6 +35,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         btnOff = new javax.swing.JButton();
         btnOn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnOnAndOff = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,6 +67,13 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
         jLabel1.setText("TRABALHANDO");
 
+        btnOnAndOff.setText("Ativar");
+        btnOnAndOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOnAndOffActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PersonalBackgroundMenuWhiteLayout = new javax.swing.GroupLayout(PersonalBackgroundMenuWhite);
         PersonalBackgroundMenuWhite.setLayout(PersonalBackgroundMenuWhiteLayout);
         PersonalBackgroundMenuWhiteLayout.setHorizontalGroup(
@@ -76,13 +85,18 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
                         .addComponent(btnPersonalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
-                .addContainerGap(260, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138))
+                        .addGap(0, 250, Short.MAX_VALUE)
+                        .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                                .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(138, 138, 138))))))
+            .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
+                .addGap(235, 235, 235)
+                .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                     .addGap(107, 107, 107)
@@ -93,12 +107,14 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
             PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPersonalMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(btnPersonalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
+                .addGap(50, 50, 50)
+                .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
             .addGroup(PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                     .addContainerGap(266, Short.MAX_VALUE)
@@ -144,6 +160,22 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOffActionPerformed
 
+    private void btnOnAndOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnAndOffActionPerformed
+        // TODO add your handling code here:
+        
+        if(btnOnAndOff.isSelected())
+        {
+            System.out.println("entrei no if");
+            //dizer que o personal esta online
+            btnOnAndOff.setText("Desativar");
+        }else
+        {
+            System.out.println("entrei no else");
+            //dizer que o personal esta online
+            btnOnAndOff.setText("Ativar");
+        }
+    }//GEN-LAST:event_btnOnAndOffActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -184,6 +216,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel PersonalBackgroundMenuWhite;
     private javax.swing.JButton btnOff;
     private javax.swing.JButton btnOn;
+    private javax.swing.JToggleButton btnOnAndOff;
     private javax.swing.JButton btnPersonalMenu;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
