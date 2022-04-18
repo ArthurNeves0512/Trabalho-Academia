@@ -4,23 +4,21 @@
  */
 package classes;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author arthur
  */
 public class Funcionario extends Pessoa {
     private boolean trabalhando;
-    private String chave;    
-    private int saldo =0;
+    private String chave;
+    private double saldo =0;
+    private double valorServico=0.00;
 
     public Funcionario() {
     }
 
-    public Funcionario( String nome, String senha, String cpf, String foto, String endereco, String telefone, String email, String idade, String sexo, String cep) {
-        super(nome, senha, cpf, foto, endereco, telefone, email, idade, sexo, cep);
-    }
-
-    
     public boolean getTrabalhando() {
         return trabalhando;
     }
@@ -37,12 +35,28 @@ public class Funcionario extends Pessoa {
         this.chave = chave;
     }
 
-    public int getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = this.saldo+saldo;
     }
     
+    public double getValorServico()
+    {
+        return this.valorServico;
+    }
+    
+    public void setValorServico(double valor)
+    {
+        this.valorServico = valor;
+    }
+
+    @Override
+    public void ajuda(){
+        JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n "
+                + "você no pagamento poderá checar seu saldo e a chave do pix cadastrada, não é possível ter mais de uma", "atenção", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

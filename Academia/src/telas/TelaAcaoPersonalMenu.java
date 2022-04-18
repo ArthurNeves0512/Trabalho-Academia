@@ -18,7 +18,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonalMenu
      */
     public TelaAcaoPersonalMenu() {
-        if(TelaInicio.flag2 !=1){
+        if(TelaInicio.flagF !=1){
             initComponents();
             for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
                 if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
@@ -33,7 +33,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         }
         else{
             this.setVisible(false);
-            TelaInicio.flag2 = 0;
+            TelaInicio.flagF = 0;
         }
         
     }
@@ -58,9 +58,6 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         PersonalPaymentIcon = new javax.swing.JLabel();
         PersonalPaymentText = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        PersonalFeedbackIcon = new javax.swing.JLabel();
-        PersonalFeedbackText = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         PersonalHelpIcon = new javax.swing.JLabel();
         PersonalHelpText = new javax.swing.JLabel();
@@ -148,38 +145,16 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        PersonalFeedbackIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/chat-bubbles-couple-hand-drawn-outlines.png"))); // NOI18N
-
-        PersonalFeedbackText.setText("Feedback");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(PersonalFeedbackIcon)
-                .addGap(33, 33, 33)
-                .addComponent(PersonalFeedbackText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PersonalFeedbackText)
-                    .addComponent(PersonalFeedbackIcon))
-                .addContainerGap())
-        );
-
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
         PersonalHelpIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ask-round-button.png"))); // NOI18N
 
         PersonalHelpText.setText("Ajuda");
+        PersonalHelpText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PersonalHelpTextMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -215,7 +190,6 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
             PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PersonalMenuBarLayout.createSequentialGroup()
                 .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,10 +223,8 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(btnExitPersonal)
                 .addContainerGap())
         );
@@ -305,6 +277,15 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         new ConfigPersonal().setVisible(true);
     }//GEN-LAST:event_PersonalConfigTextMouseClicked
 
+    private void PersonalHelpTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalHelpTextMouseClicked
+        try{TelaInicio.cadastrosPersonal.get(0).ajuda();
+        TelaInicio.flagF=1;}
+        catch(IndexOutOfBoundsException e){
+            this.setVisible(false);
+            TelaInicio.flagF = 0;
+        }
+    }//GEN-LAST:event_PersonalHelpTextMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -344,8 +325,6 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PersonalConfigIcon;
     private javax.swing.JLabel PersonalConfigText;
-    private javax.swing.JLabel PersonalFeedbackIcon;
-    private javax.swing.JLabel PersonalFeedbackText;
     private javax.swing.JLabel PersonalHelpIcon;
     private javax.swing.JLabel PersonalHelpText;
     private javax.swing.JLabel PersonalIconImage;
@@ -358,7 +337,6 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnPersonalExit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

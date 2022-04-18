@@ -18,14 +18,15 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonal
      */
     public TelaAcaoPersonal() {
-        if(TelaInicio.flag2 !=1){
+        if(TelaInicio.flagF !=1){
             
         
         initComponents();
         }
         else{
+            
             this.setVisible(false);
-            TelaInicio.flag2 = 0;
+            TelaInicio.flagF = 0;
         }
     }
 
@@ -142,6 +143,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         {
             //dizer que o personal esta online
             btnOnAndOff.setText("Desativar");
+            btnOnAndOff.setSelected(true);
             for(int i =0; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                 TelaInicio.cadastrosPersonal.get(i).setTrabalhando(true);

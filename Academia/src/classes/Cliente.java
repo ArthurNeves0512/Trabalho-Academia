@@ -4,8 +4,9 @@
  */
 package classes;
 
-/**
- *
+import javax.swing.JOptionPane;
+
+/*
  * @author arthur
  */
 public class Cliente extends Pessoa {
@@ -15,13 +16,13 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
-    public Cliente(float peso, float altura, String nome, String senha, String cpf, String foto, String endereco, String telefone, String email, String idade, String sexo, String cep) {
-        super(nome, senha, cpf, foto, endereco, telefone, email, idade, sexo, cep);
-        this.peso = peso;
-        this.altura = altura;
-    }
+ 
 
+@Override
+public void ajuda(){
+    JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
 
+}
     public float getPeso() {
         return peso;
     }
@@ -40,11 +41,11 @@ public class Cliente extends Pessoa {
     public float calculoImc(){
         return this.getPeso()/(this.getAltura()*this.getAltura());
     }
-  
 
-    
-    
-   
-    
-    
+
+
+
+
+
+
 }

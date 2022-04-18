@@ -410,9 +410,11 @@ String getImagemSelecionada;
         else{
             JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
             
-            Cliente cliente = new Cliente(Float.parseFloat(txtPeso.getText()), Float.parseFloat(txtAltura.getText()),
-                    txtNome.getText(), txtSenha.getText(), txtCpf.getText(), getImagemSelecionada, txtEndereco.getText(),
-                    txtTelefone.getText(), txtEmail.getText(), txtIdade.getText(), String.valueOf(cmbSexo.getSelectedItem()), txtCep.getText());
+            Cliente cliente = new Cliente(); cliente.setAltura(Float.parseFloat(txtAltura.getText()));cliente.setCep(txtCep.getText());
+            cliente.setCpf(txtCep.getText()); cliente.setEmail(txtEmail.getText()); cliente.setEndereco(txtEndereco.getText());
+            cliente.setFoto(getImagemSelecionada); cliente.setIdade(txtIdade.getText()); cliente.setNome(txtNome.getText());
+            cliente.setPeso(Float.parseFloat(txtPeso.getText())); cliente.setSenha(txtSenha.getText()); cliente.setTelefone(txtTelefone.getText());
+            
             cadastrosClientes.add(cliente);
             
             

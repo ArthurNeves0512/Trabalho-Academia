@@ -256,17 +256,16 @@ public class ConfigPersonal extends javax.swing.JFrame {
                 TelaInicio.cadastrosPersonal.get(i).setCpf(txtCpf.getText());
               
                 if(TelaInicio.flag2==1){
-               
-                
-                TelaInicio.cadastrosPersonal.get(i).setFoto(getImagemSelecionada);
-                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
-                Image imFit = imcon.getImage();
-                Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-                pnlFoto.setIcon(new ImageIcon(imgFit));
-                TelaInicio.flag2 =0;
+                    TelaInicio.cadastrosPersonal.get(i).setFoto(getImagemSelecionada);
+                    ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
+                    Image imFit = imcon.getImage();
+                    Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
+                    pnlFoto.setIcon(new ImageIcon(imgFit));
+                    TelaInicio.flag2 =0;
                 }
-            JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
-                    }
+                
+                JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
+            }
         
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -279,7 +278,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
                 new TelaAcaoPersonalMenu().setVisible(false);
                     JOptionPane.showMessageDialog(null, "Personal apagado com sucesso!","Apagar", JOptionPane.INFORMATION_MESSAGE);
                this.setVisible(false);
-               TelaInicio.flag1 =1;
+               TelaInicio.flag2 =1;
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed

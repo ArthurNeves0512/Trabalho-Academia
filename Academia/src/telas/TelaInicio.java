@@ -22,14 +22,14 @@ private int flag =0;
 static String cpfEscolhido;
 static int flag1;
 static int flag2;
+static int flagF;
     /**
      * Creates new form TelaInicio
      */
     public TelaInicio() {
         initComponents();
         cadastrosPersonal = new ArrayList<Funcionario>();
-        cadastrosClientes = new ArrayList<Cliente>();
-        
+        cadastrosClientes = new ArrayList<Cliente>();  
     }
 
     /**
@@ -147,6 +147,7 @@ static int flag2;
         flag =0;
         for (int i =0; i<cadastrosClientes.size(); i ++){
             if(cadastrosClientes.get(i).getCpf().equals(txtCpf.getText()) && cadastrosClientes.get(i).getSenha().equals(txtSenha.getText())){      
+                //this.setVisible(false);
                 new TelaAcaoCliente().setVisible(true);
                 flag = 1;
                 cpfEscolhido =cadastrosClientes.get(i).getCpf();
@@ -155,6 +156,7 @@ static int flag2;
         }
         for (int i =0; i<cadastrosPersonal.size(); i ++){
             if(cadastrosPersonal.get(i).getCpf().equals(txtCpf.getText()) && cadastrosPersonal.get(i).getSenha().equals(txtSenha.getText())){      
+                //this.setVisible(false);
                 new TelaAcaoPersonal().setVisible(true);
                 flag =1;
                 cpfEscolhido =cadastrosPersonal.get(i).getCpf();
@@ -162,7 +164,7 @@ static int flag2;
         }
         
         if (flag ==0){
-                JOptionPane.showMessageDialog(null, "não possuimos cadastro ligados com esse cpf e essa senha", "atenção", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Não possuimos cadastro ligados com este CPF e Senha", "Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

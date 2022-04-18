@@ -381,13 +381,17 @@ String getImagemSelecionada;
             btnSalvar.setEnabled(true);
             btnUpload.setEnabled(true);
       
-                JOptionPane.showMessageDialog(null, "Por Favor, Insira Todos os Campos!!!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!!!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-            Funcionario funcionario = new Funcionario( txtNome.getText(), txtSenha.getText(), txtCpf.getText(),
-                    getImagemSelecionada, txtEndereco.getText(),
-                    txtTelefone.getText(), txtEmail.getText(), txtIdade.getText(), String.valueOf(cmbSexo.getSelectedItem()), txtCep.getText());
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+            
+            Funcionario funcionario = new Funcionario();
+            funcionario.setNome(txtNome.getText());funcionario.setCpf(txtCpf.getText());funcionario.setEmail(txtEmail.getText());
+            funcionario.setEndereco(txtEndereco.getText()); funcionario.setFoto(getImagemSelecionada); funcionario.setIdade(txtIdade.getText());
+            funcionario.setNome(txtNome.getText()); funcionario.setSenha(txtSenha.getText()); funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
+            funcionario.setTelefone(txtTelefone.getText());
+            
             cadastrosPersonal.add(funcionario);
            
             icon.setIcon(null);

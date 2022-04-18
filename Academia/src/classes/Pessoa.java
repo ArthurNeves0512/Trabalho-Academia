@@ -7,8 +7,12 @@ package classes;
 /**
  *
  * @author arthur
+ * os atributos que estão aqui são os atributos que são necessários em basicamente
+ * todos os cadastros, e aqui também tem os get e setters de cada
+ * 
+ * 
  */
-public class Pessoa {
+public abstract class  Pessoa {
     protected String nome;
     protected String senha;
     protected String cpf;
@@ -19,22 +23,12 @@ public class Pessoa {
     protected String idade;
     protected String sexo;
     protected String cep;
+
+
+    public abstract void  ajuda();
     
     public Pessoa(){
         
-    }
-
-    public Pessoa(String nome, String senha, String cpf, String foto, String endereco, String telefone, String email, String idade, String sexo, String cep) {
-        this.nome = nome;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.foto = foto;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.email = email;
-        this.idade = idade;
-        this.sexo = sexo;
-        this.cep = cep;
     }
     
 
@@ -117,8 +111,5 @@ public class Pessoa {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    
-    
-   
     
 }

@@ -16,6 +16,8 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     /**
      * Creates new form TelaAcaoCliente
      */
+    static int personalEscolhido;
+    
     public TelaAcaoCliente() {
         initComponents();
         carregarTabelaClientes();
@@ -147,9 +149,10 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(TabelaPersonalOnline.getSelectedRow()==-1)
         {
-            JOptionPane.showMessageDialog(null, "Você deve selecionar ao menos 1 funcionário.", "Dados Cadastrais", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Você deve selecionar ao menos 1 funcionário.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }else
         {
+            personalEscolhido = TabelaPersonalOnline.getSelectedRow();
             this.setVisible(false);
             new TelaContratacaoServico().setVisible(true);
         }
