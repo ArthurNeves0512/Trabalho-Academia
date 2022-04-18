@@ -58,11 +58,11 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Foto", "Nome", "Endereço", "Sexo", "Chave Pix"
+                "Preço", "Nome", "Endereço", "Sexo", "Chave Pix"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -195,14 +195,14 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     
     public void carregarTabelaClientes() //carrega os personal online pra tabela
     {
-        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Foto","Nome","Endereço", "Sexo", "Chave Pix"},0);
+        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço","Nome","Endereço", "Sexo", "Chave Pix"},0);
         
         for(int i=0; i<TelaInicio.cadastrosPersonal.size(); i++)
         {
             if(TelaInicio.cadastrosPersonal.get(i).getTrabalhando())
             {
                 //adiciona os personal que estao online
-                Object linha[] = new Object[]{TelaInicio.cadastrosPersonal.get(i).getFoto(), TelaInicio.cadastrosPersonal.get(i).getNome(), TelaInicio.cadastrosPersonal.get(i).getEndereco(), TelaInicio.cadastrosPersonal.get(i).getSexo(), TelaInicio.cadastrosPersonal.get(i).getChave()};
+                Object linha[] = new Object[]{TelaInicio.cadastrosPersonal.get(i).getValorServico(), TelaInicio.cadastrosPersonal.get(i).getNome(), TelaInicio.cadastrosPersonal.get(i).getEndereco(), TelaInicio.cadastrosPersonal.get(i).getSexo(), TelaInicio.cadastrosPersonal.get(i).getChave()};
             
                 modelo.addRow(linha);
             }
