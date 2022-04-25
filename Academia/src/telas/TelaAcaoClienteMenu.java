@@ -8,7 +8,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
- *
  * @author MASTER
  */
 
@@ -18,20 +17,19 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
      * Creates new form TelaAcaoClienteMenu
      */
     public TelaAcaoClienteMenu() {
-        if(TelaInicio.flag1!=1){
-        initComponents();
-         for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
-            if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-         
-                NomeCliente.setText(TelaInicio.cadastrosClientes.get(i).getNome());
-                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
-                Image imFit = imcon.getImage();
-                Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon.setIcon(new ImageIcon(imgFit));
+        if (TelaInicio.flag1 != 1) {
+            initComponents();
+            for (int i = 0; i < TelaInicio.cadastrosClientes.size(); i++) {
+                if (TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)) {
+
+                    NomeCliente.setText(TelaInicio.cadastrosClientes.get(i).getNome());
+                    ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
+                    Image imFit = imcon.getImage();
+                    Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon.setIcon(new ImageIcon(imgFit));
+                }
             }
-        }
-        }
-        else{
+        } else {
             this.setVisible(false);
             TelaInicio.flag1 = 0;
         }
@@ -84,22 +82,22 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(SettIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ConfigText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(SettIcon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ConfigText)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SettIcon)
-                    .addComponent(ConfigText))
-                .addGap(13, 13, 13))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap(13, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(SettIcon)
+                                        .addComponent(ConfigText))
+                                .addGap(13, 13, 13))
         );
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -116,22 +114,22 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(HelpIcon)
-                .addGap(41, 41, 41)
-                .addComponent(HelpText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(HelpIcon)
+                                .addGap(41, 41, 41)
+                                .addComponent(HelpText)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(HelpIcon)
-                    .addComponent(HelpText))
-                .addContainerGap())
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(HelpIcon)
+                                        .addComponent(HelpText))
+                                .addContainerGap())
         );
 
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2cross-rounded-outline.png"))); // NOI18N
@@ -151,67 +149,67 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout MenuSideBarLayout = new javax.swing.GroupLayout(MenuSideBar);
         MenuSideBar.setLayout(MenuSideBarLayout);
         MenuSideBarLayout.setHorizontalGroup(
-            MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(MenuSideBarLayout.createSequentialGroup()
-                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MenuSideBarLayout.createSequentialGroup()
-                        .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(MenuSideBarLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(NomeCliente)
-                                    .addComponent(ImageIcon)))
-                            .addGroup(MenuSideBarLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 32, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuSideBarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnExit)))
-                .addContainerGap())
+                MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                                                .addGap(14, 14, 14)
+                                                                .addGroup(MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(NomeCliente)
+                                                                        .addComponent(ImageIcon)))
+                                                        .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 32, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuSideBarLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(btnExit)))
+                                .addContainerGap())
         );
         MenuSideBarLayout.setVerticalGroup(
-            MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuSideBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ImageIcon)
-                .addGap(18, 18, 18)
-                .addComponent(NomeCliente)
-                .addGap(25, 25, 25)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                .addComponent(btnExit)
-                .addContainerGap())
+                MenuSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(MenuSideBarLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ImageIcon)
+                                .addGap(18, 18, 18)
+                                .addComponent(NomeCliente)
+                                .addGap(25, 25, 25)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                                .addComponent(btnExit)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout BackgroundPanelBlackLayout = new javax.swing.GroupLayout(BackgroundPanelBlack);
         BackgroundPanelBlack.setLayout(BackgroundPanelBlackLayout);
         BackgroundPanelBlackLayout.setHorizontalGroup(
-            BackgroundPanelBlackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BackgroundPanelBlackLayout.createSequentialGroup()
-                .addComponent(MenuSideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 548, Short.MAX_VALUE))
+                BackgroundPanelBlackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(BackgroundPanelBlackLayout.createSequentialGroup()
+                                .addComponent(MenuSideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 548, Short.MAX_VALUE))
         );
         BackgroundPanelBlackLayout.setVerticalGroup(
-            BackgroundPanelBlackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MenuSideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                BackgroundPanelBlackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(MenuSideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackgroundPanelBlack, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(BackgroundPanelBlack, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackgroundPanelBlack, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(BackgroundPanelBlack, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
         );
 
         pack();
@@ -226,7 +224,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
 
     private void ConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfigTextMouseClicked
         // TODO add your handling code here:
-        
+
         new ConfigCliente().setVisible(true);
     }//GEN-LAST:event_ConfigTextMouseClicked
 
@@ -246,7 +244,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -269,9 +267,9 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new TelaAcaoClienteMenu().setVisible(true);
-                
+
             }
         });
     }

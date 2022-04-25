@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author MASTER
  */
 public class TelaAcaoCliente extends javax.swing.JFrame {
@@ -17,7 +16,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
      * Creates new form TelaAcaoCliente
      */
     static int personalEscolhido;
-    
+
     public TelaAcaoCliente() {
         initComponents();
         carregarTabelaClientes();
@@ -51,29 +50,29 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         });
 
         TabelaPersonalOnline.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Preço", "Nome", "Endereço", "Sexo", "Chave Pix"
-            }
+                new Object[][]{
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null}
+                },
+                new String[]{
+                        "Preço", "Nome", "Endereço", "Sexo", "Chave Pix"
+                }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            Class[] types = new Class[]{
+                    java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         TabelaPersonalOnline.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,42 +92,42 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         javax.swing.GroupLayout TelaAcaoClienteBackgroundLayout = new javax.swing.GroupLayout(TelaAcaoClienteBackground);
         TelaAcaoClienteBackground.setLayout(TelaAcaoClienteBackgroundLayout);
         TelaAcaoClienteBackgroundLayout.setHorizontalGroup(
-            TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addGroup(TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSelecionarServico)
-                .addGap(29, 29, 29))
+                TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                                .addGroup(TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                                                .addGap(67, 67, 67)
+                                                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSelecionarServico)
+                                .addGap(29, 29, 29))
         );
         TelaAcaoClienteBackgroundLayout.setVerticalGroup(
-            TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(btnSelecionarServico)
-                .addContainerGap())
+                TelaAcaoClienteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TelaAcaoClienteBackgroundLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(ScrollPanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                                .addComponent(btnSelecionarServico)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TelaAcaoClienteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -147,11 +146,9 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
 
     private void btnSelecionarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarServicoActionPerformed
         // TODO add your handling code here:
-        if(TabelaPersonalOnline.getSelectedRow()==-1)
-        {
+        if (TabelaPersonalOnline.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Você deve selecionar ao menos 1 funcionário.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        }else
-        {
+        } else {
             personalEscolhido = TabelaPersonalOnline.getSelectedRow();
             this.setVisible(false);
             new TelaContratacaoServico().setVisible(true);
@@ -165,7 +162,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -192,23 +189,21 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void carregarTabelaClientes() //carrega os personal online pra tabela
     {
-        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço","Nome","Endereço", "Sexo", "Chave Pix"},0);
-        
-        for(int i=0; i<TelaInicio.cadastrosPersonal.size(); i++)
-        {
-            if(TelaInicio.cadastrosPersonal.get(i).getTrabalhando())
-            {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço", "Nome", "Endereço", "Sexo", "Chave Pix"}, 0);
+
+        for (int i = 0; i < TelaInicio.cadastrosPersonal.size(); i++) {
+            if (TelaInicio.cadastrosPersonal.get(i).getTrabalhando()) {
                 //adiciona os personal que estao online
                 Object linha[] = new Object[]{TelaInicio.cadastrosPersonal.get(i).getValorServico(), TelaInicio.cadastrosPersonal.get(i).getNome(), TelaInicio.cadastrosPersonal.get(i).getEndereco(), TelaInicio.cadastrosPersonal.get(i).getSexo(), TelaInicio.cadastrosPersonal.get(i).getChave()};
-            
+
                 modelo.addRow(linha);
             }
-            
+
         }
-        
+
         TabelaPersonalOnline.setModel(modelo);
     }
 

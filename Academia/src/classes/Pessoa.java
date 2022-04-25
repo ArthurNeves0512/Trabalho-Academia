@@ -5,14 +5,11 @@
 package classes;
 
 /**
- *
  * @author arthur
  * os atributos que estão aqui são os atributos que são necessários em basicamente
  * todos os cadastros, e aqui também tem os get e setters de cada
- * 
- * 
  */
-public abstract class  Pessoa {
+public abstract class Pessoa {
     protected String nome;
     protected String senha;
     protected String cpf;
@@ -25,12 +22,12 @@ public abstract class  Pessoa {
     protected String cep;
 
 
-    public abstract void  ajuda();
-    
-    public Pessoa(){
-        
+    public abstract void ajuda();
+
+    public Pessoa() {
+
     }
-    
+
 
     public String getNome() {
         return nome;
@@ -111,5 +108,5 @@ public abstract class  Pessoa {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    
+
 }

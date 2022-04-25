@@ -16,13 +16,13 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
- 
 
-@Override
-public void ajuda(){
-    JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
+    @Override
+    public void ajuda() {
+        JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
 
-}
+    }
+
     public float getPeso() {
         return peso;
     }
@@ -38,14 +38,10 @@ public void ajuda(){
     public void setAltura(float altura) {
         this.altura = altura;
     }
-    public float calculoImc(){
-        return this.getPeso()/(this.getAltura()*this.getAltura());
+
+    public float calculoImc() {
+        return this.getPeso() / (this.getAltura() * this.getAltura());
     }
-
-
-
-
-
 
 
 }
