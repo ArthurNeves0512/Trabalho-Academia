@@ -26,6 +26,8 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     static int indicePersonalEscolhido;
     static String cpfFuncionarioEscolhido;
     ResultSet rs;
+    public static FuncionarioDAO fd= new FuncionarioDAO();
+    
     
     public TelaAcaoCliente() {
         initComponents();
@@ -168,9 +170,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
             indicePersonalEscolhido = TabelaPersonalOnline.getSelectedRow();
             Object nomePersonalEscolhido = TabelaPersonalOnline.getValueAt(indicePersonalEscolhido, 1);
             
-            
            cpfFuncionarioEscolhido = fd.getCpfPeloNome(nomePersonalEscolhido);
-           
             
             this.setVisible(false);
             new TelaContratacaoServico().setVisible(true);
@@ -231,13 +231,13 @@ public ResultSet carregarDadosBd(){
         while(rs.next()){
             
             Object linha [] = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3) +"\n" + rs.getString(4)+
-                    "\n"+ rs.getString(5), rs.getString(6), rs.getString(7)};// O 7 É O DO ESPECIALIDADE
+                    "\n"+ rs.getString(5), rs.getString(6), fd.carregarEspecialidade(fd.getCpfPeloNome(rs.getString(2)))};// O 7 É O DO ESPECIALIDADE
             modelo.addRow(linha);
         }
         TabelaPersonalOnline.setModel(modelo);
     } 
     catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
+        JOptionPane.showMessageDialog(null,"deu erro pra carregar a tabela"+ e);
     }
     return null;
 }        
