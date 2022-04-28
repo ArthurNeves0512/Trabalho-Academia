@@ -5,6 +5,7 @@
 package academia;
 
 /**
+ *
  * @author arthur
  */
 public class Academia {
@@ -15,5 +16,5 @@ public class Academia {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-
+    
 }

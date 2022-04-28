@@ -7,8 +7,9 @@ package telas;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
-
+import classes.*;
 /**
+ *
  * @author MASTER
  */
 public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
@@ -17,11 +18,15 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonalMenu
      */
     public TelaAcaoPersonalMenu() {
-        if (TelaInicio.flagF != 1) {
+        if(TelaInicio.flagF !=1){
             initComponents();
-            for (int i = 0; i < TelaInicio.cadastrosPersonal.size(); i++) {
-                if (TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)) {
-
+            
+            FuncionarioDAO ps = new FuncionarioDAO();/*
+            TelaInicio.cadastrosPersonal = ps.pesquisarPersonal();*/
+            
+            System.out.println(TelaInicio.cpfEscolhido);
+            for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
+                if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                     PersonalName.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
                     ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
                     Image imFit = imcon.getImage();
@@ -29,11 +34,12 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
                     PersonalIconImage.setIcon(new ImageIcon(imgFit));
                 }
             }
-        } else {
+        }
+        else{
             this.setVisible(false);
             TelaInicio.flagF = 0;
         }
-
+        
     }
 
     /**
@@ -62,6 +68,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         btnExitPersonal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Personal");
 
         PersonalMenuBackground.setBackground(new java.awt.Color(0, 0, 0));
         PersonalMenuBackground.setMinimumSize(new java.awt.Dimension(600, 500));
@@ -75,15 +82,16 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
             }
         });
 
-        PersonalIconImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/circle-icon-magenta_bckgnd.png"))); // NOI18N
+        PersonalIconImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/muscular male torso outline inside a circle_128.png"))); // NOI18N
 
-        PersonalName.setText("Nome_Personal_Mudar");
+        PersonalName.setText("Nome_Personal");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         PersonalConfigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/settings-icon(1).png"))); // NOI18N
 
-        PersonalConfigText.setText("Configuração");
+        PersonalConfigText.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
+        PersonalConfigText.setText("Configurações");
         PersonalConfigText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PersonalConfigTextMouseClicked(evt);
@@ -93,28 +101,29 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(PersonalConfigIcon)
-                                .addGap(28, 28, 28)
-                                .addComponent(PersonalConfigText)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(PersonalConfigIcon)
+                .addGap(37, 37, 37)
+                .addComponent(PersonalConfigText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(PersonalConfigIcon)
-                                        .addComponent(PersonalConfigText))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PersonalConfigIcon)
+                    .addComponent(PersonalConfigText))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         PersonalPaymentIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/debit-card.png"))); // NOI18N
 
+        PersonalPaymentText.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         PersonalPaymentText.setText("Pagamento");
         PersonalPaymentText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,28 +134,29 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(PersonalPaymentIcon)
-                                .addGap(27, 27, 27)
-                                .addComponent(PersonalPaymentText)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(PersonalPaymentIcon)
+                .addGap(44, 44, 44)
+                .addComponent(PersonalPaymentText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(PersonalPaymentText)
-                                        .addComponent(PersonalPaymentIcon))
-                                .addContainerGap())
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PersonalPaymentText)
+                    .addComponent(PersonalPaymentIcon))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
         PersonalHelpIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ask-round-button.png"))); // NOI18N
 
+        PersonalHelpText.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         PersonalHelpText.setText("Ajuda");
         PersonalHelpText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -157,24 +167,26 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(PersonalHelpIcon)
-                                .addGap(42, 42, 42)
-                                .addComponent(PersonalHelpText)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(PersonalHelpIcon)
+                .addGap(60, 60, 60)
+                .addComponent(PersonalHelpText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(PersonalHelpText)
-                                        .addComponent(PersonalHelpIcon))
-                                .addContainerGap())
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PersonalHelpText)
+                    .addComponent(PersonalHelpIcon))
+                .addContainerGap())
         );
 
+        btnExitPersonal.setBackground(new java.awt.Color(255, 255, 255));
+        btnExitPersonal.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnExitPersonal.setText("Sair");
         btnExitPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,70 +197,72 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout PersonalMenuBarLayout = new javax.swing.GroupLayout(PersonalMenuBar);
         PersonalMenuBar.setLayout(PersonalMenuBarLayout);
         PersonalMenuBarLayout.setHorizontalGroup(
-                PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PersonalMenuBarLayout.createSequentialGroup()
-                                .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(PersonalMenuBarLayout.createSequentialGroup()
-                                                .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(PersonalMenuBarLayout.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(btnPersonalExit, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(PersonalMenuBarLayout.createSequentialGroup()
-                                                                .addGap(41, 41, 41)
-                                                                .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(PersonalName)
-                                                                        .addComponent(PersonalIconImage))))
-                                                .addGap(0, 25, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalMenuBarLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(btnExitPersonal)))
-                                .addContainerGap())
+            PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PersonalMenuBarLayout.createSequentialGroup()
+                .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PersonalMenuBarLayout.createSequentialGroup()
+                        .addGroup(PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PersonalMenuBarLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnPersonalExit, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PersonalMenuBarLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(PersonalIconImage)))
+                        .addGap(0, 25, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalMenuBarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnExitPersonal)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalMenuBarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(PersonalName)
+                .addGap(61, 61, 61))
         );
         PersonalMenuBarLayout.setVerticalGroup(
-                PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PersonalMenuBarLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnPersonalExit, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(PersonalIconImage)
-                                .addGap(18, 18, 18)
-                                .addComponent(PersonalName)
-                                .addGap(40, 40, 40)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                                .addComponent(btnExitPersonal)
-                                .addContainerGap())
+            PersonalMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PersonalMenuBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPersonalExit, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(PersonalIconImage)
+                .addGap(18, 18, 18)
+                .addComponent(PersonalName)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(btnExitPersonal)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout PersonalMenuBackgroundLayout = new javax.swing.GroupLayout(PersonalMenuBackground);
         PersonalMenuBackground.setLayout(PersonalMenuBackgroundLayout);
         PersonalMenuBackgroundLayout.setHorizontalGroup(
-                PersonalMenuBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PersonalMenuBackgroundLayout.createSequentialGroup()
-                                .addComponent(PersonalMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 463, Short.MAX_VALUE))
+            PersonalMenuBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PersonalMenuBackgroundLayout.createSequentialGroup()
+                .addComponent(PersonalMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 445, Short.MAX_VALUE))
         );
         PersonalMenuBackgroundLayout.setVerticalGroup(
-                PersonalMenuBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PersonalMenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            PersonalMenuBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PersonalMenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PersonalMenuBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PersonalMenuBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PersonalMenuBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PersonalMenuBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -267,8 +281,9 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitPersonalActionPerformed
 
     private void PersonalPaymentTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalPaymentTextMouseClicked
-        new PagamentoPersonal().setVisible(true);
-
+        this.setVisible(false);
+        new MetodoDePagamento().setVisible(true);
+        
     }//GEN-LAST:event_PersonalPaymentTextMouseClicked
 
     private void PersonalConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalConfigTextMouseClicked
@@ -276,10 +291,12 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonalConfigTextMouseClicked
 
     private void PersonalHelpTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalHelpTextMouseClicked
-        try {
+        try
+        {
             TelaInicio.cadastrosPersonal.get(0).ajuda();
-            TelaInicio.flagF = 1;
-        } catch (IndexOutOfBoundsException e) {
+            TelaInicio.flagF=1;
+        }
+        catch(IndexOutOfBoundsException e){
             this.setVisible(false);
             TelaInicio.flagF = 0;
         }
@@ -292,7 +309,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -316,7 +333,7 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAcaoPersonalMenu().setVisible(true);
-
+                
             }
         });
     }

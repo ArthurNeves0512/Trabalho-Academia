@@ -4,27 +4,68 @@
  */
 package classes;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import telas.TelaInicio;
+import java.util.ArrayList;
 
 /*
  * @author arthur
+maioria dos atributos herdados pela classe mae pessoa e depois tem esses atributos
+peso e altura para poder calcular o imc
+Cliente que irá contratar 
+o método ajuda é para mostrar pro cliente quando ele aperta no botao ajuda na tela de menu
  */
 public class Cliente extends Pessoa {
     private float peso;
     private float altura;
-
+    Connection conn;
+    private ClienteDao clienteDAO = new ClienteDao();
     public Cliente() {
     }
 
+ 
+    public ResultSet autenticacaoCliente() {
+            
+            /*
+           conn = new ConexaoBd().conectaBd(); //conexão 
 
-    @Override
-    public void ajuda() {
-        JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            String sql = "SELECT *FROM cliente where cpf= ? and senha = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);            
 
+            //aqui compararemos o que ele recebeu nos txts da tela.
+            pstm.setString(1, telas.TelaInicio.cpfEscolhido);
+            pstm.setString(2, telas.TelaInicio.senhaEscolhida);
+            
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+            
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Eu estou na classe Cliente " + e);
+            return null;
+        }*/
+            
+        return clienteDAO.pesquisarCliente();
     }
+    
+    
+    
+    
+    
 
+@Override
+public void ajuda(){
+    JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
+
+}
     public float getPeso() {
         return peso;
+        
     }
 
     public void setPeso(float peso) {
@@ -38,10 +79,15 @@ public class Cliente extends Pessoa {
     public void setAltura(float altura) {
         this.altura = altura;
     }
-
-    public float calculoImc() {
-        return this.getPeso() / (this.getAltura() * this.getAltura());
+    public float calculoImc(){
+        //retorna o valor do IMC da pessoa.
+        return this.getPeso()/(this.getAltura()*this.getAltura());
     }
+
+
+
+
+
 
 
 }
