@@ -19,9 +19,23 @@ public class FuncionarioDAO {
     PreparedStatement pstm;
     ResultSet rs;
     //PreparedStatment ps;/*
-    
-    //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
 
+    //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
+    public String getCpfPeloNome(String nome) {
+        try {
+            String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não consegui pegar o nome ");
+        }
+        return null;
+    }
 
     public void cadastrarFuncionarioFinal(Funcionario objFuncionario) {
         try {
@@ -60,17 +74,16 @@ public class FuncionarioDAO {
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
-            
+
             pstm.setString(1, cpf);
             rs = pstm.executeQuery();
-            
-            while(rs.next()){
-                
-                if(rs.getInt(1)==1) {
+
+            while (rs.next()) {
+
+                if (rs.getInt(1) == 1) {
                     return true;
-                } 
-                else {
-                    
+                } else {
+
                     return false;
                 }
             }
@@ -79,7 +92,7 @@ public class FuncionarioDAO {
         }
         return false;
     }
-    
+
     public void cadastroFuncionario(Funcionario objFuncionario) {
         try {
             String sql = "INSERT INTO FUNCIONARIO(CPF,ID,ESPECIALIDADE,TRABALHANDO,METODO_RECEBIMENTO) VALUES(?,1,?,0,0)";
