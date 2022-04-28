@@ -7,24 +7,55 @@ package telas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
+import java.sql.*;
+import classes.*;
 /**
  *
  * @author MASTER
  */
 public class TelaContratacaoServico extends javax.swing.JFrame {
 String getImagemSelecionada;
+public Connection conn;
+public PreparedStatement pstm;
+public ResultSet rs;
     /**
      * Creates new form TelaContratacaoServico
      */
     public TelaContratacaoServico() {
         initComponents();
-        ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getFoto());
-                Image imFit = imcon.getImage();                
-                Image imgFit = imFit.getScaledInstance(txtFoto.getWidth(), txtFoto.getHeight(), Image.SCALE_SMOOTH);
-                txtFoto.setIcon(new ImageIcon(imgFit));
+        CarregarDados(TelaAcaoCliente.cpfFuncionarioEscolhido);
+//        ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getFoto());
+//                Image imFit = imcon.getImage();                
+//                Image imgFit = imFit.getScaledInstance(txtFoto.getWidth(), txtFoto.getHeight(), Image.SCALE_SMOOTH);
+//                txtFoto.setIcon(new ImageIcon(imgFit));
     }
-
+    
+    public void CarregarDados(String cpf){
+        System.out.println(cpf);
+        String sql = "SELECT CATEGORIA.VALOR_SESSAO, PESSOA.NOME, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, TELEFONES.NUMERO, FUNCIONARIO.ESPECIALIDADE, PESSOA.SEXO FROM PESSOA, CATEGORIA, ENDERECO, TELEFONES, FUNCIONARIO WHERE PESSOA.CPF = ? AND TELEFONES.CPF= ? AND  FUNCIONARIO.CPF= ? AND CATEGORIA.CPF = ? AND ENDERECO.CPF = ?";
+        try {
+            conn =  new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.setString(2, cpf);
+            pstm.setString(3, cpf);
+            pstm.setString(4, cpf);
+            pstm.setString(5, cpf);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                InputBairro.setText(rs.getString(4));
+                InputCidade.setText(rs.getString(5));
+                InputLogradouro.setText(rs.getString(3));
+                InputNomePersonalContratacaoTexto.setText(rs.getString(2));
+                InputSexoPersonalContratacaoTexto.setText(rs.getString(8));
+                InputTelefoneContratacaoTexto.setText(rs.getString(6));
+                InputValorPersonalContratacaoTexto.setText(rs.getString(1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui carregar os dados da pessoa que vc quer contratar "+ e);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,39 +333,39 @@ String getImagemSelecionada;
     private void InputValorPersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputValorPersonalContratacaoTextoPropertyChange
         // TODO add your handling code here:
 
-        InputValorPersonalContratacaoTexto.setText(Double.toString(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getValorServico()));
+//        InputValorPersonalContratacaoTexto.setText(Double.toString(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getValorServico()));
     }//GEN-LAST:event_InputValorPersonalContratacaoTextoPropertyChange
 
     private void InputSexoPersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputSexoPersonalContratacaoTextoPropertyChange
         // TODO add your handling code here:
 
-        InputSexoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getSexo());
+//        InputSexoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getSexo());
     }//GEN-LAST:event_InputSexoPersonalContratacaoTextoPropertyChange
 
     private void InputEspecialidadePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputEspecialidadePropertyChange
         // TODO add your handling code here:
 
-        InputEspecialidade.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getIdade());
+//        InputEspecialidade.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getIdade());
     }//GEN-LAST:event_InputEspecialidadePropertyChange
 
     private void InputTelefoneContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputTelefoneContratacaoTextoPropertyChange
         // TODO add your handling code here:
 
-        InputTelefoneContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getTelefone());
+//        InputTelefoneContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getTelefone());
     }//GEN-LAST:event_InputTelefoneContratacaoTextoPropertyChange
 
     private void InputLogradouroPropertyChange(java.beans.PropertyChangeEvent evt) {                                               
         // TODO add your handling code here:
                                                                  
 
-        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getLogradouro());
+//        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getLogradouro());
     }                                              
 
 
     private void InputNomePersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputNomePersonalContratacaoTextoPropertyChange
         // TODO add your handling code here:
 
-        InputNomePersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getNome());
+//        InputNomePersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getNome());
     }//GEN-LAST:event_InputNomePersonalContratacaoTextoPropertyChange
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -354,7 +385,8 @@ String getImagemSelecionada;
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).setSaldo(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getValorServico());
+//        AQUI ESTÁ DANDO ERRO
+//        TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).setSaldo(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getValorServico());
 
         this.setVisible(false);
         new SelecionarMetodoDePagamentoFinalizacao().setVisible(true);
@@ -363,13 +395,13 @@ String getImagemSelecionada;
     private void InputBairroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputBairroPropertyChange
         // TODO add your handling code here:
         
-        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getBairro());
+//        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getBairro());
     }//GEN-LAST:event_InputBairroPropertyChange
 
     private void InputCidadePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputCidadePropertyChange
         // TODO add your handling code here:
         
-        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getCidade());
+//        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getCidade());
     }//GEN-LAST:event_InputCidadePropertyChange
 
     /**

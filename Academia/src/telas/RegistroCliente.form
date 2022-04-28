@@ -272,10 +272,6 @@
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-<<<<<<< HEAD
-                  <EmptySpace pref="110" max="32767" attributes="0"/>
-=======
->>>>>>> 6fde05fe9e2c188fe2dc33ad31c80a91c56ec3ea
               </Group>
           </Group>
         </DimensionLayout>
@@ -573,9 +569,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century" size="13" style="0"/>
             </Property>

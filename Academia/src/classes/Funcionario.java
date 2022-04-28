@@ -94,7 +94,7 @@ public class Funcionario extends Pessoa {
 
     @Override
     public void ajuda(){
-        JOptionPane.showMessageDialog(null, "Essa funciondalidade vai ser aprimorada!", "atenção", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Essa funciondalidade vai ser aprimorada!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

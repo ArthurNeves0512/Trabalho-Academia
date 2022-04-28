@@ -213,7 +213,6 @@ String getImagemSelecionada;
         txtCidadeEscrita.setForeground(new java.awt.Color(255, 255, 255));
         txtCidadeEscrita.setText("Cidade");
 
-        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
         btnVoltar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -369,7 +368,6 @@ String getImagemSelecionada;
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(29, 29, 29)
-
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(43, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
