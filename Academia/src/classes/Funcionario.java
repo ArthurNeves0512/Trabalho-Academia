@@ -75,8 +75,7 @@ public class Funcionario extends Pessoa {
 
     @Override
     public void ajuda(){
-        JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n "
-                + "você no pagamento poderá checar seu saldo e a chave do pix cadastrada, não é possível ter mais de uma", "atenção", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Essa funciondalidade vai ser aprimorada!", "atenção", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

@@ -40,7 +40,7 @@ public class Cliente extends Pessoa {
 
 @Override
 public void ajuda(){
-    JOptionPane.showMessageDialog(null, "nas configurações você pode alterar e excluir seu perfil\n Você pode escolher um personal para contratar e logo depois colocar o valor e a chave do pix do personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Você vai descobrir um segredo se carregar a 'Ajuda' do Personal", "atenção", JOptionPane.INFORMATION_MESSAGE);
 
 }
     public float getPeso() {
