@@ -432,7 +432,7 @@ String getImagemSelecionada;
         txtPeso.setEnabled(true);
         txtTelefone.setEnabled(true);
         txtSenha.setEnabled(true);
-        
+        cmbSexo.setEnabled(true);
         btnNovo.setEnabled(false);
         btnLimpar.setEnabled(true);
         btnSalvar.setEnabled(true);
@@ -486,7 +486,7 @@ String getImagemSelecionada;
             Cliente cliente = new Cliente();
             
             cliente.setNome(txtNome.getText());
-            cliente.setCpf(txtCep.getText());
+            cliente.setCpf(txtCpf.getText());
             
             
             cliente.setEndereco(txtLogradouro.getText(),txtBairro.getText(),txtCidade.getText(),txtCep.getText());

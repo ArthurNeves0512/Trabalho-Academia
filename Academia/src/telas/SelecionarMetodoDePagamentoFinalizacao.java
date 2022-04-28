@@ -145,6 +145,7 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         new ConfirmacaoContratacaoServico().setVisible(true);
+        //new ConfirmacaoContratacaoServico().setVisible(true);
     }//GEN-LAST:event_btnPIXActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed

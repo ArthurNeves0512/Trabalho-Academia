@@ -21,12 +21,12 @@ public class FuncionarioDAO {
     //PreparedStatment ps;/*
 
     //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
-    public String getCpfPeloNome(String nome) {
+    public String getCpfPeloNome(Object nome) {
         try {
             String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, nome);
+            pstm.setString(1, nome.toString());
             rs = pstm.executeQuery();
             while (rs.next()) {
                 return rs.getString(1);
