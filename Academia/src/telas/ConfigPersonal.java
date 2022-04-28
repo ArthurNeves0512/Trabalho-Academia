@@ -32,13 +32,9 @@ public class ConfigPersonal extends javax.swing.JFrame {
                 
                 txtNome.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
                 txtCpf.setText(TelaInicio.cadastrosPersonal.get(i).getCpf());
-<<<<<<< HEAD
-//                txtEndereco.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco());
-=======
                 txtLogradouro.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getLogradouro());
                 txtBairro.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getBairro());
                 txtCidade.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getCidade());
->>>>>>> 6fde05fe9e2c188fe2dc33ad31c80a91c56ec3ea
                 txtCep.setText(TelaInicio.cadastrosPersonal.get(i).getCep());
                 txtTelefone.setText(TelaInicio.cadastrosPersonal.get(i).getTelefone());
                 txtIdade.setText(TelaInicio.cadastrosPersonal.get(i).getIdade());
@@ -341,12 +337,9 @@ public class ConfigPersonal extends javax.swing.JFrame {
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){   
                 TelaInicio.cadastrosPersonal.get(i).setNome(txtNome.getText());
                 TelaInicio.cadastrosPersonal.get(i).setCep(txtCpf.getText());
-<<<<<<< HEAD
-//                TelaInicio.cadastrosPersonal.get(i).setEndereco(txtEndereco.getText());
-                TelaInicio.cadastrosPersonal.get(i).setCep(txtCep.getText());
-=======
+
+
                 TelaInicio.cadastrosPersonal.get(i).setEndereco(txtLogradouro.getText(),txtBairro.getText(),txtCidade.getText(),txtCep.getText());
->>>>>>> 6fde05fe9e2c188fe2dc33ad31c80a91c56ec3ea
                 TelaInicio.cadastrosPersonal.get(i).setTelefone(txtTelefone.getText());
                 TelaInicio.cadastrosPersonal.get(i).setIdade(txtIdade.getText());
                 TelaInicio.cadastrosPersonal.get(i).setEmail(txtEmail.getText());
