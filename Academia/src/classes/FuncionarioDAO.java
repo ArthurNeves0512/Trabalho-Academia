@@ -19,15 +19,11 @@ public class FuncionarioDAO {
     PreparedStatement pstm;
     ResultSet rs;
     //PreparedStatment ps;/*
-<<<<<<< HEAD
 
-    //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
-    public String getCpfPeloNome(Object nome) {
-=======
     
     public String carregarEspecialidade()
     {
-        
+     return null;   
     }
     
     public void atualizaEspecialidade(String s)
@@ -35,8 +31,8 @@ public class FuncionarioDAO {
         
     }
     
-    public String getCpfPeloNome(String nome) {
->>>>>>> a90623f2ea3f166954e90cb325c286c82cf6ba74
+    public String getCpfPeloNome(Object nome) {
+
         try {
             String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
             conn = new ConexaoBd().conectaBd();
