@@ -272,10 +272,7 @@
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-<<<<<<< HEAD
-                  <EmptySpace pref="110" max="32767" attributes="0"/>
-=======
->>>>>>> 6fde05fe9e2c188fe2dc33ad31c80a91c56ec3ea
+
               </Group>
           </Group>
         </DimensionLayout>
