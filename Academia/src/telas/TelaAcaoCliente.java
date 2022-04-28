@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author MASTER
  */
 public class TelaAcaoCliente extends javax.swing.JFrame {
-      
+    public static FuncionarioDAO fd = new FuncionarioDAO();
         
     /**
      * Creates new form TelaAcaoCliente
@@ -170,8 +170,14 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
             indicePersonalEscolhido = TabelaPersonalOnline.getSelectedRow();
             Object nomePersonalEscolhido = TabelaPersonalOnline.getValueAt(indicePersonalEscolhido, 1);
             
+<<<<<<< HEAD
             cpfFuncionarioEscolhido = fd.getCpfPeloNome(nomePersonalEscolhido.toString());
             System.out.println(cpfFuncionarioEscolhido);
+=======
+            
+           cpfFuncionarioEscolhido = fd.getCpfPeloNome(nomePersonalEscolhido);
+           
+>>>>>>> f48f09ad662edb362fd6064e898345940aeddf5a
             
             this.setVisible(false);
             new TelaContratacaoServico().setVisible(true);

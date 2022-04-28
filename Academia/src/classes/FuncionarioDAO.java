@@ -19,9 +19,11 @@ public class FuncionarioDAO {
     PreparedStatement pstm;
     ResultSet rs;
     //PreparedStatment ps;/*
+
     
     public String carregarEspecialidade(String cpf)
     {
+<<<<<<< HEAD
         String especialidade="";
         String ans="";
         String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
@@ -62,6 +64,9 @@ public class FuncionarioDAO {
         }
         
         return ans;
+=======
+     return null;   
+>>>>>>> f48f09ad662edb362fd6064e898345940aeddf5a
     }
     
     public String carregarEspecialidadeNaConfiguracao(String cpf)
@@ -104,6 +109,10 @@ public class FuncionarioDAO {
     }
     
     public String getCpfPeloNome(Object nome) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> f48f09ad662edb362fd6064e898345940aeddf5a
         try {
             String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
             conn = new ConexaoBd().conectaBd();

@@ -100,7 +100,6 @@ public ResultSet rs;
         ConfirmacaoServicoText.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         ConfirmacaoServicoText.setText("Você tem certeza de que quer contratar o serviço?");
 
-        btnConfirmar.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -229,23 +228,20 @@ public ResultSet rs;
                                 .addComponent(InputNomePersonalContratacaoTexto))
                             .addComponent(jLabel2)
                             .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(96, 96, 96)
-                                .addComponent(InputBairro))
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(EnderecoPersonalContratacaoTexto)
-                                .addGap(64, 64, 64)
-                                .addComponent(InputLogradouro))
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(ValorPersonalContratacaoTexto)
-                                .addGap(34, 34, 34)
-                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(InputCidade)
-                                    .addComponent(InputValorPersonalContratacaoTexto)))
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
                                 .addComponent(IdadePersonalContratacaoTexto)
                                 .addGap(18, 18, 18)
-                                .addComponent(InputEspecialidade)))
+                                .addComponent(InputEspecialidade))
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ValorPersonalContratacaoTexto)
+                                    .addComponent(jLabel1)
+                                    .addComponent(EnderecoPersonalContratacaoTexto))
+                                .addGap(34, 34, 34)
+                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(InputLogradouro)
+                                    .addComponent(InputBairro)
+                                    .addComponent(InputCidade)
+                                    .addComponent(InputValorPersonalContratacaoTexto))))
                         .addGap(40, 40, 40)
                         .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
@@ -266,7 +262,7 @@ public ResultSet rs;
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(ConfirmacaoServicoText)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         ContratacaoServicoWhiteBackgroundLayout.setVerticalGroup(
             ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +317,7 @@ public ResultSet rs;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ContratacaoServicoWhiteBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(ContratacaoServicoWhiteBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
