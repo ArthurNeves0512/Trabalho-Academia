@@ -19,8 +19,17 @@ public class FuncionarioDAO {
     PreparedStatement pstm;
     ResultSet rs;
     //PreparedStatment ps;/*
-
-    //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
+    
+    public String carregarEspecialidade()
+    {
+        
+    }
+    
+    public void atualizaEspecialidade(String s)
+    {
+        
+    }
+    
     public String getCpfPeloNome(String nome) {
         try {
             String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
