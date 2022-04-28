@@ -26,7 +26,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     static int indicePersonalEscolhido;
     static String cpfFuncionarioEscolhido;
     ResultSet rs;
-    public static FuncionarioDAO fd= new FuncionarioDAO();
+    
     
     
     public TelaAcaoCliente() {
