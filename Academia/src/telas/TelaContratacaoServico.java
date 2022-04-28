@@ -43,13 +43,14 @@ public ResultSet rs;
             pstm.setString(5, cpf);
             rs = pstm.executeQuery();
             while(rs.next()){
+                InputNomePersonalContratacaoTexto.setText(rs.getString(2));
+                InputLogradouro.setText(rs.getString(3));
                 InputBairro.setText(rs.getString(4));
                 InputCidade.setText(rs.getString(5));
-                InputLogradouro.setText(rs.getString(3));
-                InputNomePersonalContratacaoTexto.setText(rs.getString(2));
-                InputSexoPersonalContratacaoTexto.setText(rs.getString(8));
-                InputTelefoneContratacaoTexto.setText(rs.getString(6));
                 InputValorPersonalContratacaoTexto.setText(rs.getString(1));
+                InputEspecialidade.setText(TelaAcaoCliente.fd.carregarEspecialidade(TelaAcaoCliente.fd.getCpfPeloNome(rs.getString(2))));
+                InputTelefoneContratacaoTexto.setText(rs.getString(6));
+                InputSexoPersonalContratacaoTexto.setText(rs.getString(8));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "não consegui carregar os dados da pessoa que vc quer contratar "+ e);

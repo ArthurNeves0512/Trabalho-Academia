@@ -20,22 +20,95 @@ public class FuncionarioDAO {
     ResultSet rs;
     //PreparedStatment ps;/*
     
-    public String carregarEspecialidade()
+    public String carregarEspecialidade(String cpf)
     {
+        String especialidade="";
+        String ans="";
+        String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                especialidade=rs.getString("ESPECIALIDADE");
+            }
+            
+            if(Character.compare(especialidade.charAt(0),'1')==0)
+            {
+                ans+="Abdomen\n";
+            }
+            if(Character.compare(especialidade.charAt(1),'1')==0)
+            {
+                ans+="Peito\n";
+            }
+            if(Character.compare(especialidade.charAt(2),'1')==0)
+            {
+                ans+="Braços\n";
+            }
+            if(Character.compare(especialidade.charAt(3),'1')==0)
+            {
+                ans+="Pernas\n";
+            }
+            if(Character.compare(especialidade.charAt(4),'1')==0)
+            {
+                ans+="Ombros";
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "nao deu pra pegar a especialidade do banco de dados" + e);
+        }
+        
+        return ans;
+    }
+    
+    public String carregarEspecialidadeNaConfiguracao(String cpf)
+    {
+        String especialidade="";
+        String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                especialidade=rs.getString("ESPECIALIDADE");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "nao deu pra pegar a especialidade do banco de dados" + e);
+        }
+        
+        return especialidade;
+    }
+    
+    public void atualizaEspecialidade(String s, String cpf)
+    {
+        String sql = "UPDATE FUNCIONARIO SET ESPECIALIDADE = ? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, s);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar a especialidade");
+        }
         
     }
     
-    public void atualizaEspecialidade(String s)
-    {
-        
-    }
-    
-    public String getCpfPeloNome(String nome) {
+    public String getCpfPeloNome(Object nome) {
         try {
             String sql = "SELECT PESSOA.CPF FROM PESSOA WHERE PESSOA.NOME= ?";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, nome);
+            pstm.setString(1, nome.toString());
             rs = pstm.executeQuery();
             while (rs.next()) {
                 return rs.getString(1);
