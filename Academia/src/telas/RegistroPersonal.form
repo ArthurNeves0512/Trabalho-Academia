@@ -215,13 +215,9 @@
                       <Component id="txtSenha" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
-=======
                   <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Component id="btnvoltar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
->>>>>>> 6fde05fe9e2c188fe2dc33ad31c80a91c56ec3ea
               </Group>
           </Group>
         </DimensionLayout>
