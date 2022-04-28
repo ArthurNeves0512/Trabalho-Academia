@@ -136,6 +136,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome_Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="NomeClientePropertyChange"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel2">
               <Properties>

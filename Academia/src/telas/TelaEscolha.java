@@ -138,14 +138,17 @@ public class TelaEscolha extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        this.setVisible(false);
         new RegistroCliente().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.setVisible(false);        // TODO add your handling code here:
+        new TelaInicio().setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
+        this.setVisible(false);
         new RegistroPersonal().setVisible(true);
     }//GEN-LAST:event_btnPersonalActionPerformed
 

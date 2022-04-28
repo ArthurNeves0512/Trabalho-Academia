@@ -87,8 +87,8 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
                         .addGap(137, 137, 137))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonalBackgroundMenuWhiteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(253, 253, 253))
+                .addComponent(btnOnAndOff, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
         );
         PersonalBackgroundMenuWhiteLayout.setVerticalGroup(
             PersonalBackgroundMenuWhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
