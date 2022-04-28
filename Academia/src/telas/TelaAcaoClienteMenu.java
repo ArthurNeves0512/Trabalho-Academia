@@ -76,6 +76,11 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         ImageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/muscular male torso outline inside a circle_128.png"))); // NOI18N
 
         NomeCliente.setText("Nome_Cliente");
+        NomeCliente.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                NomeClientePropertyChange(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -286,6 +291,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.setVisible(false);
+        new TelaInicio().setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void txtPaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPaymentMouseClicked
@@ -293,6 +299,20 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
         this.setVisible(true);
         new MetodoDePagamento().setVisible(true);
     }//GEN-LAST:event_txtPaymentMouseClicked
+
+    private void NomeClientePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_NomeClientePropertyChange
+        // TODO add your handling code here:
+        
+        PessoaDao pessoa = new PessoaDao();
+        
+        try 
+        {
+            NomeCliente.setText(pessoa.pesquisarPessoaTerNome(TelaInicio.cpfEscolhido));
+        } catch (Exception e) 
+        {
+            NomeCliente.setText("deu ruim");
+        }
+    }//GEN-LAST:event_NomeClientePropertyChange
 
     /**
      * @param args the command line arguments

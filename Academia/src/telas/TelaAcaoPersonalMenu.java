@@ -85,6 +85,11 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
         PersonalIconImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/muscular male torso outline inside a circle_128.png"))); // NOI18N
 
         PersonalName.setText("Nome_Personal");
+        PersonalName.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                PersonalNamePropertyChange(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -278,15 +283,16 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
     private void btnExitPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitPersonalActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        new TelaInicio().setVisible(true);
     }//GEN-LAST:event_btnExitPersonalActionPerformed
 
     private void PersonalPaymentTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalPaymentTextMouseClicked
         this.setVisible(false);
-        new MetodoDePagamento().setVisible(true);
-        
+        new MetodoDePagamento().setVisible(true); 
     }//GEN-LAST:event_PersonalPaymentTextMouseClicked
 
     private void PersonalConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonalConfigTextMouseClicked
+        this.setVisible(false);
         new ConfigPersonal().setVisible(true);
     }//GEN-LAST:event_PersonalConfigTextMouseClicked
 
@@ -301,6 +307,20 @@ public class TelaAcaoPersonalMenu extends javax.swing.JFrame {
             TelaInicio.flagF = 0;
         }
     }//GEN-LAST:event_PersonalHelpTextMouseClicked
+
+    private void PersonalNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_PersonalNamePropertyChange
+        // TODO add your handling code here:
+        
+        PessoaDao pessoa = new PessoaDao();
+        
+        try 
+        {
+            PersonalName.setText(pessoa.pesquisarPessoaTerNome(TelaInicio.cpfEscolhido));
+        } catch (Exception e) 
+        {
+            PersonalName.setText("deu ruim");
+        }
+    }//GEN-LAST:event_PersonalNamePropertyChange
 
     /**
      * @param args the command line arguments

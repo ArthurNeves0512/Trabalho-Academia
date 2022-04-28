@@ -238,6 +238,7 @@ public class TelaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        this.setVisible(false);
         new TelaEscolha().setVisible(true);   // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

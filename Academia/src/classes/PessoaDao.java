@@ -52,5 +52,30 @@ public class PessoaDao {
         
         return id;
     }
+    
+    
+    public String pesquisarPessoaTerNome(String s) throws SQLException{
+        String sql = "SELECT NOME FROM PESSOA WHERE CPF=?;";
+        conn  = new ConexaoBd().conectaBd();
+        String nome="";
+        
+        try
+        {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, s);
+            rs = pstm.executeQuery();
+
+            while(rs.next())
+            {
+                nome = rs.getString("NOME");
+            }
+                
+        }catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null,"deu ruim aqui fia, volte duas casas." + e);
+        }       
+        
+        return nome;
+    }
    
 }
