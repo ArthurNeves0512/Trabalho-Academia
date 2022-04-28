@@ -29,8 +29,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     
     public TelaAcaoCliente() {
         initComponents();
-//        carregar();
-            carregdarDadosBd();
+        carregarDadosBd();
      
     }
 
@@ -68,11 +67,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-<<<<<<< HEAD
-                "Preço", "Nome", "Endereço", "Telefone", "Chave Pix"
-=======
                 "Preço", "Nome", "Endereço", "Telefone", "Especialidades"
->>>>>>> f116c06249916a09841015b58109040c42555cc0
             }
         ) {
             Class[] types = new Class [] {
@@ -224,7 +219,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnSelecionarServico;
     // End of variables declaration//GEN-END:variables
 
-public ResultSet carregdarDadosBd(){
+public ResultSet carregarDadosBd(){
     String sql= "SELECT CATEGORIA.VALOR_SESSAO, PESSOA.NOME, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, TELEFONES.NUMERO, FUNCIONARIO.ESPECIALIDADE\n"
             + "FROM PESSOA, CATEGORIA, ENDERECO, TELEFONES, FUNCIONARIO WHERE FUNCIONARIO.TRABALHANDO = 1 AND PESSOA.CPF = ENDERECO.CPF AND PESSOA.CPF = TELEFONES.CPF AND PESSOA.CPF = FUNCIONARIO.CPF; ";
     try {
