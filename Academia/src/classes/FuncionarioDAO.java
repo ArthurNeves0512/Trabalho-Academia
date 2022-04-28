@@ -64,7 +64,6 @@ public class FuncionarioDAO {
             pstm.setString(1, cpf);
             rs = pstm.executeQuery();
             
-
             while(rs.next()){
                 
                 if(rs.getInt(1)==1) {

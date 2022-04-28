@@ -23,7 +23,7 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
        
         if(TelaInicio.flagF !=1){
             
-        
+      
         initComponents();
             if (objFuncionarioDao.isTrabalhando(TelaInicio.cpfEscolhido)) {
                 btnOnAndOff.setSelected(true);
