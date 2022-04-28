@@ -133,7 +133,6 @@ String getImagemSelecionada;
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha uma opção", "Masculino", "Feminino" }));
 
-        btnNovo.setBackground(new java.awt.Color(255, 255, 255));
         btnNovo.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnNovo.setText("Editar");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +141,6 @@ String getImagemSelecionada;
             }
         });
 
-        btnUpload.setBackground(new java.awt.Color(255, 255, 255));
         btnUpload.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnUpload.setText("Carregar foto");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +149,6 @@ String getImagemSelecionada;
             }
         });
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar dados");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +157,6 @@ String getImagemSelecionada;
             }
         });
 
-        btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnLimpar.setText("Apagar tudo");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,17 +202,16 @@ String getImagemSelecionada;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel11)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel10)
-                        .addComponent(jLabel8))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8)
                     .addComponent(jLabel4))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -317,7 +312,7 @@ String getImagemSelecionada;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,7 +323,7 @@ String getImagemSelecionada;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -417,20 +412,22 @@ String getImagemSelecionada;
             ////INSERINDO NO BANCO DE DADOS SÓ UM PERSONAL COM SENHA E CPF//////
             Funcionario funcionario = new Funcionario();
             FuncionarioDAO personalDao = new FuncionarioDAO();
-            funcionario.setCpf(txtCpf.getText());
-            funcionario.setSenha(txtSenha.getText());
-            personalDao.cadastrarFuncionario(funcionario);
+            
+            
             ////////////////////////////////////
             
             
             
             
             funcionario.setNome(txtNome.getText());funcionario.setCpf(txtCpf.getText());funcionario.setEmail(txtEmail.getText());
-            funcionario.setEndereco(txtLogradouro.getText()); funcionario.setFoto(getImagemSelecionada); funcionario.setIdade(txtIdade.getText());
-            funcionario.setNome(txtNome.getText()); funcionario.setSenha(txtSenha.getText()); funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
+            funcionario.setEndereco(txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText());
+            funcionario.setFoto(getImagemSelecionada);
+            funcionario.setIdade(txtIdade.getText());
+            funcionario.setNome(txtNome.getText()); funcionario.setSenha(txtSenha.getText());
+            funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
             funcionario.setTelefone(txtTelefone.getText());
+            personalDao.cadastrarFuncionarioFinal(funcionario);
             
-            cadastrosPersonal.add(funcionario);
            
             icon.setIcon(null);
             txtCep.setText("");

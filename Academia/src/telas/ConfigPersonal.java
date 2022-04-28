@@ -32,7 +32,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
                 
                 txtNome.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
                 txtCpf.setText(TelaInicio.cadastrosPersonal.get(i).getCpf());
-                txtEndereco.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco());
+//                txtEndereco.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco());
                 txtCep.setText(TelaInicio.cadastrosPersonal.get(i).getCep());
                 txtTelefone.setText(TelaInicio.cadastrosPersonal.get(i).getTelefone());
                 txtIdade.setText(TelaInicio.cadastrosPersonal.get(i).getIdade());
@@ -304,7 +304,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){   
                 TelaInicio.cadastrosPersonal.get(i).setNome(txtNome.getText());
                 TelaInicio.cadastrosPersonal.get(i).setCep(txtCpf.getText());
-                TelaInicio.cadastrosPersonal.get(i).setEndereco(txtEndereco.getText());
+//                TelaInicio.cadastrosPersonal.get(i).setEndereco(txtEndereco.getText());
                 TelaInicio.cadastrosPersonal.get(i).setCep(txtCep.getText());
                 TelaInicio.cadastrosPersonal.get(i).setTelefone(txtTelefone.getText());
                 TelaInicio.cadastrosPersonal.get(i).setIdade(txtIdade.getText());

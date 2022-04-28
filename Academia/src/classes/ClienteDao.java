@@ -22,7 +22,6 @@ public class ClienteDao {
     
     public void cadastrarClienteFinal(Cliente objCliente){
         try {
-            
             cadastrarPessoa(objCliente.getCpf(), objCliente.getNome(), objCliente.getSexo());
             cadastrarEndereco(objCliente);
             cadastroCadastro(objCliente);
@@ -33,20 +32,17 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null, "CLienteDao");
         }
         
-        
     }
     
     
     public void cadastroCliente(Cliente objCliente){
         try {
-            String sql = "INSERT INTO CLIENTE(CPF,ID,METODO_PAGAMENTO,PESO,ALTURA) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO CLIENTE(CPF,ID,METODO_PAGAMENTO,PESO,ALTURA) VALUES(?,0,0,?,?)";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objCliente.getCpf());
-            pstm.setString(2, "0");
-            pstm.setString(3, "0");
-            pstm.setFloat(4, objCliente.getPeso());
-            pstm.setFloat(5, objCliente.getAltura());
+            pstm.setFloat(2, objCliente.getPeso());
+            pstm.setFloat(3, objCliente.getAltura());
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
@@ -55,12 +51,11 @@ public class ClienteDao {
     }
     public void cadastroTelefone(Cliente objCliente){
         try {
-            String sql = "INSERT INTO TELEFONES(CPF,ID,NUMERO) VALUES(?,?,?)";
+            String sql = "INSERT INTO TELEFONES(CPF,ID,NUMERO) VALUES(?,0,?)";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objCliente.getCpf());
-            pstm.setString(2, "0");
-            pstm.setString(3, objCliente.getTelefone());
+            pstm.setString(2, objCliente.getTelefone());
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
@@ -70,13 +65,12 @@ public class ClienteDao {
             
     public void cadastroCadastro(Cliente objCliente){
         try {
-            String sql = "INSERT INTO CADASTRO(CPF,ID,EMAIL,SENHA) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO CADASTRO(CPF,ID,EMAIL,SENHA) VALUES(?,0,?,?)";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objCliente.getCpf());
-            pstm.setString(2, "0");
-            pstm.setString(3, objCliente.getEmail());
-            pstm.setString(4, objCliente.getSenha());
+            pstm.setString(2, objCliente.getEmail());
+            pstm.setString(3, objCliente.getSenha());
             
 
             pstm.execute();
@@ -88,36 +82,36 @@ public class ClienteDao {
     }
     public void cadastrarEndereco(Cliente objCliente){
         try {
-            String sql = "INSERT INTO ENDERECO(CPF,ID,LOGRADOURO,BAIRRO,CIDADE,CEP) VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO ENDERECO(CPF,ID,LOGRADOURO,BAIRRO,CIDADE,CEP) VALUES(?,0,?,?,?,?)";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objCliente.getCpf());
-            pstm.setString(2, "0");
-            pstm.setString(3, objCliente.getEndereco().getLogradouro());
+            pstm.setString(2, objCliente.getEndereco().getLogradouro());
+            pstm.setString(3, objCliente.getEndereco().getBairro());
             pstm.setString(4, objCliente.getEndereco().getCidade());
             pstm.setString(5, objCliente.getEndereco().getCep());
 
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "não consegui cadastrar um endereço");
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um endereço "+ e);
         }
         
     }
     public void cadastrarPessoa(String cpf, String nome, String sexo ){
         try {
-            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO,SALDO_BANCARIO) VALUES(?,0,?,?,0)";
             conn= new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1,cpf);
-            pstm.setString(2,"0");
-            pstm.setString(3, nome);
-            pstm.setString(4, sexo);
+//            pstm.setString(2,"0");
+            pstm.setString(2, nome);
+            pstm.setString(3, sexo);
             
             pstm.execute();
-            pstm.close();            
+                       
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não consegui cadastrar uma pessoa");
+            JOptionPane.showMessageDialog(null, "Não consegui cadastrar uma pessoa "+ e);
         }
         
         

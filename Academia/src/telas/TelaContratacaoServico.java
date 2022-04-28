@@ -287,7 +287,7 @@ String getImagemSelecionada;
     private void InputEnderecoPersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputEnderecoPersonalContratacaoTextoPropertyChange
         // TODO add your handling code here:
 
-        InputEnderecoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco());
+//        InputEnderecoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco());
     }//GEN-LAST:event_InputEnderecoPersonalContratacaoTextoPropertyChange
 
     private void InputNomePersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputNomePersonalContratacaoTextoPropertyChange

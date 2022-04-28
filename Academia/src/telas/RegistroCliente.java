@@ -95,7 +95,8 @@ String getImagemSelecionada;
         setTitle("Registro Cliente");
         setIconImages(getIconImages());
         setMinimumSize(new java.awt.Dimension(731, 585));
-        setSize(new java.awt.Dimension(731, 585));
+        setPreferredSize(new java.awt.Dimension(731, 500));
+        setSize(new java.awt.Dimension(731, 600));
 
         jPanel1.setBackground(new java.awt.Color(0, 130, 46));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 500));
@@ -365,7 +366,7 @@ String getImagemSelecionada;
                             .addComponent(jLabel6))
                         .addGap(29, 29, 29)
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -376,7 +377,7 @@ String getImagemSelecionada;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
         );
 
         pack();
@@ -475,12 +476,12 @@ String getImagemSelecionada;
             Cliente cliente = new Cliente(); cliente.setAltura(Float.parseFloat(txtAltura.getText()));cliente.setCep(txtCep.getText());
             cliente.setCpf(txtCep.getText());
             cliente.setEmail(txtEmail.getText()); 
-            cliente.setEndereco(txtLogradouro.getText());
+            cliente.setEndereco(txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText());
             cliente.setFoto(getImagemSelecionada); cliente.setIdade(txtIdade.getText()); cliente.setNome(txtNome.getText());
             cliente.setPeso(Float.parseFloat(txtPeso.getText())); cliente.setSenha(txtSenha.getText()); cliente.setTelefone(txtTelefone.getText());
             //COLOCAR NO BANCO DE DADOS CLIENTES APENAS COM SENHA E CPF
             ClienteDao clienteDao = new ClienteDao();
-            clienteDao.cadastrarCliente(cliente);
+            clienteDao.cadastrarClienteFinal(cliente);
 
            /////
             

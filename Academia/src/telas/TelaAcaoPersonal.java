@@ -13,17 +13,28 @@ import classes.*;
  * @author MASTER
  */
 public class TelaAcaoPersonal extends javax.swing.JFrame {
-
+    FuncionarioDAO objFuncionarioDao = new FuncionarioDAO();
     /**
      * Creates new form TelaAcaoPersonal
      */
     public TelaAcaoPersonal() {
+        
+        if(objFuncionarioDao.isTrabalhando(TelaInicio.cpfEscolhido)){
+            btnOnAndOff.setEnabled(true);
+            btnOnAndOff.setText("Desativar");
+        }
+        else{
+            btnOnAndOff.setEnabled(false);
+            btnOnAndOff.setText("Ativar");
+        }
+        
+        
         if(TelaInicio.flagF !=1){
             
         
         initComponents();
-        FuncionarioDAO ps = new FuncionarioDAO();/*
-        TelaInicio.cadastrosPersonal = ps.pesquisarPersonal();*/
+        FuncionarioDAO ps = new FuncionarioDAO();
+        
         }
         else{
             
@@ -145,19 +156,18 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
     private void btnOnAndOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnAndOffActionPerformed
         // TODO add your handling code here:
         
+        
         if(btnOnAndOff.isSelected())
         {
             //dizer que o personal esta online
+            objFuncionarioDao.isTrabalhando(1,TelaInicio.cpfEscolhido);
             btnOnAndOff.setText("Desativar");
             btnOnAndOff.setSelected(true);
-            for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(true);
-            }
         }
-        }else
+        else
         {
             //dizer que o personal esta online
+            objFuncionarioDao.isTrabalhando(0, TelaInicio.cpfEscolhido);
             btnOnAndOff.setText("Ativar");
             for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
             if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){

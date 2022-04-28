@@ -23,6 +23,7 @@ public class Funcionario extends Pessoa {
     private double saldo =0;
     private double valorServico=0.00;
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    private String especialidade;
     
     
     Connection conn;
@@ -32,6 +33,13 @@ public class Funcionario extends Pessoa {
     public Funcionario() {
     }
     
+    public void especialidade(String cpf ){
+        String sql = "SELECT ESPECIALIDADE FROM TABELA FUNCIONARIO WHERE CPF = ?";
+        try {
+            
+        } catch (Exception e) {
+        }
+    }
     
     
     public ResultSet autenticacaoFuncionario() {
@@ -39,6 +47,15 @@ public class Funcionario extends Pessoa {
        return funcionarioDAO.pesquisarFuncionario();
 
     }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+    
     public boolean getTrabalhando() {
         return this.trabalhando;
     }

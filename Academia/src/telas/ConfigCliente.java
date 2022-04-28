@@ -44,7 +44,7 @@ public class ConfigCliente extends javax.swing.JFrame {
                 txtNome.setText(TelaInicio.cadastrosClientes.get(i).getNome());
                 txtCpf.setText(TelaInicio.cadastrosClientes.get(i).getCpf());
                 txtCep.setText(TelaInicio.cadastrosClientes.get(i).getCep());
-                txtEndereco.setText(TelaInicio.cadastrosClientes.get(i).getEndereco());
+//                txtEndereco.setText(TelaInicio.cadastrosClientes.get(i).getEndereco());
                 txtCep.setText(TelaInicio.cadastrosClientes.get(i).getCep());
                 txtTelefone.setText(TelaInicio.cadastrosClientes.get(i).getTelefone());
                 txtIdade.setText(TelaInicio.cadastrosClientes.get(i).getIdade());
@@ -376,7 +376,7 @@ public class ConfigCliente extends javax.swing.JFrame {
             if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){   
                 TelaInicio.cadastrosClientes.get(i).setNome(txtNome.getText());
                 TelaInicio.cadastrosClientes.get(i).setCpf(txtCpf.getText());
-                TelaInicio.cadastrosClientes.get(i).setEndereco(txtEndereco.getText());
+//                TelaInicio.cadastrosClientes.get(i).setEndereco(txtEndereco.getText());
                 TelaInicio.cadastrosClientes.get(i).setCep(txtCep.getText());
                 TelaInicio.cadastrosClientes.get(i).setTelefone(txtTelefone.getText());
                 TelaInicio.cadastrosClientes.get(i).setIdade(txtIdade.getText());

@@ -22,7 +22,7 @@ public class ConexaoBd {
         try {
             //primeiro parâmetro é uma referência para o nosso drive de conexão     
             
-            String url="jdbc:mysql://localhost:3306/ACADEMIA?user=root&password=@Znt02918";
+            String url="jdbc:mysql://localhost:3306/ACADEMIA?user=root&password=root";
             conn = DriverManager.getConnection(url);
             
         } catch (SQLException e) {
