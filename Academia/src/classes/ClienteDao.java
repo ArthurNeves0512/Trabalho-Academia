@@ -37,6 +37,19 @@ public class ClienteDao {
         
         
     }
+    
+    public void cadastrarPessoa(){
+        try {
+            
+        } catch (Exception e) {
+        }
+        
+        
+    }
+    
+    
+    
+    
     public void excluirCLiente(String a){
        
         String sql= "delete from cliente where cpf = ?";

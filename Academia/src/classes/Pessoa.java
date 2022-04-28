@@ -17,7 +17,7 @@ public abstract class  Pessoa {
     protected String senha;
     protected String cpf;
     protected String foto;
-    protected String endereco;
+    protected Endereco endereco;
     protected String telefone;
     protected String email;
     protected String idade;
@@ -62,12 +62,12 @@ public abstract class  Pessoa {
         this.foto = foto;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEndereco(String logradouro, String bairro, String cidade, String cep) {
+        this.endereco = new Endereco(logradouro, bairro, cidade, cep);
     }
 
     public String getTelefone() {

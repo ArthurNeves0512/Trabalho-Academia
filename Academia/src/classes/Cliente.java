@@ -30,26 +30,6 @@ public class Cliente extends Pessoa {
  
     public ResultSet autenticacaoCliente() {
             
-            /*
-           conn = new ConexaoBd().conectaBd(); //conexão 
-
-        try {
-            String sql = "SELECT *FROM cliente where cpf= ? and senha = ?";
-            PreparedStatement pstm = conn.prepareStatement(sql);            
-
-            //aqui compararemos o que ele recebeu nos txts da tela.
-            pstm.setString(1, telas.TelaInicio.cpfEscolhido);
-            pstm.setString(2, telas.TelaInicio.senhaEscolhida);
-            
-            ResultSet rs = pstm.executeQuery();
-            return rs;
-            
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Eu estou na classe Cliente " + e);
-            return null;
-        }*/
-            
         return clienteDAO.pesquisarCliente();
     }
     

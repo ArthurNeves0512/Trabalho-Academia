@@ -96,7 +96,6 @@ String getImagemSelecionada;
         jPanel1.setBackground(new java.awt.Color(0, 130, 46));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 500));
 
-        btnUpload.setBackground(new java.awt.Color(255, 255, 255));
         btnUpload.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnUpload.setText("Carregar Foto");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +104,6 @@ String getImagemSelecionada;
             }
         });
 
-        btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnLimpar.setText("Apagar tudo");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +126,6 @@ String getImagemSelecionada;
             .addComponent(icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
         );
 
-        btnNovo.setBackground(new java.awt.Color(255, 255, 255));
         btnNovo.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnNovo.setText("Editar");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +134,6 @@ String getImagemSelecionada;
             }
         });
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar dados");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +434,9 @@ String getImagemSelecionada;
             JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
             
             Cliente cliente = new Cliente(); cliente.setAltura(Float.parseFloat(txtAltura.getText()));cliente.setCep(txtCep.getText());
-            cliente.setCpf(txtCep.getText()); cliente.setEmail(txtEmail.getText()); cliente.setEndereco(txtEndereco.getText());
+            cliente.setCpf(txtCep.getText());
+            cliente.setEmail(txtEmail.getText()); 
+            cliente.setEndereco(txtEndereco.getText());
             cliente.setFoto(getImagemSelecionada); cliente.setIdade(txtIdade.getText()); cliente.setNome(txtNome.getText());
             cliente.setPeso(Float.parseFloat(txtPeso.getText())); cliente.setSenha(txtSenha.getText()); cliente.setTelefone(txtTelefone.getText());
             //COLOCAR NO BANCO DE DADOS CLIENTES APENAS COM SENHA E CPF

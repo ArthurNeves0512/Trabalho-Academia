@@ -35,26 +35,7 @@ public class Funcionario extends Pessoa {
     
     
     public ResultSet autenticacaoFuncionario() {
-        /*  
-            
-        conn = new ConexaoBd().conectaBd(); //conexão 
-
-        try {
-            String sql = "SELECT * FROM FUNCIONARIO WHERE CPF= ? AND SENHA= ?";
-            PreparedStatement pstm = conn.prepareStatement(sql);            
-
-            //aqui compararemos o que ele recebeu nos txts da tela.
-            pstm.setString(1, telas.TelaInicio.cpfEscolhido);
-            pstm.setString(2, telas.TelaInicio.senhaEscolhida);
-            
-            ResultSet rs = pstm.executeQuery();
-            
-            return rs;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Eu estou na classe Personal " + e);
-            return null;
-        }*/
-        
+      
        return funcionarioDAO.pesquisarFuncionario();
 
     }
