@@ -66,7 +66,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Preço", "Cpf", "Endereço", "Sexo", "Chave Pix"
+                "Preço", "Nome", "Endereço", "Telefone", "Chave Pix"
             }
         ) {
             Class[] types = new Class [] {

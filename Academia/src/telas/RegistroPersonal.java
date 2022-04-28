@@ -1,8 +1,9 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
+
 import classes.FuncionarioDAO;
 import classes.Funcionario;
 import java.awt.Image;
@@ -12,12 +13,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import static telas.TelaInicio.cadastrosPersonal;
+
 /**
  *
  * @author arthur
  */
 public class RegistroPersonal extends javax.swing.JFrame {
-String getImagemSelecionada;
+
+    String cBAbdomen, cBPeito, cBBracos, cBPernas, cBOmbros;
+    String getImagemSelecionada;
+
     /**
      * Creates new form RegistroPersonal
      */
@@ -27,15 +32,23 @@ String getImagemSelecionada;
         btnSalvar.setEnabled(false);
         btnNovo.setEnabled(true);
         btnUpload.setEnabled(false);
-        txtCep.setEnabled(false);
-        txtCpf.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtIdade.setEnabled(false);
+
         txtNome.setEnabled(false);
-        cmbSexo.setEnabled(false);
-        txtTelefone.setEnabled(false);
-        txtSenha.setEnabled(false);
+        txtCpf.setEnabled(false);
         txtLogradouro.setEnabled(false);
+        txtBairro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtIdade.setEnabled(false);
+        cmbSexo.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtSenha.setEnabled(false);
+        checkBoxAbdomen.setEnabled(false);
+        checkBoxPeito.setEnabled(false);
+        checkBoxBracos.setEnabled(false);
+        checkBoxPernas.setEnabled(false);
+        checkBoxOmbros.setEnabled(false);
     }
 
     /**
@@ -78,6 +91,12 @@ String getImagemSelecionada;
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnvoltar = new javax.swing.JButton();
+        checkBoxAbdomen = new javax.swing.JCheckBox();
+        checkBoxPeito = new javax.swing.JCheckBox();
+        checkBoxBracos = new javax.swing.JCheckBox();
+        checkBoxPernas = new javax.swing.JCheckBox();
+        checkBoxOmbros = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -204,65 +223,137 @@ String getImagemSelecionada;
             }
         });
 
+        checkBoxAbdomen.setBackground(new java.awt.Color(0, 58, 122));
+        checkBoxAbdomen.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        checkBoxAbdomen.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxAbdomen.setText("Abdomen");
+        checkBoxAbdomen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxAbdomenActionPerformed(evt);
+            }
+        });
+
+        checkBoxPeito.setBackground(new java.awt.Color(0, 58, 122));
+        checkBoxPeito.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        checkBoxPeito.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxPeito.setText("Peito");
+        checkBoxPeito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxPeitoActionPerformed(evt);
+            }
+        });
+
+        checkBoxBracos.setBackground(new java.awt.Color(0, 58, 122));
+        checkBoxBracos.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        checkBoxBracos.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxBracos.setText("Braços");
+        checkBoxBracos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxBracosActionPerformed(evt);
+            }
+        });
+
+        checkBoxPernas.setBackground(new java.awt.Color(0, 58, 122));
+        checkBoxPernas.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        checkBoxPernas.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxPernas.setText("Pernas");
+        checkBoxPernas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxPernasActionPerformed(evt);
+            }
+        });
+
+        checkBoxOmbros.setBackground(new java.awt.Color(0, 58, 122));
+        checkBoxOmbros.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        checkBoxOmbros.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxOmbros.setText("Ombros");
+        checkBoxOmbros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxOmbrosActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Especialidades");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel4))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(btnLimpar))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(149, 149, 149)
-                                        .addComponent(btnSalvar))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(51, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnUpload)
-                        .addGap(162, 162, 162))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnvoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel4))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(69, 69, 69)
+                                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(59, 59, 59)
+                                                .addComponent(btnLimpar))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(149, 149, 149)
+                                                .addComponent(btnSalvar))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(checkBoxAbdomen)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(checkBoxPeito)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(checkBoxBracos)))
+                                .addContainerGap(51, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnUpload)
+                                .addGap(162, 162, 162))))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(checkBoxPernas)
+                .addGap(18, 18, 18)
+                .addComponent(checkBoxOmbros)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,14 +378,13 @@ String getImagemSelecionada;
                                     .addComponent(btnLimpar)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6))
+                                    .addComponent(jLabel3)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,11 +421,20 @@ String getImagemSelecionada;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkBoxBracos)
+                    .addComponent(checkBoxPeito)
+                    .addComponent(checkBoxAbdomen))
+                .addGap(3, 3, 3)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkBoxPernas)
+                    .addComponent(checkBoxOmbros))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnvoltar)
                 .addGap(21, 21, 21))
-
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -354,15 +453,15 @@ String getImagemSelecionada;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
-     JFileChooser pegandoImagem = new JFileChooser();
+        JFileChooser pegandoImagem = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("4 extenções suportadas", "jpg", "png", "jpeg", "gif");
         pegandoImagem.setFileFilter(filtro);
         int selecionado = pegandoImagem.showOpenDialog(this);
-        if(selecionado == JFileChooser.APPROVE_OPTION){
+        if (selecionado == JFileChooser.APPROVE_OPTION) {
             File arquivo = pegandoImagem.getSelectedFile();
             getImagemSelecionada = arquivo.getAbsolutePath();
             JOptionPane.showMessageDialog(null, getImagemSelecionada);
-             ImageIcon imIco= new ImageIcon(getImagemSelecionada);
+            ImageIcon imIco = new ImageIcon(getImagemSelecionada);
             Image imFit = imIco.getImage();
             Image imgFit = imFit.getScaledInstance(icon.getWidth(), icon.getHeight(), Image.SCALE_SMOOTH);
             icon.setIcon(new ImageIcon(imgFit));
@@ -371,16 +470,23 @@ String getImagemSelecionada;
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
 
-        txtCep.setEnabled(true);
-        txtCpf.setEnabled(true);
-        txtEmail.setEnabled(true);
-        txtIdade.setEnabled(true);
         txtNome.setEnabled(true);
-        cmbSexo.setEnabled(true);
-        txtTelefone.setEnabled(true);
+        txtCpf.setEnabled(true);
         txtLogradouro.setEnabled(true);
+        txtBairro.setEnabled(true);
+        txtCidade.setEnabled(true);
+        txtCep.setEnabled(true);
+        txtTelefone.setEnabled(true);
+        txtIdade.setEnabled(true);
+        cmbSexo.setEnabled(true);
+        txtEmail.setEnabled(true);
         txtSenha.setEnabled(true);
-          
+        checkBoxAbdomen.setEnabled(true);
+        checkBoxPeito.setEnabled(true);
+        checkBoxBracos.setEnabled(true);
+        checkBoxPernas.setEnabled(true);
+        checkBoxOmbros.setEnabled(true);
+
         btnNovo.setEnabled(false);
         btnLimpar.setEnabled(true);
         btnSalvar.setEnabled(true);
@@ -388,93 +494,117 @@ String getImagemSelecionada;
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+
         btnNovo.setEnabled(true);
         btnLimpar.setEnabled(false);
         btnSalvar.setEnabled(false);
         btnUpload.setEnabled(false);
-        
-        txtCep.setEnabled(false);
-        txtCpf.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtIdade.setEnabled(false);
+
         txtNome.setEnabled(false);
-        cmbSexo.setEnabled(false);
-        txtTelefone.setEnabled(false);
+        txtCpf.setEnabled(false);
         txtLogradouro.setEnabled(false);
+        txtBairro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtIdade.setEnabled(false);
+        cmbSexo.setEnabled(false);
+        txtEmail.setEnabled(false);
         txtSenha.setEnabled(false);
-        
-        
-        
-          
-        if(txtCep.getText().isEmpty() || txtCpf.getText().isEmpty()||
-                txtEmail.getText().isEmpty() || txtLogradouro.getText().isEmpty() || txtLogradouro.getText().isEmpty() 
+        checkBoxAbdomen.setEnabled(false);
+        checkBoxPeito.setEnabled(false);
+        checkBoxBracos.setEnabled(false);
+        checkBoxPernas.setEnabled(false);
+        checkBoxOmbros.setEnabled(false);
+
+        if (txtCep.getText().isEmpty() || txtCpf.getText().isEmpty()
+                || txtEmail.getText().isEmpty() || txtLogradouro.getText().isEmpty() || txtLogradouro.getText().isEmpty()
                 || txtIdade.getText().isEmpty() || txtNome.getText().isEmpty() || txtSenha.getText().isEmpty() || txtTelefone.getText().isEmpty()
-                || txtSenha.getText().isEmpty()){
-            
-       
-            txtCep.setEnabled(true);
-            txtCpf.setEnabled(true);
-            txtEmail.setEnabled(true);
-            txtLogradouro.setEnabled(true);
-            txtIdade.setEnabled(true);
+                || txtSenha.getText().isEmpty()) {
+
             txtNome.setEnabled(true);
-            txtSenha.setEnabled(true);
-       
-            cmbSexo.setEnabled(true);
+            txtCpf.setEnabled(true);
+            txtLogradouro.setEnabled(true);
+            txtBairro.setEnabled(true);
+            txtCidade.setEnabled(true);
+            txtCep.setEnabled(true);
             txtTelefone.setEnabled(true);
+            txtIdade.setEnabled(true);
+            cmbSexo.setEnabled(true);
+            txtEmail.setEnabled(true);
+            txtSenha.setEnabled(true);
+            checkBoxAbdomen.setEnabled(true);
+            checkBoxPeito.setEnabled(true);
+            checkBoxBracos.setEnabled(true);
+            checkBoxPernas.setEnabled(true);
+            checkBoxOmbros.setEnabled(true);
+
             btnNovo.setEnabled(false);
             btnLimpar.setEnabled(true);
             btnSalvar.setEnabled(true);
             btnUpload.setEnabled(true);
-      
-                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!!!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+
             ////INSERINDO NO BANCO DE DADOS SÓ UM PERSONAL COM SENHA E CPF//////
             Funcionario funcionario = new Funcionario();
             FuncionarioDAO personalDao = new FuncionarioDAO();
-            
-            
             ////////////////////////////////////
-            
-            
-            
-            
-            funcionario.setNome(txtNome.getText());funcionario.setCpf(txtCpf.getText());funcionario.setEmail(txtEmail.getText());
 
-
-            funcionario.setEndereco(txtLogradouro.getText(),txtBairro.getText(),txtCidade.getText(),txtCep.getText());
-            funcionario.setNome(txtNome.getText()); funcionario.setSenha(txtSenha.getText()); funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
+            funcionario.setNome(txtNome.getText());
+            funcionario.setCpf(txtCpf.getText());
+            funcionario.setEndereco(txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText());
             funcionario.setTelefone(txtTelefone.getText());
+            funcionario.setIdade(txtIdade.getText());
+            funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
+            funcionario.setEmail(txtEmail.getText());
+            funcionario.setSenha(txtSenha.getText());
+            funcionario.setEspecialidade(cBAbdomen + cBPeito + cBBracos + cBPernas + cBOmbros);
+
             personalDao.cadastrarFuncionarioFinal(funcionario);
-            
-           
-            icon.setIcon(null);
-            txtCep.setText("");
-            txtCpf.setText("");
-            txtEmail.setText("");
-            txtLogradouro.setText("");
-            txtIdade.setText("");
+
             txtNome.setText("");
+            txtCpf.setText("");
+            txtLogradouro.setText("");
+            txtBairro.setText("");
+            txtCidade.setText("");
+            txtCep.setText("");
             txtTelefone.setText("");
+            txtIdade.setText("");
+            cmbSexo.setSelectedIndex(0);
+            txtEmail.setText("");
             txtSenha.setText("");
-            
+            checkBoxAbdomen.setSelected(false);
+            checkBoxPeito.setSelected(false);
+            checkBoxBracos.setSelected(false);
+            checkBoxPernas.setSelected(false);
+            checkBoxOmbros.setSelected(false);
+            icon.setIcon(null);
+
         }
-        
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        txtCep.setText("");
-        txtCpf.setText("");
-        txtEmail.setText("");
-        txtIdade.setText("");
         txtNome.setText("");
-        txtTelefone.setText("");
+        txtCpf.setText("");
         txtLogradouro.setText("");
+        txtBairro.setText("");
+        txtCidade.setText("");
+        txtCep.setText("");
+        txtTelefone.setText("");
+        txtIdade.setText("");
+        cmbSexo.setSelectedIndex(0);
+        txtEmail.setText("");
         txtSenha.setText("");
-        
+        checkBoxAbdomen.setSelected(false);
+        checkBoxPeito.setSelected(false);
+        checkBoxBracos.setSelected(false);
+        checkBoxPernas.setSelected(false);
+        checkBoxOmbros.setSelected(false);
+
         btnLimpar.setEnabled(true);
         btnSalvar.setEnabled(true);
         btnNovo.setEnabled(false);
@@ -491,6 +621,76 @@ String getImagemSelecionada;
         this.setVisible(false);
         new TelaInicio().setVisible(true);
     }//GEN-LAST:event_btnvoltarActionPerformed
+
+    private void checkBoxAbdomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAbdomenActionPerformed
+        // TODO add your handling code here:
+
+        int cBAbdomenInt;
+
+        if (checkBoxAbdomen.isSelected()) {
+            cBAbdomenInt = 1;
+        } else {
+            cBAbdomenInt = 0;
+        }
+
+        cBAbdomen = Integer.toString(cBAbdomenInt);
+    }//GEN-LAST:event_checkBoxAbdomenActionPerformed
+
+    private void checkBoxPeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPeitoActionPerformed
+        // TODO add your handling code here:
+
+        int cBPeitoInt;
+
+        if (checkBoxPeito.isSelected()) {
+            cBPeitoInt = 1;
+        } else {
+            cBPeitoInt = 0;
+        }
+
+        cBPeito = Integer.toString(cBPeitoInt);
+    }//GEN-LAST:event_checkBoxPeitoActionPerformed
+
+    private void checkBoxBracosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxBracosActionPerformed
+        // TODO add your handling code here:
+
+        int cBBracosInt;
+
+        if (checkBoxBracos.isSelected()) {
+            cBBracosInt = 1;
+        } else {
+            cBBracosInt = 0;
+        }
+
+        cBBracos = Integer.toString(cBBracosInt);
+    }//GEN-LAST:event_checkBoxBracosActionPerformed
+
+    private void checkBoxPernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPernasActionPerformed
+        // TODO add your handling code here:
+
+        int cBPernasInt;
+
+        if (checkBoxPernas.isSelected()) {
+            cBPernasInt = 1;
+        } else {
+            cBPernasInt = 0;
+        }
+
+        cBPernas = Integer.toString(cBPernasInt);
+    }//GEN-LAST:event_checkBoxPernasActionPerformed
+
+    private void checkBoxOmbrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxOmbrosActionPerformed
+        // TODO add your handling code here:
+
+        int cBOmbrosInt;
+
+        if (checkBoxOmbros.isSelected()) {
+            cBOmbrosInt = 1;
+        } else {
+            cBOmbrosInt = 0;
+        }
+
+        cBOmbros = Integer.toString(cBOmbrosInt);
+    }//GEN-LAST:event_checkBoxOmbrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,12 +733,18 @@ String getImagemSelecionada;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JCheckBox checkBoxAbdomen;
+    private javax.swing.JCheckBox checkBoxBracos;
+    private javax.swing.JCheckBox checkBoxOmbros;
+    private javax.swing.JCheckBox checkBoxPeito;
+    private javax.swing.JCheckBox checkBoxPernas;
     private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -32,28 +32,20 @@ public class Funcionario extends Pessoa {
 
     public Funcionario() {
     }
-    
+    /*
     public void especialidade(String cpf ){
         String sql = "SELECT ESPECIALIDADE FROM TABELA FUNCIONARIO WHERE CPF = ?";
         try {
             
         } catch (Exception e) {
         }
-    }
+    }*/
     
     
     public ResultSet autenticacaoFuncionario() {
       
        return funcionarioDAO.pesquisarFuncionario();
 
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
     }
     
     public boolean getTrabalhando() {
@@ -88,6 +80,16 @@ public class Funcionario extends Pessoa {
     public void setValorServico(double valor)
     {
         this.valorServico = valor;
+    }
+    
+    public String getEspecialidade()
+    {
+        return especialidade;
+    }
+    
+    public void setEspecialidade(String s)
+    {
+        this.especialidade = s;
     }
 
     @Override
