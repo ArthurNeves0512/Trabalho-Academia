@@ -201,9 +201,9 @@ public class TelaInicio extends javax.swing.JFrame {
                         new TelaAcaoPersonal().setVisible(true);
                         flag = 1;
                     }
-                } catch (Exception e) 
+                } catch (SQLException e) 
                 {
-                    JOptionPane.showMessageDialog(null, "nao  possuímos nenhuma pessoa com esses dados");
+                    JOptionPane.showMessageDialog(null, "nao  possuímos nenhuma pessoa com esses dados 111111 " + e);
                 }
             }else
             {
@@ -220,9 +220,9 @@ public class TelaInicio extends javax.swing.JFrame {
                         new TelaAcaoCliente().setVisible(true);
                         flag = 1;
                     }
-                }catch (Exception e) 
+                }catch (SQLException e) 
                 {
-                    JOptionPane.showMessageDialog(null, "nao possuímos nenhuma pessoa com esses dados");
+                    JOptionPane.showMessageDialog(null, "nao possuímos nenhuma pessoa com esses dados "+e);
                 }
             }
 

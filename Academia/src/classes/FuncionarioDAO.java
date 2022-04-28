@@ -17,8 +17,10 @@ public class FuncionarioDAO {
 
     Connection conn;
     PreparedStatement pstm;
-    ResultSet rs;/*
-    ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
+    ResultSet rs;
+    //PreparedStatment ps;/*
+    
+    //ArrayList<Personal> tabelaPersonal = new ArrayList<>();*/
 
 
     public void cadastrarFuncionarioFinal(Funcionario objFuncionario) {
@@ -54,23 +56,27 @@ public class FuncionarioDAO {
     }
 
     public boolean isTrabalhando(String cpf) {
-        String sql = "SELECT TRABALHANDO FROM FUNCIONARIO WHERE CPF=?";
+        String sql = "SELECT TRABALHANDO FROM FUNCIONARIO WHERE CPF= ?";
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
+            
             pstm.setString(1, cpf);
-            pstm.execute();
-            ResultSet rs = pstm.executeQuery();
-            pstm.close();
-            while (rs.next()) {
-                if (rs.getBoolean("TRABALHANDO")) {
+            rs = pstm.executeQuery();
+            
+
+            while(rs.next()){
+                
+                if(rs.getInt(1)==1) {
                     return true;
-                } else {
+                } 
+                else {
+                    
                     return false;
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "odeio polimorfos");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "odeio polimorfos " + e);
         }
         return false;
     }

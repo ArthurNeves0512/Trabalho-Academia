@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,21 +19,20 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonal
      */
     public TelaAcaoPersonal() {
-        
-        if(objFuncionarioDao.isTrabalhando(TelaInicio.cpfEscolhido)){
-            btnOnAndOff.setEnabled(true);
-            btnOnAndOff.setText("Desativar");
-        }
-        else{
-            btnOnAndOff.setEnabled(false);
-            btnOnAndOff.setText("Ativar");
-        }
-        
-        
+        System.out.println(TelaInicio.cpfEscolhido);
+       
         if(TelaInicio.flagF !=1){
             
         
         initComponents();
+            if (objFuncionarioDao.isTrabalhando(TelaInicio.cpfEscolhido)) {
+                btnOnAndOff.setSelected(true);
+                btnOnAndOff.setText("Desativar");
+            } else {
+                btnOnAndOff.setSelected(false);
+                btnOnAndOff.setText("Ativar");
+            }
+
         FuncionarioDAO ps = new FuncionarioDAO();
         
         }
