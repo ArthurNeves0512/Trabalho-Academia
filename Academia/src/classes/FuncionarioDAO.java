@@ -80,7 +80,7 @@ public class FuncionarioDAO {
         }
         return false;
     }
-
+    
     public void cadastroFuncionario(Funcionario objFuncionario) {
         try {
             String sql = "INSERT INTO FUNCIONARIO(CPF,ID,ESPECIALIDADE,TRABALHANDO,METODO_RECEBIMENTO) VALUES(?,1,?,0,0)";
@@ -161,13 +161,11 @@ public class FuncionarioDAO {
     }
 
     public void excluirFuncionario(Funcionario objFuncionario) {
-        String sql = "DELETE FROM PESSOA WHERE CPF=? and ID=?";
+        String sql = "DELETE FROM PESSOA WHERE CPF=? and ID=1";
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objFuncionario.getCep());
-            pstm.setString(2, objFuncionario.getSenha());
-            /* tem que trocar isso aqui pra pegar o id */
+            pstm.setString(1, objFuncionario.getCpf());
             pstm.execute();
             pstm.close();
         } catch (Exception e) {

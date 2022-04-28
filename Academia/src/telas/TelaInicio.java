@@ -197,7 +197,6 @@ public class TelaInicio extends javax.swing.JFrame {
                     personal.setSenha(senhaEscolhida);
                     ResultSet rs = personal.autenticacaoFuncionario();
                     if (rs.next()) {
-                        //chamar tela que eu quero abrir;
                         new TelaAcaoPersonal().setVisible(true);
                         flag = 1;
                     }

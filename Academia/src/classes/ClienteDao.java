@@ -120,13 +120,13 @@ public class ClienteDao {
     
     
     
-    public void excluirCLiente(String a){
+    public void excluirCLiente(Cliente objCliente){
        
-        String sql= "delete from cliente where cpf = ?";
+        String sql= "DELETE FROM PESSOA WHERE CPF= ? AND ID = 0";
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, a);
+            pstm.setString(1, objCliente.getCpf());
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
