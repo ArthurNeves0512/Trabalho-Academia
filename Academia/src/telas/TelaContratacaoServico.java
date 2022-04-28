@@ -44,16 +44,20 @@ String getImagemSelecionada;
         TelefonePersonalContratacaoTexto = new javax.swing.JLabel();
         SexoPersonalContratacaoTexto = new javax.swing.JLabel();
         IdadePersonalContratacaoTexto = new javax.swing.JLabel();
-        ImagemPersonalContratacaoTexto = new javax.swing.JPanel();
-        txtFoto = new javax.swing.JLabel();
         InputNomePersonalContratacaoTexto = new javax.swing.JLabel();
-        InputEnderecoPersonalContratacaoTexto = new javax.swing.JLabel();
+        InputLogradouro = new javax.swing.JLabel();
         InputTelefoneContratacaoTexto = new javax.swing.JLabel();
-        InputIdadePersonalContratacaoTexto = new javax.swing.JLabel();
+        InputEspecialidade = new javax.swing.JLabel();
         InputSexoPersonalContratacaoTexto = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         ValorPersonalContratacaoTexto = new javax.swing.JLabel();
         InputValorPersonalContratacaoTexto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        InputBairro = new javax.swing.JLabel();
+        InputCidade = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        txtFoto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contratar serviço");
@@ -88,7 +92,7 @@ String getImagemSelecionada;
         NomePersonalContratacaoTexto.setText("Nome");
 
         EnderecoPersonalContratacaoTexto.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
-        EnderecoPersonalContratacaoTexto.setText("Endereço");
+        EnderecoPersonalContratacaoTexto.setText("Logradouro");
 
         TelefonePersonalContratacaoTexto.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         TelefonePersonalContratacaoTexto.setText("Telefone");
@@ -97,18 +101,7 @@ String getImagemSelecionada;
         SexoPersonalContratacaoTexto.setText("Sexo");
 
         IdadePersonalContratacaoTexto.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
-        IdadePersonalContratacaoTexto.setText("Idade");
-
-        javax.swing.GroupLayout ImagemPersonalContratacaoTextoLayout = new javax.swing.GroupLayout(ImagemPersonalContratacaoTexto);
-        ImagemPersonalContratacaoTexto.setLayout(ImagemPersonalContratacaoTextoLayout);
-        ImagemPersonalContratacaoTextoLayout.setHorizontalGroup(
-            ImagemPersonalContratacaoTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-        );
-        ImagemPersonalContratacaoTextoLayout.setVerticalGroup(
-            ImagemPersonalContratacaoTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-        );
+        IdadePersonalContratacaoTexto.setText("Especilidade");
 
         InputNomePersonalContratacaoTexto.setText("jLabel1");
         InputNomePersonalContratacaoTexto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -117,10 +110,10 @@ String getImagemSelecionada;
             }
         });
 
-        InputEnderecoPersonalContratacaoTexto.setText("jLabel1");
-        InputEnderecoPersonalContratacaoTexto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        InputLogradouro.setText("jLabel1");
+        InputLogradouro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                InputEnderecoPersonalContratacaoTextoPropertyChange(evt);
+                InputLogradouroPropertyChange(evt);
             }
         });
 
@@ -131,10 +124,10 @@ String getImagemSelecionada;
             }
         });
 
-        InputIdadePersonalContratacaoTexto.setText("jLabel1");
-        InputIdadePersonalContratacaoTexto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        InputEspecialidade.setText("jLabel1");
+        InputEspecialidade.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                InputIdadePersonalContratacaoTextoPropertyChange(evt);
+                InputEspecialidadePropertyChange(evt);
             }
         });
 
@@ -155,102 +148,148 @@ String getImagemSelecionada;
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
+        jLabel1.setText("Bairro");
+
+        jLabel2.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
+        jLabel2.setText("Cidade");
+
+        InputBairro.setText("jLabel3");
+        InputBairro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                InputBairroPropertyChange(evt);
+            }
+        });
+
+        InputCidade.setText("jLabel3");
+        InputCidade.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                InputCidadePropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout ContratacaoServicoWhiteBackgroundLayout = new javax.swing.GroupLayout(ContratacaoServicoWhiteBackground);
         ContratacaoServicoWhiteBackground.setLayout(ContratacaoServicoWhiteBackgroundLayout);
         ContratacaoServicoWhiteBackgroundLayout.setHorizontalGroup(
             ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
                 .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EnderecoPersonalContratacaoTexto)
-                                .addComponent(TelefonePersonalContratacaoTexto)
-                                .addComponent(IdadePersonalContratacaoTexto)
-                                .addComponent(ValorPersonalContratacaoTexto)
-                                .addComponent(NomePersonalContratacaoTexto))
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(InformacoesPersonalcontratadoText)
-                                .addGap(65, 65, 65)))
-                        .addGap(31, 31, 31)
-                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(InputValorPersonalContratacaoTexto)
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(InputIdadePersonalContratacaoTexto)
-                                .addGap(60, 60, 60)
-                                .addComponent(SexoPersonalContratacaoTexto)
-                                .addGap(18, 18, 18)
-                                .addComponent(InputSexoPersonalContratacaoTexto))
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(InputTelefoneContratacaoTexto)
-                                    .addComponent(InputEnderecoPersonalContratacaoTexto)
-                                    .addComponent(InputNomePersonalContratacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(57, 57, 57)
-                                .addComponent(ImagemPersonalContratacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(225, 225, 225)
+                        .addComponent(InformacoesPersonalcontratadoText))
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(39, 39, 39)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(NomePersonalContratacaoTexto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(InputNomePersonalContratacaoTexto))
+                            .addComponent(jLabel2)
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(96, 96, 96)
+                                .addComponent(InputBairro))
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(EnderecoPersonalContratacaoTexto)
+                                .addGap(64, 64, 64)
+                                .addComponent(InputLogradouro))
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(ValorPersonalContratacaoTexto)
+                                .addGap(34, 34, 34)
+                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(InputCidade)
+                                    .addComponent(InputValorPersonalContratacaoTexto)))
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(IdadePersonalContratacaoTexto)
+                                .addGap(18, 18, 18)
+                                .addComponent(InputEspecialidade)))
+                        .addGap(40, 40, 40)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                                .addComponent(TelefonePersonalContratacaoTexto)
+                                .addGap(27, 27, 27)
+                                .addComponent(InputTelefoneContratacaoTexto)
+                                .addGap(47, 47, 47)
+                                .addComponent(SexoPersonalContratacaoTexto)
+                                .addGap(27, 27, 27)
+                                .addComponent(InputSexoPersonalContratacaoTexto))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(btnCancelar)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnConfirmar))
+                    .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
                         .addComponent(ConfirmacaoServicoText)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCancelar)
-                .addGap(59, 59, 59)
-                .addComponent(btnConfirmar)
-                .addGap(129, 129, 129))
         );
         ContratacaoServicoWhiteBackgroundLayout.setVerticalGroup(
             ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(InformacoesPersonalcontratadoText)
+                .addGap(30, 30, 30)
                 .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(InformacoesPersonalcontratadoText)
-                        .addGap(39, 39, 39)
-                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                                .addComponent(NomePersonalContratacaoTexto)
-                                .addGap(18, 18, 18)
-                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(InputEnderecoPersonalContratacaoTexto, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(EnderecoPersonalContratacaoTexto, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TelefonePersonalContratacaoTexto)
-                                    .addComponent(InputTelefoneContratacaoTexto)))
-                            .addComponent(InputNomePersonalContratacaoTexto)))
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NomePersonalContratacaoTexto)
+                            .addComponent(InputNomePersonalContratacaoTexto))
+                        .addGap(18, 18, 18)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EnderecoPersonalContratacaoTexto)
+                            .addComponent(InputLogradouro))
+                        .addGap(18, 18, 18)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(InputBairro))
+                        .addGap(18, 18, 18)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(InputCidade))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ValorPersonalContratacaoTexto)
+                            .addComponent(InputValorPersonalContratacaoTexto))
+                        .addGap(29, 29, 29))
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(ImagemPersonalContratacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(InputIdadePersonalContratacaoTexto)
-                        .addComponent(SexoPersonalContratacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(InputSexoPersonalContratacaoTexto))
-                    .addComponent(IdadePersonalContratacaoTexto))
-                .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ValorPersonalContratacaoTexto)
-                    .addComponent(InputValorPersonalContratacaoTexto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                    .addComponent(IdadePersonalContratacaoTexto)
+                    .addComponent(InputEspecialidade)
+                    .addComponent(TelefonePersonalContratacaoTexto)
+                    .addComponent(InputTelefoneContratacaoTexto)
+                    .addComponent(SexoPersonalContratacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InputSexoPersonalContratacaoTexto))
+                .addGap(85, 85, 85)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(ConfirmacaoServicoText)
-                .addGap(45, 45, 45)
+                .addGap(40, 40, 40)
                 .addGroup(ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar)
-                    .addComponent(btnCancelar))
-                .addGap(90, 90, 90))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnConfirmar))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ContratacaoServicoWhiteBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ContratacaoServicoWhiteBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,11 +311,11 @@ String getImagemSelecionada;
         InputSexoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getSexo());
     }//GEN-LAST:event_InputSexoPersonalContratacaoTextoPropertyChange
 
-    private void InputIdadePersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputIdadePersonalContratacaoTextoPropertyChange
+    private void InputEspecialidadePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputEspecialidadePropertyChange
         // TODO add your handling code here:
 
-        InputIdadePersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getIdade());
-    }//GEN-LAST:event_InputIdadePersonalContratacaoTextoPropertyChange
+        InputEspecialidade.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getIdade());
+    }//GEN-LAST:event_InputEspecialidadePropertyChange
 
     private void InputTelefoneContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputTelefoneContratacaoTextoPropertyChange
         // TODO add your handling code here:
@@ -284,11 +323,13 @@ String getImagemSelecionada;
         InputTelefoneContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getTelefone());
     }//GEN-LAST:event_InputTelefoneContratacaoTextoPropertyChange
 
-    private void InputEnderecoPersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputEnderecoPersonalContratacaoTextoPropertyChange
+    private void InputLogradouroPropertyChange(java.beans.PropertyChangeEvent evt) {                                               
         // TODO add your handling code here:
+                                                                 
 
-//        InputEnderecoPersonalContratacaoTexto.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco());
-    }//GEN-LAST:event_InputEnderecoPersonalContratacaoTextoPropertyChange
+        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getLogradouro());
+    }                                              
+
 
     private void InputNomePersonalContratacaoTextoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputNomePersonalContratacaoTextoPropertyChange
         // TODO add your handling code here:
@@ -316,8 +357,20 @@ String getImagemSelecionada;
         TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).setSaldo(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getValorServico());
 
         this.setVisible(false);
-        new ConfirmacaoContratacaoServico().setVisible(true);
+        new SelecionarMetodoDePagamentoFinalizacao().setVisible(true);
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void InputBairroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputBairroPropertyChange
+        // TODO add your handling code here:
+        
+        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getBairro());
+    }//GEN-LAST:event_InputBairroPropertyChange
+
+    private void InputCidadePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_InputCidadePropertyChange
+        // TODO add your handling code here:
+        
+        InputLogradouro.setText(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getEndereco().getCidade());
+    }//GEN-LAST:event_InputCidadePropertyChange
 
     /**
      * @param args the command line arguments
@@ -359,10 +412,11 @@ String getImagemSelecionada;
     private javax.swing.JPanel ContratacaoServicoWhiteBackground;
     private javax.swing.JLabel EnderecoPersonalContratacaoTexto;
     private javax.swing.JLabel IdadePersonalContratacaoTexto;
-    private javax.swing.JPanel ImagemPersonalContratacaoTexto;
     private javax.swing.JLabel InformacoesPersonalcontratadoText;
-    private javax.swing.JLabel InputEnderecoPersonalContratacaoTexto;
-    private javax.swing.JLabel InputIdadePersonalContratacaoTexto;
+    private javax.swing.JLabel InputBairro;
+    private javax.swing.JLabel InputCidade;
+    private javax.swing.JLabel InputEspecialidade;
+    private javax.swing.JLabel InputLogradouro;
     private javax.swing.JLabel InputNomePersonalContratacaoTexto;
     private javax.swing.JLabel InputSexoPersonalContratacaoTexto;
     private javax.swing.JLabel InputTelefoneContratacaoTexto;
@@ -373,7 +427,10 @@ String getImagemSelecionada;
     private javax.swing.JLabel ValorPersonalContratacaoTexto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel txtFoto;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/ClienteDao.java</file>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/FuncionarioDAO.java</file>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/Funcionario.java</file>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/telas/RegistroCliente.java</file>
+            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/telas/TelaAcaoPersonal.java</file>
             <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/telas/RegistroPersonal.java</file>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/Pessoa.java</file>
-            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/Cliente.java</file>
+            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/ClienteDao.java</file>
+            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/telas/RegistroCliente.java</file>
+            <file>file:/home/arthur/Faculdade/TerceiroSemestre/BancoDeDados/Trabalho-Academia/Academia/src/classes/FuncionarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

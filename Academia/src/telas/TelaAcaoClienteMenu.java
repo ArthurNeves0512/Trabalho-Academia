@@ -19,20 +19,20 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
      */
     public TelaAcaoClienteMenu() {
         if(TelaInicio.flag1!=1){
-        ClienteDao cd = new ClienteDao();/*
-        TelaInicio.cadastrosClientes = cd.pesquisarCliente();*/
-        initComponents();
-       
-         for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
-            if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-         
-                NomeCliente.setText(TelaInicio.cadastrosClientes.get(i).getNome());
-                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
-                Image imFit = imcon.getImage();
-                Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon.setIcon(new ImageIcon(imgFit));
+            ClienteDao cd = new ClienteDao();/*
+            TelaInicio.cadastrosClientes = cd.pesquisarCliente();*/
+            initComponents();
+
+             for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
+                if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
+
+                    NomeCliente.setText(TelaInicio.cadastrosClientes.get(i).getNome());
+                    ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosClientes.get(i).getFoto());
+                    Image imFit = imcon.getImage();
+                    Image imgFit = imFit.getScaledInstance(ImageIcon.getWidth(), ImageIcon.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon.setIcon(new ImageIcon(imgFit));
+                }
             }
-        }
         }
         else{
             this.setVisible(false);
@@ -280,7 +280,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
 
     private void ConfigTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfigTextMouseClicked
         // TODO add your handling code here:
-        
+        this.setVisible(false);
         new ConfigCliente().setVisible(true);
     }//GEN-LAST:event_ConfigTextMouseClicked
 

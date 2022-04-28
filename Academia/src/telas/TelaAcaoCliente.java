@@ -234,7 +234,7 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
 public void carregar(){
     try {
         FuncionarioDAO p = new FuncionarioDAO();
-         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço","Cpf","Endereço", "Sexo", "Chave Pix"},0);
+         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço","Cpf","Endereço", "Sexo", "Especilidade"},0);
          /*TelaInicio.cadastrosPersonal = p.pesquisarPersonal();*/
          
          for (int i = 1; i <TelaInicio.cadastrosPersonal.size(); i ++){
@@ -245,6 +245,7 @@ public void carregar(){
                  TelaInicio.cadastrosPersonal.get(i).getSexo(), TelaInicio.cadastrosPersonal.get(i).getChave()};
              modelo.addRow(linha);
          }
+         
          TabelaPersonalOnline.setModel(modelo);  
       
     } catch (Exception e) {
