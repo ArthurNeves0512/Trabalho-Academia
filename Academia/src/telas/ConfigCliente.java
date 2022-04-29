@@ -22,6 +22,7 @@ public class ConfigCliente extends javax.swing.JFrame {
     String getImagemSelecionada;
     int flag;
     int mu;
+    ClienteDao cd = new ClienteDao();
     /**
      * Creates new form ConfigCliente
      */
@@ -29,9 +30,7 @@ public class ConfigCliente extends javax.swing.JFrame {
         initComponents();
         txtImc.setEnabled(false);
         txtCpf.setEnabled(false);
-        ClienteDao cd = new ClienteDao();/*
-        TelaInicio.cadastrosClientes = cd.pesquisarCliente();*/
-        
+              
         for(int i =0; i<TelaInicio.cadastrosClientes.size(); i ++){
             if(TelaInicio.cadastrosClientes.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
                 txtNome.setText(TelaInicio.cadastrosClientes.get(i).getNome());
@@ -148,7 +147,6 @@ public class ConfigCliente extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Telefone");
 
-        btnUpload.setBackground(new java.awt.Color(255, 255, 255));
         btnUpload.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnUpload.setText("Carregar foto");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +155,6 @@ public class ConfigCliente extends javax.swing.JFrame {
             }
         });
 
-        btnApagar.setBackground(new java.awt.Color(255, 255, 255));
         btnApagar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnApagar.setText("Apagar conta");
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +163,6 @@ public class ConfigCliente extends javax.swing.JFrame {
             }
         });
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar alterações");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +215,6 @@ public class ConfigCliente extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Cidade");
 
-        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
         btnVoltar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +264,7 @@ public class ConfigCliente extends javax.swing.JFrame {
                                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(70, 70, 70)
                                 .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(37, Short.MAX_VALUE))
+                        .addContainerGap(57, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
@@ -382,11 +377,15 @@ public class ConfigCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
