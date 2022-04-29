@@ -4,6 +4,8 @@
  */
 package telas;
 
+import classes.FuncionarioDAO;
+
 /**
  *
  * @author MASTER
@@ -13,8 +15,14 @@ public class ConfirmacaoContratacaoServico extends javax.swing.JFrame {
     /**
      * Creates new form ConfirmacaoContratacaoServico
      */
+    
+    FuncionarioDAO funcionario = new FuncionarioDAO();
+    
+    
     public ConfirmacaoContratacaoServico() {
         initComponents();
+        
+        funcionario.atualizaSaldoFuncionario(TelaAcaoCliente.cpfFuncionarioEscolhido);
     }
 
     /**

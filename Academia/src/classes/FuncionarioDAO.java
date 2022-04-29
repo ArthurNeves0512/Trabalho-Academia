@@ -140,12 +140,12 @@ public class FuncionarioDAO {
             pstm.setInt(1, i);
             pstm.setString(2, cpf);
             pstm.execute();
-            pstm.close();
+            pstm.close();/* se der problema em dizer que o funcionario ta tarbalhando ou nao, foi aqui que deu erro
             if (i == 1) {
                 return true;
             } else {
                 return false;
-            }
+            }*/
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "não consegui alterar a propriedade de trabalhar");
         }
@@ -257,6 +257,7 @@ public class FuncionarioDAO {
 
     public void excluirFuncionario(Funcionario objFuncionario) {
         String sql = "DELETE FROM PESSOA WHERE CPF=? and ID=1";
+        
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
@@ -271,6 +272,7 @@ public class FuncionarioDAO {
     public ResultSet pesquisarFuncionario() {
         String sql = "SELECT FUNCIONARIO.CPF,CADASTRO.SENHA FROM FUNCIONARIO JOIN CADASTRO ON FUNCIONARIO.CPF=CADASTRO.CPF;";
         conn = new ConexaoBd().conectaBd();
+        
         try {
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
@@ -283,6 +285,85 @@ public class FuncionarioDAO {
 
     public void atualizarCadastroFuncionario() {
 
+    }
+    
+    public double pegaValorSessao(String cpf)
+    {
+        String sql = "SELECT VALOR_SESSAO FROM CATEGORIA WHERE (ID=1 AND CPF=?);";
+        
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            
+            while(rs.next())
+            {
+                return rs.getDouble("VALOR_SESSAO");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "deu erro na hora de pegar o valor da sessao"+e);
+        }
+        
+        return 0.00;
+    }
+    
+    public double pegaSaldoBancario(String cpf)
+    {
+        String sql = "SELECT SALDO_BANCARIO FROM PESSOA WHERE (ID=1 AND CPF=?);";
+        
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            
+            while(rs.next())
+            {
+                return rs.getDouble("SALDO_BANCARIO");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "deu erro na hora de pegar o saldo."+e);
+        }
+
+        return -1.00;
+    }
+    
+    public void atualizaSaldoFuncionario(String cpf)
+    {
+        String sql = "UPDATE PESSOA SET SALDO_BANCARIO = ? WHERE CPF= ?";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setDouble(1, pegaSaldoBancario(cpf)+pegaValorSessao(cpf));
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui alterar a propriedade de trabalhar");
+        }
+    }
+    
+    public String pegaSenha(String cpf)
+    {
+        String sql = "SELECT SENHA FROM CADASTRO WHERE (ID=1 AND CPF=?);";
+        
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            
+            while(rs.next())
+            {
+                return rs.getString("SENHA");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao deu pra pegar a senha"+e);
+        }
+        
+        return "-1";
     }
 
 }

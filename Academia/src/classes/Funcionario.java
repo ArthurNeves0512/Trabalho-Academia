@@ -45,7 +45,6 @@ public class Funcionario extends Pessoa {
     public ResultSet autenticacaoFuncionario() {
       
        return funcionarioDAO.pesquisarFuncionario();
-
     }
     
     public boolean getTrabalhando() {

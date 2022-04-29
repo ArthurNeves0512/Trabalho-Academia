@@ -5,6 +5,7 @@
 package telas;
 
 import classes.Cliente;
+import classes.ClienteDao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -174,6 +175,7 @@ public class TelaInicio extends javax.swing.JFrame {
         cpfEscolhido = txtCpf.getText();
         flag = 0;
         int idReferente;
+        String senhaCorreta="";
         
         try 
         {
@@ -186,46 +188,49 @@ public class TelaInicio extends javax.swing.JFrame {
         if (idReferente==-1) 
         {
             JOptionPane.showMessageDialog(null, "Este usuário não existe.");
+            txtLogin.setText("");
+            txtSenha.setText("");
         }else
         {
-            if(idReferente==1)
+            if(idReferente==1) //ate aqui, o cpf existe - precisa comparalo com a senha armazenada no banco
             {
-                try 
-                {
-                    Funcionario personal = new Funcionario();
-                    personal.setCpf(cpfEscolhido);
-                    personal.setSenha(senhaEscolhida);
-                    ResultSet rs = personal.autenticacaoFuncionario();
-                    if (rs.next()) {
+                FuncionarioDAO personal = new FuncionarioDAO();
+                
+                try {
+                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
+                    
+                    if(senhaCorreta.equals(senhaEscolhida))
+                    {
+                        this.setVisible(false);
                         new TelaAcaoPersonal().setVisible(true);
-                        flag = 1;
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                        txtSenha.setText("");
                     }
-                } catch (SQLException e) 
-                {
-                    JOptionPane.showMessageDialog(null, "nao  possuímos nenhuma pessoa com esses dados 111111 " + e);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
                 }
             }else
             {
-                try 
-                {
-                    Cliente cliente = new Cliente();
-                    cliente.setCpf(cpfEscolhido);
-                    cliente.setSenha(senhaEscolhida);
-                    ResultSet rs = cliente.autenticacaoCliente();
-
-                    if (rs.next()) {
-                        //chamar tela que eu quero abrir; 
-
+                ClienteDao personal = new ClienteDao();
+                
+                try {
+                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
+                    
+                    if(senhaCorreta.equals(senhaEscolhida))
+                    {
+                        this.setVisible(false);
                         new TelaAcaoCliente().setVisible(true);
-                        flag = 1;
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                        txtSenha.setText("");
                     }
-                }catch (SQLException e) 
-                {
-                    JOptionPane.showMessageDialog(null, "nao possuímos nenhuma pessoa com esses dados "+e);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha do cliente."+e);
                 }
             }
-
-            System.out.println("meu deus");
 
             flag = 0;
         }        
@@ -237,6 +242,7 @@ public class TelaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        this.setVisible(false);
         new TelaEscolha().setVisible(true);   // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

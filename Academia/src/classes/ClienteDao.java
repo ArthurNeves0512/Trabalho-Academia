@@ -150,5 +150,24 @@ public class ClienteDao {
         return rs;
     }
     
-    
+    public String pegaSenha(String cpf)
+    {
+        String sql = "SELECT SENHA FROM CADASTRO WHERE (ID=0 AND CPF=?);";
+        
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            
+            while(rs.next())
+            {
+                return rs.getString("SENHA");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao deu pra pegar a senha do cliente"+e);
+        }
+        
+        return "-1";
+    }
 }
