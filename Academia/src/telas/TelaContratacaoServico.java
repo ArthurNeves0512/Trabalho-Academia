@@ -31,7 +31,6 @@ public ResultSet rs;
     }
     
     public void CarregarDados(String cpf){
-        System.out.println(cpf);
         String sql = "SELECT CATEGORIA.VALOR_SESSAO, PESSOA.NOME, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, TELEFONES.NUMERO, FUNCIONARIO.ESPECIALIDADE, PESSOA.SEXO FROM PESSOA, CATEGORIA, ENDERECO, TELEFONES, FUNCIONARIO WHERE PESSOA.CPF = ? AND TELEFONES.CPF= ? AND  FUNCIONARIO.CPF= ? AND CATEGORIA.CPF = ? AND ENDERECO.CPF = ?";
         try {
             conn =  new ConexaoBd().conectaBd();
