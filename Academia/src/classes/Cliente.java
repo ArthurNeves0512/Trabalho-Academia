@@ -63,6 +63,9 @@ public void ajuda(){
         //retorna o valor do IMC da pessoa.
         return this.getPeso()/(this.getAltura()*this.getAltura());
     }
+    public float calculoImc(float peso, float altura){
+        return peso/(altura*altura);
+    }
 
 
 
