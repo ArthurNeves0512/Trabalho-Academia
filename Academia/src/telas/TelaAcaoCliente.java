@@ -230,8 +230,7 @@ public ResultSet carregarDadosBd(){
         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço", "Nome", "Endereço", "Telefone", "Especialidades"}, 0);
         while(rs.next()){
             
-            Object linha [] = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3) +"\n" + rs.getString(4)+
-                    "\n"+ rs.getString(5), rs.getString(6), fd.carregarEspecialidade(fd.getCpfPeloNome(rs.getString(2)))};// O 7 É O DO ESPECIALIDADE
+            Object linha [] = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3) + rs.getString(4)+rs.getString(5), rs.getString(6), fd.carregarEspecialidade(fd.getCpfPeloNome(rs.getString(2)))};// O 7 É O DO ESPECIALIDADE
             modelo.addRow(linha);
         }
         TabelaPersonalOnline.setModel(modelo);
