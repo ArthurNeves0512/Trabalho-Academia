@@ -21,10 +21,9 @@ public class FuncionarioDAO {
     //PreparedStatment ps;/*
 
     
-    public String carregarEspecialidade(String cpf)
-    {
-        String especialidade="";
-        String ans="";
+    public String carregarEspecialidade(String cpf) {
+        String especialidade = "";
+        String ans = "";
         String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
         try {
             conn = new ConexaoBd().conectaBd();
@@ -35,33 +34,28 @@ public class FuncionarioDAO {
 
             while (rs.next()) {
 
-                especialidade=rs.getString("ESPECIALIDADE");
+                especialidade = rs.getString("ESPECIALIDADE");
             }
-            
-            if(Character.compare(especialidade.charAt(0),'1')==0)
-            {
-                ans+="Abdomen\n";
+
+            if (Character.compare(especialidade.charAt(0), '1') == 0) {
+                ans += "Abdomen\n";
             }
-            if(Character.compare(especialidade.charAt(1),'1')==0)
-            {
-                ans+="Peito\n";
+            if (Character.compare(especialidade.charAt(1), '1') == 0) {
+                ans += "Peito\n";
             }
-            if(Character.compare(especialidade.charAt(2),'1')==0)
-            {
-                ans+="Braços\n";
+            if (Character.compare(especialidade.charAt(2), '1') == 0) {
+                ans += "Braços\n";
             }
-            if(Character.compare(especialidade.charAt(3),'1')==0)
-            {
-                ans+="Pernas\n";
+            if (Character.compare(especialidade.charAt(3), '1') == 0) {
+                ans += "Pernas\n";
             }
-            if(Character.compare(especialidade.charAt(4),'1')==0)
-            {
-                ans+="Ombros";
+            if (Character.compare(especialidade.charAt(4), '1') == 0) {
+                ans += "Ombros";
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "nao deu pra pegar a especialidade do banco de dados" + e);
         }
-        
+
         return ans;
     }
     
@@ -136,7 +130,7 @@ public class FuncionarioDAO {
         String sql = "UPDATE FUNCIONARIO SET TRABALHANDO = ? WHERE CPF= ?";
         try {
             conn = new ConexaoBd().conectaBd();
-            pstm = conn.prepareStatement(sql);
+            pstm = conn.prepareStatement(sql);  
             pstm.setInt(1, i);
             pstm.setString(2, cpf);
             pstm.execute();

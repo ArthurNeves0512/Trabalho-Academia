@@ -137,7 +137,7 @@ public ResultSet rs;
         // TODO add your handling code here:
         if(!(this.txtChaveCadastrada.getText().isEmpty())){
             System.out.println("ENTREI PORRA CONFIA KARALHO");
-            String sql = "UPDATE PIX SET CHAVE_CADASTRADA = ? WHERE CPF = ?";
+            String sql = "UPDATE PIX SET CHAVE_CADASTRADA = ?  WHERE CPF = ?";
             try {
              conn = new ConexaoBd().conectaBd();
              pstm = conn.prepareStatement(sql);
