@@ -4,17 +4,29 @@
  */
 package telas;
 
+import classes.ConexaoBd;
+import javax.swing.JOptionPane;
+import java.sql.*;
+
 /**
  *
  * @author MASTER
  */
 public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
 
+    public Connection conn;
+    public ResultSet rs;
+    public PreparedStatement pstm;
+
     /**
      * Creates new form PagamentoCartaoCreditoFuncionario
      */
     public PagamentoCartaoDebitoCliente() {
         initComponents();
+        this.txtMostraAgenciaCadastrada.setEditable(false);
+        this.txtMostraBancoCadastrado.setEditable(false);
+        this.txtMostraNumeroContaCadastrada.setEditable(false);
+        CarregarDados(TelaInicio.cpfEscolhido);
     }
 
     /**
@@ -27,11 +39,6 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        PainelConta = new javax.swing.JPanel();
-        textoSaldoBancario = new javax.swing.JLabel();
-        txtPreco = new javax.swing.JLabel();
-        txtSaldo = new javax.swing.JTextField();
-        txtPrecoSercico = new javax.swing.JTextField();
         PainelPagamento = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,68 +46,20 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
         txtNumeroConta = new javax.swing.JTextField();
         txtNomeBanco = new javax.swing.JTextField();
         txtNoemAgencia = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         PainelPagamento1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtMostraNumeroContaCadastrada = new javax.swing.JLabel();
-        txtMostraBancoCadastrado = new javax.swing.JLabel();
-        txtMostraAgenciaCadastrada = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtMostraNumeroContaCadastrada = new javax.swing.JTextField();
+        txtMostraBancoCadastrado = new javax.swing.JTextField();
+        txtMostraAgenciaCadastrada = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(578, 463));
 
         jPanel1.setBackground(new java.awt.Color(0, 130, 46));
         jPanel1.setPreferredSize(new java.awt.Dimension(578, 463));
-
-        PainelConta.setBackground(new java.awt.Color(0, 130, 46));
-        PainelConta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Conta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century", 1, 13), new java.awt.Color(255, 255, 255))); // NOI18N
-
-        textoSaldoBancario.setBackground(new java.awt.Color(255, 255, 255));
-        textoSaldoBancario.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
-        textoSaldoBancario.setForeground(new java.awt.Color(255, 255, 255));
-        textoSaldoBancario.setText("Saldo bancário");
-
-        txtPreco.setBackground(new java.awt.Color(255, 255, 255));
-        txtPreco.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
-        txtPreco.setForeground(new java.awt.Color(255, 255, 255));
-        txtPreco.setText("Preço do Serviço");
-
-        txtPrecoSercico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecoSercicoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PainelContaLayout = new javax.swing.GroupLayout(PainelConta);
-        PainelConta.setLayout(PainelContaLayout);
-        PainelContaLayout.setHorizontalGroup(
-            PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelContaLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textoSaldoBancario)
-                    .addComponent(txtPreco))
-                .addGap(39, 39, 39)
-                .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSaldo)
-                    .addComponent(txtPrecoSercico, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PainelContaLayout.setVerticalGroup(
-            PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelContaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoSaldoBancario))
-                .addGap(27, 27, 27)
-                .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPrecoSercico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
 
         PainelPagamento.setBackground(new java.awt.Color(0, 130, 46));
         PainelPagamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century", 1, 13), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -158,9 +117,13 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
-        jButton1.setText("Salvar");
+        btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         PainelPagamento1.setBackground(new java.awt.Color(0, 130, 46));
         PainelPagamento1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cartão Cadastrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century", 1, 13), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -169,15 +132,6 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Número da Conta");
-
-        txtMostraNumeroContaCadastrada.setForeground(new java.awt.Color(255, 255, 255));
-        txtMostraNumeroContaCadastrada.setText("mostrar_numero");
-
-        txtMostraBancoCadastrado.setForeground(new java.awt.Color(255, 255, 255));
-        txtMostraBancoCadastrado.setText("jLabel8");
-
-        txtMostraAgenciaCadastrada.setForeground(new java.awt.Color(255, 255, 255));
-        txtMostraAgenciaCadastrada.setText("jLabel9");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
@@ -196,36 +150,33 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
             .addGroup(PainelPagamento1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(PainelPagamento1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(85, 85, 85)
-                        .addComponent(txtMostraBancoCadastrado)))
-                .addGap(90, 90, 90)
-                .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMostraNumeroContaCadastrada)
-                    .addGroup(PainelPagamento1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(44, 44, 44)
+                        .addComponent(txtMostraBancoCadastrado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel6)
-                        .addGap(75, 75, 75)
-                        .addComponent(txtMostraAgenciaCadastrada)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(txtMostraAgenciaCadastrada, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelPagamento1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(69, 69, 69)
+                        .addComponent(txtMostraNumeroContaCadastrada, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         PainelPagamento1Layout.setVerticalGroup(
             PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPagamento1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(21, 21, 21)
+                .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(txtMostraNumeroContaCadastrada))
+                    .addComponent(txtMostraNumeroContaCadastrada, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(txtMostraAgenciaCadastrada))
-                    .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtMostraBancoCadastrado)))
+                .addGroup(PainelPagamento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtMostraBancoCadastrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtMostraAgenciaCadastrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -233,30 +184,23 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PainelPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PainelPagamento1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(PainelPagamento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelPagamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelConta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PainelConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addComponent(PainelPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(PainelPagamento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(47, 47, 47)
+                .addComponent(btnSalvar)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,20 +208,52 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecoSercicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoSercicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecoSercicoActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
+        if (!(this.txtMostraBancoCadastrado.getText().isEmpty()) && !(this.txtMostraAgenciaCadastrada.getText().isEmpty())
+                && !(this.txtMostraNumeroContaCadastrada.getText().isEmpty())) {
+            String sql = "UPDATE CARTAO_DEBITO SET BANCO = ?, AGENCIA =?, NUMERO_CONTA= ? WHERE CPF = ?";
+            try {
+                conn = new ConexaoBd().conectaBd();
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, this.txtNomeBanco.getText());
+                pstm.setString(2, this.txtNoemAgencia.getText());
+                pstm.setString(3, this.txtNumeroConta.getText());
+                pstm.setString(4, TelaInicio.cpfEscolhido);
+                JOptionPane.showMessageDialog(null, "Dados Atualizados");
+                pstm.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        } else if (!(this.txtNoemAgencia.getText().isEmpty()) && !(this.txtNomeBanco.getText().isEmpty()) && !(this.txtNumeroConta.getText().isEmpty())) {
+            if (!(this.txtNoemAgencia.getText().isEmpty()) && !(this.txtNomeBanco.getText().isEmpty()) && !(this.txtNumeroConta.getText().isEmpty())) {
+                inserirPagamento(TelaInicio.cpfEscolhido);
+                inserirCartaoDebito(TelaInicio.cpfEscolhido, this.txtNomeBanco.getText(), this.txtNoemAgencia.getText(), this.txtNumeroConta.getText());
+                JOptionPane.showMessageDialog(null, "Dados Atualizados");
+            } else {
+                JOptionPane.showMessageDialog(null, "coloque todos os dados para o cadastro");
+            }
+        }
+        txtNoemAgencia.setText("");
+        txtNomeBanco.setText("");
+        txtNumeroConta.setText("");
+
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,11 +293,62 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
         });
     }
 
+    public void CarregarDados(String cpf) {
+        System.out.println(cpf);
+        String sql = "SELECT BANCO, AGENCIA, NUMERO_CONTA FROM CARTAO_DEBITO WHERE CPF = ?";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                txtMostraBancoCadastrado.setText(rs.getString(1));
+                txtMostraAgenciaCadastrada.setText(rs.getString(2));
+                txtMostraNumeroContaCadastrada.setText(rs.getString(3));
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui carregar os dados da pessoa que vc quer contratar " + e);
+        }
+
+    }
+
+    public void inserirPagamento(String cpf) {
+        try {
+            String sql = "INSERT INTO PAGAMENTOS(CPF,ID,CODIGO_PAGAMENTO) VALUES(?,0,1)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um pagamento " + e);
+        }
+
+    }
+
+    public void inserirCartaoDebito(String cpf, String banco, String agencia, String numConta) {
+        try {
+            String sql = "INSERT INTO CARTAO_DEBITO(CPF,ID,CODIGO_ID,BANCO,AGENCIA,NUMERO_CONTA) VALUES(?,0,1,?,?,?)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.setString(2, banco);
+            pstm.setString(3, agencia);
+            pstm.setString(4, numConta);
+            pstm.execute();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um cartão de crédito " + e);
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PainelConta;
     private javax.swing.JPanel PainelPagamento;
     private javax.swing.JPanel PainelPagamento1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,15 +356,11 @@ public class PagamentoCartaoDebitoCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel textoSaldoBancario;
-    private javax.swing.JLabel txtMostraAgenciaCadastrada;
-    private javax.swing.JLabel txtMostraBancoCadastrado;
-    private javax.swing.JLabel txtMostraNumeroContaCadastrada;
+    private javax.swing.JTextField txtMostraAgenciaCadastrada;
+    private javax.swing.JTextField txtMostraBancoCadastrado;
+    private javax.swing.JTextField txtMostraNumeroContaCadastrada;
     private javax.swing.JTextField txtNoemAgencia;
     private javax.swing.JTextField txtNomeBanco;
     private javax.swing.JTextField txtNumeroConta;
-    private javax.swing.JLabel txtPreco;
-    private javax.swing.JTextField txtPrecoSercico;
-    private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 }

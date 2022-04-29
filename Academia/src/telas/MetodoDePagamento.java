@@ -142,7 +142,7 @@ public class MetodoDePagamento extends javax.swing.JFrame {
         // TODO add your handling code here:
         botaoSelecionado=0;
         this.setVisible(false);
-        new AutenticacaoAcessoPagamentos().setVisible(true);
+        new PagamentoCartaoDebitoCliente().setVisible(true);
     }//GEN-LAST:event_btnCartaoDebitoActionPerformed
 
     private void btnPIXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPIXActionPerformed
