@@ -4,6 +4,10 @@
  */
 package telas;
 
+import classes.ConexaoBd;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,19 +19,26 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form PagamentoPersonal
      */
+    
+    public Connection conn;
+    public PreparedStatement pstm;
+    public ResultSet rs;
+
+    /**
+     *
+     */
+    
+    /**
+     *
+     */
+    
+    
+    
     public PagamentoPIXFuncionario() {
         initComponents();
-        txtSaldo.setEditable(false);
-        txtChaveCadastrada.setEditable(false);
+        this.txtChave.setEditable(false);
         
-        for (int i =1; i<TelaInicio.cadastrosPersonal.size();i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                txtSaldo.setText(String.valueOf(TelaInicio.cadastrosPersonal.get(i).getSaldo()));
-                txtChaveCadastrada.setText(TelaInicio.cadastrosPersonal.get(i).getChave());
-                txtPrecoServico.setText(String.valueOf(TelaInicio.cadastrosPersonal.get(i).getValorServico()));
-                
-            }
-        }
+        CarregarDados(TelaInicio.cpfEscolhido);
     }
     
 
@@ -55,6 +66,7 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtPrecoServico = new javax.swing.JTextPane();
         btnSalvar = new javax.swing.JButton();
+        btrnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dados Financeiros");
@@ -74,6 +86,11 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cadastrar Chave");
 
+        txtChaveCadastrada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtChaveCadastradaPropertyChange(evt);
+            }
+        });
         jScrollPane2.setViewportView(txtChaveCadastrada);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -170,6 +187,15 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
             }
         });
 
+        btrnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btrnVoltar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        btrnVoltar.setText("Voltar");
+        btrnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btrnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -182,6 +208,8 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btrnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnSalvar)
                 .addGap(24, 24, 24))
         );
@@ -193,7 +221,9 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btrnVoltar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -214,28 +244,57 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        for (int i =1; i<TelaInicio.cadastrosPersonal.size();i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setChave(txtChave.getText());
-                TelaInicio.cadastrosPersonal.get(i).setValorServico(Double.parseDouble(txtPrecoServico.getText()));
-                System.out.println(txtChave.getText() +" opa");
+        if(!(this.txtChaveCadastrada.getText().isEmpty())){
+            String sql = "UPDATE PIX SET CHAVE_CADASTRADA = ?  WHERE CPF = ?";
+            try {
+             conn = new ConexaoBd().conectaBd();
+             pstm = conn.prepareStatement(sql);
+             pstm.setString(1, txtChaveCadastrada.getText());
+             pstm.setString(2, TelaInicio.cpfEscolhido);
+             JOptionPane.showMessageDialog(null, "Dados Atualizados");
+             pstm.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }          
+        }
+        if (this.txtChave.getText().isEmpty() ) {
+            System.out.println(this.txtChaveCadastrada.getText());
+            if(!(this.txtChaveCadastrada.getText().isEmpty())){
+                inserirPagamento(TelaInicio.cpfEscolhido);
+                inserirPix(TelaInicio.cpfEscolhido,this.txtChaveCadastrada.getText());    
+                JOptionPane.showMessageDialog(null, "Dados Atualizados.");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor, insira alguma chave para ser salvar");
             }
         }
         txtChaveCadastrada.setText("");
-        JOptionPane.showMessageDialog(null, "Dados atualizados.", "Dados Cadastrais", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtSaldoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSaldoPropertyChange
         // TODO add your handling code here:
         
-        txtSaldo.setText(Double.toString(TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).getSaldo()));
+        
     }//GEN-LAST:event_txtSaldoPropertyChange
 
     private void txtPrecoServicoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtPrecoServicoPropertyChange
         // TODO add your handling code here:
         
-        //TelaInicio.cadastrosPersonal.get(TelaAcaoCliente.personalEscolhido).setValorServico(Double.parseDouble(txtPrecoServico.getText()));
+        
     }//GEN-LAST:event_txtPrecoServicoPropertyChange
+
+    private void btrnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btrnVoltarActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        new TelaAcaoPersonalMenu().setVisible(true);
+    }//GEN-LAST:event_btrnVoltarActionPerformed
+
+    private void txtChaveCadastradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtChaveCadastradaPropertyChange
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_txtChaveCadastradaPropertyChange
 
     /**
      * @param args the command line arguments
@@ -276,6 +335,7 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PrecoServicoText;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btrnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,4 +350,47 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextPane txtPrecoServico;
     private javax.swing.JTextPane txtSaldo;
     // End of variables declaration//GEN-END:variables
+
+    private void CarregarDados(String cpf) {
+        System.out.println(cpf);
+        String sql = "SELECT PIX.CHAVE_CADASTRADA FROM PIX WHERE CPF = ? AND ID=1";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            while (rs.next()) {                
+                txtChave.setText(rs.getString(1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui carregar os dados da pessoa que vc quer contratar " + e);
+        }    
+    }
+
+    private void inserirPagamento(String cpf) {
+        try {
+            String sql = "INSERT INTO PAGAMENTOS(CPF,ID,CODIGO_PAGAMENTO) VALUES(?,1,2)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);           
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um pagamento "+ e);
+        }    
+    }
+
+    private void inserirPix(String cpf, String chave) {
+        try {
+            String sql = "INSERT INTO PIX(CPF,ID,CODIGO_ID, CHAVE_CADASTRADA) VALUES(?,0,2,?)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.setString(2, chave);
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar uma chave pix " + e);
+        }
+    }
 }

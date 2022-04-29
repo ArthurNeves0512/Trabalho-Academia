@@ -5,6 +5,7 @@
 package telas;
 
 import classes.Cliente;
+import classes.ClienteDao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,8 @@ import classes.Funcionario;
 import classes.FuncionarioDAO;
 import classes.PessoaDao;
 import java.sql.*;
+import static telas.TelaInicio.cpfEscolhido;
+import static telas.TelaInicio.senhaEscolhida;
 
 /**
  *
@@ -21,24 +24,15 @@ import java.sql.*;
  */
 public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
 
-    public static ArrayList<Cliente> cadastrosClientes;
-    public static ArrayList<Funcionario> cadastrosPersonal;
-    private int flag = 0;
     public static String cpfEscolhido;
     public static String senhaEscolhida;
     public PessoaDao pessoaDAO = new PessoaDao();
-    static int flag1;
-    static int flag2;
-    static int flagF;
 
     /**
      * Creates new form TelaInicio
      */
     public AutenticacaoAcessoPagamentos() {
         initComponents();
-        cadastrosPersonal = new ArrayList<Funcionario>();
-        cadastrosClientes = new ArrayList<Cliente>();
-
     }
 
     /**
@@ -52,10 +46,10 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
 
         jSpinner1 = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
-        txtCpf = new javax.swing.JTextField();
+        txtCPF = new javax.swing.JTextField();
         txtLogin = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        txtPassword = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        labelPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         txtMensagemConfirmacao = new javax.swing.JLabel();
 
@@ -69,14 +63,14 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
         txtLogin.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         txtLogin.setText("CPF");
 
-        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaActionPerformed(evt);
+                txtPasswordActionPerformed(evt);
             }
         });
 
-        txtPassword.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
-        txtPassword.setText("Senha");
+        labelPassword.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        labelPassword.setText("Senha");
 
         btnLogin.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnLogin.setText("Confirmar");
@@ -98,12 +92,12 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPassword)
+                            .addComponent(labelPassword)
                             .addComponent(txtLogin))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(129, 129, 129))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnLogin)
@@ -119,12 +113,12 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
                 .addComponent(txtMensagemConfirmacao)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLogin))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelPassword))
                 .addGap(32, 32, 32)
                 .addComponent(btnLogin)
                 .addGap(106, 106, 106))
@@ -146,91 +140,88 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        senhaEscolhida = txtSenha.getText();
-        cpfEscolhido = txtCpf.getText();
-        flag = 0;
-        int idReferente=0;
+        senhaEscolhida = txtPassword.getText();
+        cpfEscolhido = txtCPF.getText();
         
-        try 
-        {
+        int idReferente;
+        String senhaCorreta;
+        
+        try {
             idReferente = pessoaDAO.pesquisarPessoa(cpfEscolhido);
-        } catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Credenciais incorretas.");
+        } catch (Exception e) {
+            idReferente=-1;
         }
         
-        if(idReferente==1)
+        if(idReferente==-1)
         {
-            try 
-            {
-                Funcionario personal = new Funcionario();
-                personal.setCpf(cpfEscolhido);
-                personal.setSenha(senhaEscolhida);
-                ResultSet rs = personal.autenticacaoFuncionario();
-                if (rs.next()) {
-                    //chamar tela que eu quero abrir;
-                    this.setVisible(false);
-                    
-                    switch(MetodoDePagamento.botaoSelecionado) /* nao sei se existe a chance de essa variavel dar problema por ser static, mas vamo que vamo */
-                    {
-                        case -1:
-                            new PagamentoCartaoCreditoFuncionario().setVisible(true);
-                            break;
-                        case 1:
-                            new PagamentoCartaoDebitoFuncionario().setVisible(true);
-                            break;
-                        default:
-                            new PagamentoPIXFuncionario().setVisible(true);
-                            break;
-                    }
-                    
-                    flag = 1;
-                }
-            } catch (Exception e) 
-            {
-                JOptionPane.showMessageDialog(null, "Deu ruim, gata");
-            }
+            JOptionPane.showMessageDialog(null, "Incorreto.");
+            txtCPF.setText("");
+            txtPassword.setText("");
         }else
         {
-            try 
+            if(idReferente==1)
             {
-                Cliente cliente = new Cliente();
-                cliente.setCpf(cpfEscolhido);
-                cliente.setSenha(senhaEscolhida);
-                ResultSet rs = cliente.autenticacaoCliente();
-
-                if (rs.next()) {
-                    //chamar tela que eu quero abrir; 
-                    this.setVisible(false);
+                FuncionarioDAO personal = new FuncionarioDAO();
+                
+                try {
+                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
                     
-                    switch(MetodoDePagamento.botaoSelecionado)
+                    if(senhaCorreta.equals(senhaEscolhida))
                     {
-                        case -1:
-                            new PagamentoCartaoCreditoCliente().setVisible(true);
-                            break;
-                        case 1:
-                            new PagamentoCartaoDebitoCliente().setVisible(true);
-                            break;
-                        default:
-                            new PagamentoPIXCliente().setVisible(true);
-                            break;
+                        this.setVisible(false);
+                        switch(MetodoDePagamento.botaoSelecionado){
+                            case -1:
+                                new PagamentoCartaoCreditoFuncionario().setVisible(true);
+                                break;
+                            case 0:
+                                new PagamentoCartaoDebitoFuncionario().setVisible(true);
+                                break;
+                            default:
+                                new PagamentoPIXFuncionario().setVisible(true);
+                                break;
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                        txtPassword.setText("");
                     }
-                    
-                    flag = 1;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
                 }
-            }catch (Exception e) 
-            {
-                JOptionPane.showMessageDialog(null, "nao faco nem ideia do que acontece se aqui der ruim");
+            }else{
+                try {
+                    ClienteDao cliente = new ClienteDao();
+                    
+                    senhaCorreta = cliente.pegaSenha(cpfEscolhido);
+                    
+                    if(senhaCorreta.equals(senhaEscolhida))
+                    {
+                        this.setVisible(false);
+                        switch(MetodoDePagamento.botaoSelecionado){
+                            case -1:
+                                new PagamentoCartaoCreditoFuncionario().setVisible(true);
+                                break;
+                            case 0:
+                                new PagamentoCartaoDebitoFuncionario().setVisible(true);
+                                break;
+                            default:
+                                new PagamentoPIXFuncionario().setVisible(true);
+                                break;
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                        txtPassword.setText("");
+                    }
+                }catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
+                }
             }
         }
-
-        flag = 0;        
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSenhaActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,10 +263,10 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JLabel labelPassword;
+    private javax.swing.JTextField txtCPF;
     private javax.swing.JLabel txtLogin;
     private javax.swing.JLabel txtMensagemConfirmacao;
-    private javax.swing.JLabel txtPassword;
-    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
