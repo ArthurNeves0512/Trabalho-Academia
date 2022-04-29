@@ -188,7 +188,7 @@ public class TelaInicio extends javax.swing.JFrame {
         if (idReferente==-1) 
         {
             JOptionPane.showMessageDialog(null, "Este usuário não existe.");
-            txtLogin.setText("");
+            txtCpf.setText("");
             txtSenha.setText("");
         }else
         {

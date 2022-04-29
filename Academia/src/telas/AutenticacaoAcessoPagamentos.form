@@ -59,13 +59,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPassword" max="-2" attributes="0"/>
+                              <Component id="labelPassword" max="-2" attributes="0"/>
                               <Component id="txtLogin" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txtCpf" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="txtSenha" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="txtCPF" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="txtPassword" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                       </Group>
@@ -88,13 +88,13 @@
                   <Component id="txtMensagemConfirmacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCpf" alignment="3" max="-2" attributes="0"/>
+                      <Component id="txtCPF" alignment="3" max="-2" attributes="0"/>
                       <Component id="txtLogin" alignment="3" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="txtSenha" max="-2" attributes="0"/>
                       <Component id="txtPassword" max="-2" attributes="0"/>
+                      <Component id="labelPassword" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnLogin" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtCpf">
+        <Component class="javax.swing.JTextField" name="txtCPF">
         </Component>
         <Component class="javax.swing.JLabel" name="txtLogin">
           <Properties>
@@ -114,12 +114,12 @@
             <Property name="text" type="java.lang.String" value="CPF"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtSenha">
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSenhaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="txtPassword">
+        <Component class="javax.swing.JLabel" name="labelPassword">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century" size="13" style="0"/>
