@@ -4,6 +4,13 @@
  */
 package telas;
 
+import classes.ConexaoBd;
+import classes.FuncionarioDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MASTER
@@ -13,8 +20,18 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form PagamentoCartaoCreditoFuncionario
      */
+    
+    public Connection conn;
+    public PreparedStatement pstm;
+    public ResultSet rs;
+    FuncionarioDAO funcionario = new FuncionarioDAO();
+    
     public PagamentoCartaoCreditoFuncionario() {
         initComponents();
+        
+        txtSaldo.setEnabled(false);
+        
+        CarregarDados(TelaInicio.cpfEscolhido);
     }
 
     /**
@@ -31,7 +48,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
         textoSaldoBancario = new javax.swing.JLabel();
         txtPreco = new javax.swing.JLabel();
         txtSaldo = new javax.swing.JTextField();
-        txtPrecoSercico = new javax.swing.JTextField();
+        txtPrecoServico = new javax.swing.JTextField();
         PainelPagamento = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,7 +56,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
         txtNumeroCartao = new javax.swing.JTextField();
         txtDataValidade = new javax.swing.JTextField();
         txtCodigoSeguranca = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         PainelPagamento1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -68,9 +85,25 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
         txtPreco.setForeground(new java.awt.Color(255, 255, 255));
         txtPreco.setText("Preço do Serviço");
 
-        txtPrecoSercico.addActionListener(new java.awt.event.ActionListener() {
+        txtSaldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecoSercicoActionPerformed(evt);
+                txtSaldoActionPerformed(evt);
+            }
+        });
+        txtSaldo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtSaldoPropertyChange(evt);
+            }
+        });
+
+        txtPrecoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecoServicoActionPerformed(evt);
+            }
+        });
+        txtPrecoServico.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtPrecoServicoPropertyChange(evt);
             }
         });
 
@@ -86,7 +119,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSaldo)
-                    .addComponent(txtPrecoSercico, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                    .addComponent(txtPrecoServico, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelContaLayout.setVerticalGroup(
@@ -98,7 +131,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
                     .addComponent(textoSaldoBancario))
                 .addGap(27, 27, 27)
                 .addGroup(PainelContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPrecoSercico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPreco))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
@@ -164,9 +197,14 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
-        jButton1.setText("Salvar");
+        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         PainelPagamento1.setBackground(new java.awt.Color(0, 58, 122));
         PainelPagamento1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cartão Cadastrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century", 1, 13), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -249,7 +287,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -270,7 +308,7 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
                 .addComponent(PainelPagamento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnSalvar)
                     .addComponent(btnVoltar))
                 .addContainerGap())
         );
@@ -291,9 +329,12 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecoSercicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoSercicoActionPerformed
+    private void txtPrecoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoServicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecoSercicoActionPerformed
+        //System.out.println(funcionario.pegaValorSessao(TelaInicio.cpfEscolhido));
+        
+        //
+    }//GEN-LAST:event_txtPrecoServicoActionPerformed
 
     private void txtNumeroCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCartaoActionPerformed
         // TODO add your handling code here:
@@ -305,6 +346,59 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoPersonalMenu().setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        
+        funcionario.atualizaValorSessao(Double.parseDouble(txtPrecoServico.getText()), TelaInicio.cpfEscolhido);
+        
+        if (!(this.txtNumeroCartao.getText().isEmpty()) && !(this.txtDataValidade.getText().isEmpty())
+                && !(this.txtCodigoSeguranca.getText().isEmpty())) {
+            String sql = "UPDATE CARTAO_CREDITO SET NUMERO_CARTAO = ?, DATA_VALIDADE =?, CODIGO_SEGURANCA= ? WHERE CPF = ?";
+            try {                
+                conn = new ConexaoBd().conectaBd();
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, this.txtNumeroCartao.getText());
+                pstm.setString(2, this.txtDataValidade.getText());
+                pstm.setString(3, this.txtCodigoSeguranca.getText());
+                pstm.setString(4, TelaInicio.cpfEscolhido);
+                JOptionPane.showMessageDialog(null, "Dados Atualizados");
+                pstm.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        else if ((this.txtMostraNumeroCartaoCadastrado.getText().isEmpty()) && this.txtMostraDataValidadeCadastrada.getText().isEmpty() && this.txtMostraCodigoSegurancaCadastrado.getText().isEmpty()) {
+            if (!(this.txtCodigoSeguranca.getText().isEmpty()) && !(this.txtDataValidade.getText().isEmpty()) && !(this.txtNumeroCartao.getText().isEmpty())) {
+                inserirPagamento(TelaInicio.cpfEscolhido);
+                inserirCartaoCredito(TelaInicio.cpfEscolhido, this.txtNumeroCartao.getText(), this.txtDataValidade.getText(), this.txtCodigoSeguranca.getText());
+                JOptionPane.showMessageDialog(null, "Dados Atualizados.");
+            } else {
+                JOptionPane.showMessageDialog(null, "coloque todos os dados para o cadastro");
+            }
+        }
+        txtCodigoSeguranca.setText("");
+        txtDataValidade.setText("");
+        txtNumeroCartao.setText("");
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
+        // TODO add your handling code here:
+        
+        //
+    }//GEN-LAST:event_txtSaldoActionPerformed
+
+    private void txtSaldoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSaldoPropertyChange
+        // TODO add your handling code here:
+        
+        txtSaldo.setText(Double.toString(funcionario.pegaSaldoBancario(TelaInicio.cpfEscolhido)));
+    }//GEN-LAST:event_txtSaldoPropertyChange
+
+    private void txtPrecoServicoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtPrecoServicoPropertyChange
+        // TODO add your handling code here:
+        
+        txtPrecoServico.setText(Double.toString(funcionario.pegaValorSessao(TelaInicio.cpfEscolhido)));
+    }//GEN-LAST:event_txtPrecoServicoPropertyChange
 
     /**
      * @param args the command line arguments
@@ -345,8 +439,8 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel PainelConta;
     private javax.swing.JPanel PainelPagamento;
     private javax.swing.JPanel PainelPagamento1;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -362,7 +456,55 @@ public class PagamentoCartaoCreditoFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel txtMostraNumeroCartaoCadastrado;
     private javax.swing.JTextField txtNumeroCartao;
     private javax.swing.JLabel txtPreco;
-    private javax.swing.JTextField txtPrecoSercico;
+    private javax.swing.JTextField txtPrecoServico;
     private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
+
+    private void CarregarDados(String cpf) {
+        System.out.println(cpf);
+        String sql = "SELECT NUMERO_CARTAO, DATA_VALIDADE, CODIGO_SEGURANCA FROM CARTAO_CREDITO WHERE CPF = ? AND ID=1";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                txtMostraNumeroCartaoCadastrado.setText(rs.getString(1));
+                txtMostraDataValidadeCadastrada.setText(rs.getString(2));
+                txtMostraCodigoSegurancaCadastrado.setText(rs.getString(3));
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui carregar os dados da pessoa que vc quer contratar " + e);
+        }
+    }
+
+    private void inserirPagamento(String cpf) {
+        try {
+            String sql = "INSERT INTO PAGAMENTOS(CPF,ID,CODIGO_PAGAMENTO) VALUES(?,1,0)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um pagamento " + e);
+        }
+    }
+
+    private void inserirCartaoCredito(String cpf, String numeroCartao, String dataValidade, String cod) {
+        try {
+            String sql = "INSERT INTO CARTAO_CREDITO(CPF,ID,CODIGO_ID,NUMERO_CARTAO,DATA_VALIDADE,CODIGO_SEGURANCA) VALUES(?,1,0,?,?,?)";
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.setString(2, numeroCartao);
+            pstm.setString(3, dataValidade);
+            pstm.setString(4, cod);
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui cadastrar um cartão de crédito " + e);
+        }
+    }
 }

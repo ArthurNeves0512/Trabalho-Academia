@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import classes.FuncionarioDAO;
 
 /**
  *
@@ -23,6 +24,7 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     public Connection conn;
     public PreparedStatement pstm;
     public ResultSet rs;
+    FuncionarioDAO funcionario = new FuncionarioDAO();
 
     /**
      *
@@ -37,6 +39,7 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     public PagamentoPIXFuncionario() {
         initComponents();
         this.txtChave.setEditable(false);
+        txtSaldo.setEnabled(false);
         
         CarregarDados(TelaInicio.cpfEscolhido);
     }
@@ -244,15 +247,17 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
+        funcionario.atualizaValorSessao(Double.parseDouble(txtPrecoServico.getText()), TelaInicio.cpfEscolhido);
+        
         if(!(this.txtChaveCadastrada.getText().isEmpty())){
             String sql = "UPDATE PIX SET CHAVE_CADASTRADA = ?  WHERE CPF = ?";
             try {
-             conn = new ConexaoBd().conectaBd();
-             pstm = conn.prepareStatement(sql);
-             pstm.setString(1, txtChaveCadastrada.getText());
-             pstm.setString(2, TelaInicio.cpfEscolhido);
-             JOptionPane.showMessageDialog(null, "Dados Atualizados");
-             pstm.execute();
+                conn = new ConexaoBd().conectaBd();
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, txtChaveCadastrada.getText());
+                pstm.setString(2, TelaInicio.cpfEscolhido);
+                JOptionPane.showMessageDialog(null, "Dados Atualizados");
+                pstm.execute();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }          
@@ -274,13 +279,13 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
     private void txtSaldoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSaldoPropertyChange
         // TODO add your handling code here:
         
-        
+        txtSaldo.setText(Double.toString(funcionario.pegaSaldoBancario(TelaInicio.cpfEscolhido)));
     }//GEN-LAST:event_txtSaldoPropertyChange
 
     private void txtPrecoServicoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtPrecoServicoPropertyChange
         // TODO add your handling code here:
         
-        
+        txtPrecoServico.setText(Double.toString(funcionario.pegaValorSessao(TelaInicio.cpfEscolhido)));
     }//GEN-LAST:event_txtPrecoServicoPropertyChange
 
     private void btrnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btrnVoltarActionPerformed
@@ -292,8 +297,6 @@ public class PagamentoPIXFuncionario extends javax.swing.JFrame {
 
     private void txtChaveCadastradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtChaveCadastradaPropertyChange
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_txtChaveCadastradaPropertyChange
 
     /**

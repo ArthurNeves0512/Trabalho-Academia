@@ -198,13 +198,13 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
                         this.setVisible(false);
                         switch(MetodoDePagamento.botaoSelecionado){
                             case -1:
-                                new PagamentoCartaoCreditoFuncionario().setVisible(true);
+                                new PagamentoCartaoCreditoCliente().setVisible(true);
                                 break;
                             case 0:
-                                new PagamentoCartaoDebitoFuncionario().setVisible(true);
+                                new PagamentoCartaoDebitoCliente().setVisible(true);
                                 break;
                             default:
-                                new PagamentoPIXFuncionario().setVisible(true);
+                                new PagamentoPIXCliente().setVisible(true);
                                 break;
                         }
                     }else{

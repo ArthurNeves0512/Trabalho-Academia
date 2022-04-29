@@ -7,10 +7,14 @@ package telas;
 import classes.*;
 import java.awt.Image;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.sql.*;
 
 /**
  *
@@ -18,58 +22,49 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ConfigPersonal extends javax.swing.JFrame {
     String getImagemSelecionada;
+    public Connection conn;
+    public PreparedStatement pstm;
+    public ResultSet rs;
+    FuncionarioDAO funcionario = new FuncionarioDAO();
     
     /**
      * Creates new form ConfigPersonal
      */
     public ConfigPersonal() {
         initComponents();
-        FuncionarioDAO ps = new FuncionarioDAO();/*
-        TelaInicio.cadastrosPersonal = ps.pesquisarPersonal();*/
         
-        for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                
-                txtNome.setText(TelaInicio.cadastrosPersonal.get(i).getNome());
-                txtCpf.setText(TelaInicio.cadastrosPersonal.get(i).getCpf());
-                txtLogradouro.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getLogradouro());
-                txtBairro.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getBairro());
-                txtCidade.setText(TelaInicio.cadastrosPersonal.get(i).getEndereco().getCidade());
-                txtCep.setText(TelaInicio.cadastrosPersonal.get(i).getCep());
-                txtTelefone.setText(TelaInicio.cadastrosPersonal.get(i).getTelefone());
-                txtIdade.setText(TelaInicio.cadastrosPersonal.get(i).getIdade());
-                txtEmail.setText(TelaInicio.cadastrosPersonal.get(i).getEmail());
-                txtSenha.setText(TelaInicio.cadastrosPersonal.get(i).getSenha());
-                
-                String especialidades = ps.carregarEspecialidadeNaConfiguracao(txtCpf.getText());
-                
-                if(Character.compare(especialidades.charAt(0),'1')==0)
-                {
-                    checkBoxAbdomen.setSelected(true);
-                }
-                if(Character.compare(especialidades.charAt(1),'1')==0)
-                {
-                    checkBoxPeito.setSelected(true);
-                }
-                if(Character.compare(especialidades.charAt(2),'1')==0)
-                {
-                    checkBoxBracos.setSelected(true);
-                }
-                if(Character.compare(especialidades.charAt(3),'1')==0)
-                {
-                    checkBoxPernas.setSelected(true);
-                }
-                if(Character.compare(especialidades.charAt(4),'1')==0)
-                {
-                    checkBoxOmbros.setSelected(true);
-                }
-                
-                ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
-                Image imFit = imcon.getImage();                
-                Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-                pnlFoto.setIcon(new ImageIcon(imgFit));
-            }
+        buscarDados(TelaInicio.cpfEscolhido);
+        
+        txtCpf.setEditable(false);
+        
+        String especialidades = funcionario.carregarEspecialidadeNaConfiguracao(txtCpf.getText());
+
+        if(Character.compare(especialidades.charAt(0),'1')==0)
+        {
+            checkBoxAbdomen.setSelected(true);
         }
+        if(Character.compare(especialidades.charAt(1),'1')==0)
+        {
+            checkBoxPeito.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(2),'1')==0)
+        {
+            checkBoxBracos.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(3),'1')==0)
+        {
+            checkBoxPernas.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(4),'1')==0)
+        {
+            checkBoxOmbros.setSelected(true);
+        }
+        /*      
+        ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
+        Image imFit = imcon.getImage();                
+        Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
+        pnlFoto.setIcon(new ImageIcon(imgFit));*/
+            
     }
 
     /**
@@ -96,8 +91,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtIdade = new javax.swing.JTextField();
         btnUpload = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -118,7 +111,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuração Personal");
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(714, 700));
 
         jPanel3.setBackground(new java.awt.Color(0, 58, 122));
         jPanel3.setPreferredSize(new java.awt.Dimension(900, 700));
@@ -167,11 +159,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Alterar Email");
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Century", 1, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Idade");
 
         btnUpload.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         btnUpload.setText("Carregar foto");
@@ -269,27 +256,34 @@ public class ConfigPersonal extends javax.swing.JFrame {
                                     .addComponent(txtLogradouro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtAlterarSenha)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel2))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                        .addComponent(txtSenha)
-                                        .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTelefone))
-                                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel4))
                                 .addGap(84, 84, 84)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(txtNome))))
+                                    .addComponent(txtNome)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtAlterarSenha)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10))
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                        .addComponent(txtSenha)
+                                        .addComponent(txtTelefone))
+                                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(checkBoxAbdomen)
+                                            .addComponent(checkBoxBracos))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(checkBoxPernas)
+                                            .addComponent(checkBoxPeito))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -299,8 +293,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
                                 .addComponent(btnUpload)
                                 .addGap(108, 108, 108))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(279, 279, 279)
+                        .addGap(371, 371, 371)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -309,20 +302,9 @@ public class ConfigPersonal extends javax.swing.JFrame {
                                 .addComponent(btnExcluir)))
                         .addGap(30, 30, 30))))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(checkBoxPernas)
-                        .addGap(18, 18, 18)
-                        .addComponent(checkBoxOmbros))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(checkBoxAbdomen)
-                        .addGap(18, 18, 18)
-                        .addComponent(checkBoxPeito)
-                        .addGap(18, 18, 18)
-                        .addComponent(checkBoxBracos)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(203, 203, 203)
+                .addComponent(checkBoxOmbros)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,43 +341,44 @@ public class ConfigPersonal extends javax.swing.JFrame {
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnUpload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnSalvar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAlterarSenha)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkBoxAbdomen)
-                    .addComponent(checkBoxPeito)
-                    .addComponent(checkBoxBracos))
-                .addGap(4, 4, 4)
+                        .addGap(34, 34, 34)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExcluir)
+                        .addComponent(btnSalvar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAlterarSenha))))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(28, 52, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(btnVoltar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkBoxPernas)
-                            .addComponent(checkBoxOmbros))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(checkBoxAbdomen)
+                            .addComponent(checkBoxPeito))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkBoxBracos)
+                            .addComponent(checkBoxPernas)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(checkBoxOmbros)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -416,71 +399,60 @@ public class ConfigPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                
-                TelaInicio.cadastrosPersonal.get(i).setNome(txtNome.getText());
-                TelaInicio.cadastrosPersonal.get(i).setCep(txtCpf.getText());
-                TelaInicio.cadastrosPersonal.get(i).setEndereco(txtLogradouro.getText(),txtBairro.getText(),txtCidade.getText(),txtCep.getText());
-                TelaInicio.cadastrosPersonal.get(i).setTelefone(txtTelefone.getText());
-                TelaInicio.cadastrosPersonal.get(i).setIdade(txtIdade.getText());
-                TelaInicio.cadastrosPersonal.get(i).setEmail(txtEmail.getText());
-                TelaInicio.cadastrosPersonal.get(i).setSenha(txtSenha.getText());
-                
-                String ans="";
-                
-                if(checkBoxAbdomen.isSelected()==true)
-                {
-                    ans+="Abdomen\n";
-                }
-                if(checkBoxPeito.isSelected()==true)
-                {
-                    ans+="Peito\n";
-                }
-                if(checkBoxBracos.isSelected()==true)
-                {
-                    ans+="Braços\n";
-                }
-                if(checkBoxPernas.isSelected()==true)
-                {
-                    ans+="Pernas\n";
-                }
-                if(checkBoxOmbros.isSelected()==true)
-                {
-                    ans+="Ombros";
-                }
-                
-                TelaInicio.cadastrosPersonal.get(i).setEspecialidade(ans);
-              
-                if(TelaInicio.flag2==1){
-                    TelaInicio.cadastrosPersonal.get(i).setFoto(getImagemSelecionada);
-                    ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
-                    Image imFit = imcon.getImage();
-                    Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-                    pnlFoto.setIcon(new ImageIcon(imgFit));
-                    TelaInicio.flag2 =0;
-                }
-                
-                JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
-            }
+       
+        funcionario.atualizarCadastroFuncionario(TelaInicio.cpfEscolhido, txtNome.getText(), txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtTelefone.getText(), txtEmail.getText(),txtSenha.getText());
         
+        String ans="";
+
+        if(checkBoxAbdomen.isSelected()==true)
+        {
+            ans+="Abdomen\n";
         }
+        if(checkBoxPeito.isSelected()==true)
+        {
+            ans+="Peito\n";
+        }
+        if(checkBoxBracos.isSelected()==true)
+        {
+            ans+="Braços\n";
+        }
+        if(checkBoxPernas.isSelected()==true)
+        {
+            ans+="Pernas\n";
+        }
+        if(checkBoxOmbros.isSelected()==true)
+        {
+            ans+="Ombros";
+        }
+                
+        funcionario.atualizaEspecialidade(ans, TelaInicio.cpfEscolhido);
+        /*    
+        if(TelaInicio.flag2==1){
+            TelaInicio.cadastrosPersonal.get(i).setFoto(getImagemSelecionada);
+            ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
+            Image imFit = imcon.getImage();
+            Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
+            pnlFoto.setIcon(new ImageIcon(imgFit));
+            TelaInicio.flag2 =0;
+        }*/
+                
+        JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
-        for (int i =1; i <TelaInicio.cadastrosPersonal.size();i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-               System.out.println(TelaInicio.cadastrosPersonal.remove(i).getNome());
-                new TelaAcaoPersonalMenu().setVisible(false);
-                JOptionPane.showMessageDialog(null, "Sua conta foi deletada.","Concluído", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-                new TelaInicio().setVisible(true);
-            }
-        }
+        funcionario.excluirFuncionario(TelaInicio.cpfEscolhido);
+        
+        JOptionPane.showMessageDialog(null, "Sua conta foi deletada.","Concluído", JOptionPane.INFORMATION_MESSAGE);
+        
+        this.setVisible(false);
+        new TelaInicio().setVisible(true);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        /*
+        
         JFileChooser pegandoImagem = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("4 extenções suportadas", "jpg", "png", "jpeg", "gif");
         
@@ -504,7 +476,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
             System.out.println(getImagemSelecionada +"veremos aqui");
             TelaInicio.flag2 =1;
             
-        }
+        }*/
         
         
     }//GEN-LAST:event_btnUploadActionPerformed
@@ -567,7 +539,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
@@ -579,10 +550,40 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void buscarDados(String cpf) {
+        String sql = "SELECT PESSOA.NOME, PESSOA.CPF, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.CEP, TELEFONES.NUMERO, CADASTRO.EMAIL , CADASTRO.SENHA FROM PESSOA, CADASTRO, ENDERECO, TELEFONES, FUNCIONARIO WHERE (PESSOA.ID = 1 AND PESSOA.CPF = ?) AND (TELEFONES.ID=1 AND TELEFONES.CPF= ?) AND (FUNCIONARIO.ID=1 AND FUNCIONARIO.CPF= ?) AND (CADASTRO.ID=1 AND CADASTRO.CPF= ?) AND (ENDERECO.ID=1 AND ENDERECO.CPF = ?)";
+
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            
+            pstm.setString(1, cpf);
+            pstm.setString(2, cpf);
+            pstm.setString(3, cpf);
+            pstm.setString(4, cpf);
+            pstm.setString(5, cpf);
+            rs= pstm.executeQuery();
+            
+            while(rs.next()){
+                txtNome.setText(rs.getString(1));
+                txtCpf.setText(rs.getString(2));
+                txtLogradouro.setText(rs.getString(3));
+                txtBairro.setText(rs.getString(4));
+                txtCidade.setText(rs.getString(5));
+                txtCep.setText(rs.getString(6));
+                txtTelefone.setText(rs.getString(7));
+                txtEmail.setText(rs.getString(8));
+                txtSenha.setText(rs.getString(9));
+            }
+        
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "não consegui carregar os dados do funcionario para tela configuração " + e);
+        }    
+    }
 }

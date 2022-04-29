@@ -21,6 +21,106 @@ public class FuncionarioDAO {
     //PreparedStatment ps;/*
 
     
+    public void atualizaNome(String nome, String cpf)
+    {
+        String sql = "UPDATE PESSOA SET NOME = ? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, nome);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar o nome");
+        }
+    }
+    
+    public void atualizaEndereco(String cpf, String log, String bairro, String cidade, String cep)
+    {
+        String sql = "UPDATE ENDERECO SET LOGRADOURO=?,BAIRRO=?, CIDADE=?, CEP=? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, log);
+            pstm.setString(2, bairro);
+            pstm.setString(3, cidade);
+            pstm.setString(4, cep);
+            pstm.setString(5, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar o endereco");
+        }
+    }
+    
+    public void atualizaTelefone(String cpf, String telefone)
+    {
+        String sql = "UPDATE TELEFONE SET TELEFONE=? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, telefone);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar o telefone");
+        }
+    }
+    
+    public void atualizaEmail(String cpf, String email)
+    {
+        String sql = "UPDATE CADASTRO SET EMAIL=? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, email);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar o email");
+        }
+    }
+    
+    public void atualizaSenha(String cpf, String senha)
+    {
+        String sql = "UPDATE CADASTRO SET SENHA=? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, senha);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar a senha");
+        }
+    }
+    
+    public void atualizaEspecialidade(String s, String cpf)
+    {
+        String sql = "UPDATE FUNCIONARIO SET ESPECIALIDADE = ? WHERE (ID=1 AND CPF= ?)";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, s);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui atualizar a especialidade");
+        }
+        
+    }
+    
     public String carregarEspecialidade(String cpf) {
         String especialidade = "";
         String ans = "";
@@ -79,23 +179,6 @@ public class FuncionarioDAO {
         }
         
         return especialidade;
-    }
-    
-    public void atualizaEspecialidade(String s, String cpf)
-    {
-        String sql = "UPDATE FUNCIONARIO SET ESPECIALIDADE = ? WHERE (ID=1 AND CPF= ?)";
-        try {
-            conn = new ConexaoBd().conectaBd();
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1, s);
-            pstm.setString(2, cpf);
-            pstm.execute();
-            pstm.close();
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "nao consegui atualizar a especialidade");
-        }
-        
     }
     
     public String getCpfPeloNome(Object nome) {
@@ -262,6 +345,20 @@ public class FuncionarioDAO {
         }
 
     }
+    
+    public void excluirFuncionario(String cpf) {
+        String sql = "DELETE FROM PESSOA WHERE CPF=? and ID=1";
+        
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.execute();
+            pstm.close();
+        } catch (Exception e) {
+        }
+
+    }
 
     public ResultSet pesquisarFuncionario() {
         String sql = "SELECT FUNCIONARIO.CPF,CADASTRO.SENHA FROM FUNCIONARIO JOIN CADASTRO ON FUNCIONARIO.CPF=CADASTRO.CPF;";
@@ -277,8 +374,32 @@ public class FuncionarioDAO {
         return rs;
     }
 
-    public void atualizarCadastroFuncionario() {
-
+    public void atualizarCadastroFuncionario(String cpf, String nome, String log, String bairro, String cidade, String cep, String telefone, String email, String senha) {
+        atualizaNome(cpf,nome);
+        atualizaEndereco(cpf,log,bairro,cidade,cep);
+        atualizaTelefone(cpf,telefone);
+        atualizaEmail(cpf,email);
+        atualizaSenha(cpf,senha);
+    }
+    
+    public void atualizaValorSessao(double valorNovo, String cpf)
+    {
+        String sql = "UPDATE CATEGORIA SET VALOR_SESSAO = ? WHERE CPF= ? AND ID=1";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);  
+            pstm.setDouble(1, valorNovo);
+            pstm.setString(2, cpf);
+            pstm.execute();
+            pstm.close();/* se der problema em dizer que o funcionario ta tarbalhando ou nao, foi aqui que deu erro
+            if (i == 1) {
+                return true;
+            } else {
+                return false;
+            }*/
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "não consegui alterar o valor da sessao");
+        }
     }
     
     public double pegaValorSessao(String cpf)
@@ -335,7 +456,7 @@ public class FuncionarioDAO {
             pstm.close();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "não consegui alterar a propriedade de trabalhar");
+            JOptionPane.showMessageDialog(null, "não consegui alterar o saldo bancario");
         }
     }
     
