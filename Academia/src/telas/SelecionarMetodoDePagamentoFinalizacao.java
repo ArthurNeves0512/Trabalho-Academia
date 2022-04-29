@@ -35,7 +35,7 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
         btnPIX = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(528, 532));
@@ -68,7 +68,6 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
             }
         });
 
-        btnFechar.setBackground(new java.awt.Color(255, 255, 255));
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2cross-rounded-outline.png"))); // NOI18N
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +84,7 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
                 .addComponent(btnCartaoCredito)
                 .addGap(39, 39, 39)
                 .addComponent(btnCartaoDebito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnPIX)
                 .addGap(43, 43, 43))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -110,7 +109,7 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
                     .addComponent(btnCartaoCredito)
                     .addComponent(btnCartaoDebito)
                     .addComponent(btnPIX))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,6 +126,7 @@ public class SelecionarMetodoDePagamentoFinalizacao extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCartaoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartaoCreditoActionPerformed
