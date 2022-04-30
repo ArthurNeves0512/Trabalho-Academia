@@ -31,6 +31,7 @@ public class TelaInicio extends javax.swing.JFrame {
     static int flag1;
     static int flag2;
     static int flagF;
+    static ArrayList<String> infos_login = new ArrayList<String>();
 
     /**
      * Creates new form TelaInicio
@@ -171,69 +172,43 @@ public class TelaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        senhaEscolhida = txtSenha.getText();
-        cpfEscolhido = txtCpf.getText();
-        flag = 0;
-        int idReferente;
-        String senhaCorreta="";
         
-        try 
-        {
-            idReferente = pessoaDAO.pesquisarPessoa(cpfEscolhido);
-        } catch (Exception e) 
-        {
-            idReferente=-1;
-        }
-        
-        if (idReferente==-1) 
-        {
-            JOptionPane.showMessageDialog(null, "Este usuário não existe.");
-            txtCpf.setText("");
-            txtSenha.setText("");
-        }else
-        {
-            if(idReferente==1) //ate aqui, o cpf existe - precisa comparalo com a senha armazenada no banco
-            {
-                FuncionarioDAO personal = new FuncionarioDAO();
-                
-                try {
-                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
-                    
-                    if(senhaCorreta.equals(senhaEscolhida))
-                    {
-                        this.setVisible(false);
-                        new TelaAcaoPersonal().setVisible(true);
-                    }else
-                    {
-                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
-                        txtSenha.setText("");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
-                }
-            }else
-            {
-                ClienteDao personal = new ClienteDao();
-                
-                try {
-                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
-                    
-                    if(senhaCorreta.equals(senhaEscolhida))
-                    {
-                        this.setVisible(false);
-                        new TelaAcaoCliente().setVisible(true);
-                    }else
-                    {
-                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
-                        txtSenha.setText("");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha do cliente."+e);
-                }
-            }
 
-            flag = 0;
-        }        
+        try {
+            infos_login = pessoaDAO.pegaInfosLogin(txtCpf.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "deu ruim no SQL da view");
+        }
+
+        switch (infos_login.get(0)) {
+            case "-1":
+                JOptionPane.showMessageDialog(null, "Este usuário não existe.");
+                txtCpf.setText("");
+                txtSenha.setText("");
+                break;
+            case "0":
+                //verifica a senha
+                //muda a tela
+                if (infos_login.get(2).equals(txtSenha.getText())) {
+                    this.setVisible(false);
+                    new TelaAcaoCliente().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                    txtSenha.setText("");
+                }
+
+                break;
+            case "1":
+                if (infos_login.get(2).equals(txtSenha.getText())) {
+                    this.setVisible(false);
+                    new TelaAcaoPersonal().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                    txtSenha.setText("");
+                }
+                break;
+
+        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

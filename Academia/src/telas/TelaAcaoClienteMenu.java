@@ -286,7 +286,7 @@ public class TelaAcaoClienteMenu extends javax.swing.JFrame {
 
     private void HelpTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HelpTextMouseClicked
         // TODO add your handling code here:
-        TelaInicio.cadastrosClientes.get(0).ajuda();
+        
     }//GEN-LAST:event_HelpTextMouseClicked
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

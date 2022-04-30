@@ -6,8 +6,6 @@ package classes;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import telas.RegistroPersonal;
-import java.util.ArrayList;
 
 /**
  *
@@ -21,14 +19,16 @@ public class FuncionarioDAO {
     //PreparedStatment ps;/*
 
     
-    public void atualizaNome(String nome, String cpf)
-    {
-        String sql = "UPDATE PESSOA SET NOME = ? WHERE (ID=1 AND CPF= ?)";
+    public void atualizaNome(String nome, String cpf, byte[]foto)
+    {  System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        String sql = "UPDATE PESSOA SET NOME = ?, FOTO=? WHERE (ID=1 AND CPF= ?)";
         try {
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, nome);
-            pstm.setString(2, cpf);
+            pstm.setBytes(2, foto);
+            pstm.setString(3, cpf);
             pstm.execute();
             pstm.close();
             
@@ -121,41 +121,29 @@ public class FuncionarioDAO {
         
     }
     
-    public String carregarEspecialidade(String cpf) {
-        String especialidade = "";
-        String ans = "";
-        String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
-        try {
-            conn = new ConexaoBd().conectaBd();
-            pstm = conn.prepareStatement(sql);
 
-            pstm.setString(1, cpf);
-            rs = pstm.executeQuery();
-
-            while (rs.next()) {
-
-                especialidade = rs.getString("ESPECIALIDADE");
-            }
-
-            if (Character.compare(especialidade.charAt(0), '1') == 0) {
-                ans += "Abdomen\n";
-            }
-            if (Character.compare(especialidade.charAt(1), '1') == 0) {
-                ans += "Peito\n";
-            }
-            if (Character.compare(especialidade.charAt(2), '1') == 0) {
-                ans += "Braços\n";
-            }
-            if (Character.compare(especialidade.charAt(3), '1') == 0) {
-                ans += "Pernas\n";
-            }
-            if (Character.compare(especialidade.charAt(4), '1') == 0) {
-                ans += "Ombros";
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "nao deu pra pegar a especialidade do banco de dados" + e);
+    public String carregarEspecialidade2(String e){
+        String ans= new String(); 
+        if (e.charAt(0) =='1') {
+            System.out.println("abdomen do pai");
+            ans += "Abdomen\n";
         }
-
+        if (e.charAt(1)== '1') {
+            System.out.println("peito do pai");
+            ans += "Peito\n";
+        }
+        if (e.charAt(2) == '1') {
+            System.out.println("braço do pai");
+            ans += "Braços\n";
+        }
+        if (e.charAt(3) == '1') {
+            System.out.println("pernas do pai");
+            ans += "Pernas\n";
+        }
+        if (e.charAt(4) == '1') {
+            System.out.println("ombras do pai");
+            ans += "Ombros";
+        }
         return ans;
     }
     
@@ -171,7 +159,6 @@ public class FuncionarioDAO {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 especialidade=rs.getString("ESPECIALIDADE");
             }
         } catch (SQLException e) {
@@ -196,13 +183,30 @@ public class FuncionarioDAO {
         }
         return null;
     }
+    public void inserirCategoria(String cpf, String regiaoTreinada) {
+        String sql = "INSERT INTO CATEGORIA(CPF,ID,VALOR_SESSAO,REGIAO_TREINADA) VALUES(?,1,0,?);";
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.setString(2, regiaoTreinada);
+            pstm.execute();
+            pstm.close();
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "nao consegui cadastrar a categoria");
+        }
+
+    }
+    
     public void cadastrarFuncionarioFinal(Funcionario objFuncionario) {
         try {
-            cadastrarPessoa(objFuncionario.getCpf(), objFuncionario.getNome(), objFuncionario.getSexo());
+            cadastrarPessoa(objFuncionario.getCpf(), objFuncionario.getNome(), objFuncionario.getSexo(), objFuncionario.getImagem());
             cadastrarEndereco(objFuncionario);
             cadastroTelefone(objFuncionario);
+            cadastroCadastro(objFuncionario);
             cadastroFuncionario(objFuncionario);
+            inserirCategoria(objFuncionario.getCpf(), objFuncionario.getEspecialidade());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "PersonalDao");
         }
@@ -217,12 +221,7 @@ public class FuncionarioDAO {
             pstm.setInt(1, i);
             pstm.setString(2, cpf);
             pstm.execute();
-            pstm.close();/* se der problema em dizer que o funcionario ta tarbalhando ou nao, foi aqui que deu erro
-            if (i == 1) {
-                return true;
-            } else {
-                return false;
-            }*/
+            pstm.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "não consegui alterar a propriedade de trabalhar");
         }
@@ -317,14 +316,15 @@ public class FuncionarioDAO {
 
     }
 
-    public void cadastrarPessoa(String cpf, String nome, String sexo) {
+    public void cadastrarPessoa(String cpf, String nome, String sexo, byte[]foto) {
         try {
-            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO,SALDO_BANCARIO) VALUES(?,1,?,?,0)";
+            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO,FOTO,SALDO_BANCARIO) VALUES(?,1,?,?,?,0)";
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, cpf);
             pstm.setString(2, nome);
             pstm.setString(3, sexo);
+            pstm.setBytes(4, foto);
             pstm.execute();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não consegui cadastrar uma pessoa " + e);
@@ -374,12 +374,17 @@ public class FuncionarioDAO {
         return rs;
     }
 
-    public void atualizarCadastroFuncionario(String cpf, String nome, String log, String bairro, String cidade, String cep, String telefone, String email, String senha) {
-        atualizaNome(cpf,nome);
+    public void atualizarCadastroFuncionario(String cpf, byte[]foto, String nome, String log, String bairro, String cidade, String cep, String telefone, String email, String senha) {
+      atualizaNome(cpf,nome, foto);
+        System.out.println("1");
         atualizaEndereco(cpf,log,bairro,cidade,cep);
+        System.out.println("2");
         atualizaTelefone(cpf,telefone);
+        System.out.println("3");
         atualizaEmail(cpf,email);
+        System.out.println("4");
         atualizaSenha(cpf,senha);
+        System.out.println("5");
     }
     
     public void atualizaValorSessao(double valorNovo, String cpf)
@@ -391,12 +396,7 @@ public class FuncionarioDAO {
             pstm.setDouble(1, valorNovo);
             pstm.setString(2, cpf);
             pstm.execute();
-            pstm.close();/* se der problema em dizer que o funcionario ta tarbalhando ou nao, foi aqui que deu erro
-            if (i == 1) {
-                return true;
-            } else {
-                return false;
-            }*/
+            pstm.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "não consegui alterar o valor da sessao");
         }

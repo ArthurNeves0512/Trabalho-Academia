@@ -97,7 +97,7 @@
                                       <Component id="txtTelefone" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                  <Component id="pnl" min="-2" max="-2" attributes="0"/>
+                                  <Component id="iconBackground" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="92" max="32767" attributes="0"/>
@@ -163,7 +163,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="pnl" min="-2" max="-2" attributes="0"/>
+                          <Component id="iconBackground" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -238,7 +238,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="pnl">
+        <Container class="javax.swing.JPanel" name="iconBackground">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -253,17 +253,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlFoto" alignment="0" pref="291" max="32767" attributes="0"/>
+                  <Component id="image" alignment="0" pref="291" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlFoto" alignment="0" pref="209" max="32767" attributes="0"/>
+                  <Component id="image" alignment="0" pref="209" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="pnlFoto">
+            <Component class="javax.swing.JLabel" name="image">
             </Component>
           </SubComponents>
         </Container>

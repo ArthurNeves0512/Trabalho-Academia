@@ -140,82 +140,63 @@ public class AutenticacaoAcessoPagamentos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        senhaEscolhida = txtPassword.getText();
-        cpfEscolhido = txtCPF.getText();
-        
-        int idReferente;
-        String senhaCorreta;
-        
+        //AutenticacaoAcessoPagamentos.java -> btnLoginActionPerformed
+        ArrayList<String> infos_login = new ArrayList<String>();
+
         try {
-            idReferente = pessoaDAO.pesquisarPessoa(cpfEscolhido);
+            infos_login = pessoaDAO.pegaInfosLogin(txtCPF.getText());
         } catch (Exception e) {
-            idReferente=-1;
+            JOptionPane.showMessageDialog(null, "deu ruim no SQL da view");
         }
-        
-        if(idReferente==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Incorreto.");
-            txtCPF.setText("");
-            txtPassword.setText("");
-        }else
-        {
-            if(idReferente==1)
-            {
-                FuncionarioDAO personal = new FuncionarioDAO();
-                
-                try {
-                    senhaCorreta = personal.pegaSenha(cpfEscolhido);
-                    
-                    if(senhaCorreta.equals(senhaEscolhida))
-                    {
-                        this.setVisible(false);
-                        switch(MetodoDePagamento.botaoSelecionado){
-                            case -1:
-                                new PagamentoCartaoCreditoFuncionario().setVisible(true);
-                                break;
-                            case 0:
-                                new PagamentoCartaoDebitoFuncionario().setVisible(true);
-                                break;
-                            default:
-                                new PagamentoPIXFuncionario().setVisible(true);
-                                break;
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
-                        txtPassword.setText("");
+
+        switch (infos_login.get(0)) {
+            case "-1":
+                JOptionPane.showMessageDialog(null, "Incorreto.");
+                txtCPF.setText("");
+                txtPassword.setText("");
+                break;
+            case "0":
+                //verifica a senha
+                //muda a tela
+                if (infos_login.get(2).equals(txtPassword.getText())) {
+                    this.setVisible(false);
+                    switch (MetodoDePagamento.botaoSelecionado) {
+                        case -1:
+                            new PagamentoCartaoCreditoCliente().setVisible(true);
+                            break;
+                        case 0:
+                            new PagamentoCartaoDebitoCliente().setVisible(true);
+                            break;
+                        default:
+                            new PagamentoPIXCliente().setVisible(true);
+                            break;
                     }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                    txtPassword.setText("");
                 }
-            }else{
-                try {
-                    ClienteDao cliente = new ClienteDao();
-                    
-                    senhaCorreta = cliente.pegaSenha(cpfEscolhido);
-                    
-                    if(senhaCorreta.equals(senhaEscolhida))
-                    {
-                        this.setVisible(false);
-                        switch(MetodoDePagamento.botaoSelecionado){
-                            case -1:
-                                new PagamentoCartaoCreditoCliente().setVisible(true);
-                                break;
-                            case 0:
-                                new PagamentoCartaoDebitoCliente().setVisible(true);
-                                break;
-                            default:
-                                new PagamentoPIXCliente().setVisible(true);
-                                break;
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Senha incorreta.");
-                        txtPassword.setText("");
+
+                break;
+            case "1":
+                if (infos_login.get(2).equals(txtPassword.getText())) {
+                    this.setVisible(false);
+                    switch (MetodoDePagamento.botaoSelecionado) {
+                        case -1:
+                            new PagamentoCartaoCreditoFuncionario().setVisible(true);
+                            break;
+                        case 0:
+                            new PagamentoCartaoDebitoFuncionario().setVisible(true);
+                            break;
+                        default:
+                            new PagamentoPIXFuncionario().setVisible(true);
+                            break;
                     }
-                }catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null, "deu errado na hora de pegar a senha."+e);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                    txtPassword.setText("");
                 }
-            }
+                break;
+
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

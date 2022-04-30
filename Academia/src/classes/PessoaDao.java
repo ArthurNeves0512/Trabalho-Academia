@@ -29,6 +29,36 @@ public class PessoaDao {
     public void cadastrarPessoa(Pessoa objPessoa){}
     public void excluirPessoa (Pessoa objPessoa){}*/
     
+    public ArrayList<String> pegaInfosLogin(String cpf) {
+        ArrayList<String> infos_login = new ArrayList<String>();
+
+        String sql = "SELECT * FROM INFOS_LOGIN";
+
+        try {
+            conn = new ConexaoBd().conectaBd();
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getString("CPF").equals(cpf)) {
+                    infos_login.add(Integer.toString(rs.getInt(1)));
+                    infos_login.add(rs.getString(2));
+                    infos_login.add(rs.getString(3));
+
+                    return infos_login;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        infos_login.add("-1");
+        infos_login.add("-1");
+        infos_login.add("-1");
+
+        return infos_login;
+    }
+    
+    
     public int pesquisarPessoa(String s) throws SQLException{
         String sql = "SELECT ID FROM PESSOA WHERE CPF=?;";
         conn  = new ConexaoBd().conectaBd();

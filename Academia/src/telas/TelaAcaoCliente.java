@@ -8,23 +8,15 @@ import classes.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.util.ArrayList;
 
-
-/**
- *
- * @author MASTER
- */
 public class TelaAcaoCliente extends javax.swing.JFrame {
     public static FuncionarioDAO fd = new FuncionarioDAO();
-        
-    /**
-     * Creates new form TelaAcaoCliente
-     */
+
     public Connection conn ;
     public PreparedStatement pstm ;
     static int indicePersonalEscolhido;
     static String cpfFuncionarioEscolhido;
+    
     ResultSet rs;
     
     
@@ -177,9 +169,6 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSelecionarServicoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -221,16 +210,23 @@ public class TelaAcaoCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 public ResultSet carregarDadosBd(){
-    String sql= "SELECT CATEGORIA.VALOR_SESSAO, PESSOA.NOME, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, TELEFONES.NUMERO, FUNCIONARIO.ESPECIALIDADE\n"
-            + "FROM PESSOA, CATEGORIA, ENDERECO, TELEFONES, FUNCIONARIO WHERE FUNCIONARIO.TRABALHANDO = 1 AND PESSOA.CPF = ENDERECO.CPF AND PESSOA.CPF = TELEFONES.CPF AND PESSOA.CPF = FUNCIONARIO.CPF; ";
+String sql= "CALL CARREGA_FUNCIONARIOS_ONLINE('muuuu')";
     try {
         conn= new ConexaoBd().conectaBd();
+        CallableStatement call= conn.prepareCall(sql);
         pstm= conn.prepareStatement(sql);
         rs= pstm.executeQuery();
         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Preço", "Nome", "Endereço", "Telefone", "Especialidades"}, 0);
         while(rs.next()){
+            System.out.println(rs.getString(1));
+            System.out.println(rs.getString(2));
+            System.out.println(rs.getString(3));
+            System.out.println(rs.getString(4));
+            System.out.println(rs.getString(5));
+            System.out.println(rs.getString(6));
+            System.out.println(rs.getString(7));
             
-            Object linha [] = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3) + rs.getString(4)+rs.getString(5), rs.getString(6), fd.carregarEspecialidade(fd.getCpfPeloNome(rs.getString(2)))};// O 7 É O DO ESPECIALIDADE
+            Object linha [] = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3) + rs.getString(4)+rs.getString(5), rs.getString(6),fd.carregarEspecialidade2(rs.getString(7))};// O 7 É O DO ESPECIALIDADE
             modelo.addRow(linha);
         }
         TabelaPersonalOnline.setModel(modelo);

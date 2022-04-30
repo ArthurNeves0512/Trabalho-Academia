@@ -14,20 +14,23 @@ import classes.ClienteDao;
 import classes.Cliente;
 import java.sql.*;
 import classes.*;
-import java.math.RoundingMode;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author arthur
  */
 public class ConfigCliente extends javax.swing.JFrame {
-    String getImagemSelecionada;
-    int flag;
-    int mu;
     ResultSet rs;
     Connection conn;
     PreparedStatement pstm;
     ClienteDao cd = new ClienteDao();
+    private File imagem;
     public Cliente cliente = new Cliente();
     /**
      * Creates new form ConfigCliente
@@ -36,7 +39,8 @@ public class ConfigCliente extends javax.swing.JFrame {
         initComponents();
         txtImc.setEditable(false);
         txtCpf.setEditable(false); 
-        buscarDados(TelaInicio.cpfEscolhido);
+       
+        buscarDados(TelaInicio.infos_login.get(1));
         
     }
 
@@ -50,8 +54,8 @@ public class ConfigCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        pnl = new javax.swing.JPanel();
-        pnlFoto = new javax.swing.JLabel();
+        iconBackground = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -86,18 +90,18 @@ public class ConfigCliente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 130, 46));
 
-        pnl.setBackground(new java.awt.Color(255, 255, 255));
-        pnl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        iconBackground.setBackground(new java.awt.Color(255, 255, 255));
+        iconBackground.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
-        pnl.setLayout(pnlLayout);
-        pnlLayout.setHorizontalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+        javax.swing.GroupLayout iconBackgroundLayout = new javax.swing.GroupLayout(iconBackground);
+        iconBackground.setLayout(iconBackgroundLayout);
+        iconBackgroundLayout.setHorizontalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
-        pnlLayout.setVerticalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+        iconBackgroundLayout.setVerticalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -240,7 +244,7 @@ public class ConfigCliente extends javax.swing.JFrame {
                                     .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(70, 70, 70)
-                                .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(92, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -286,7 +290,7 @@ public class ConfigCliente extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -362,7 +366,7 @@ public class ConfigCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 public void buscarDados(String cpf){
-    String sql = "SELECT PESSOA.NOME, PESSOA.CPF, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.CEP, TELEFONES.NUMERO, CADASTRO.EMAIL , CADASTRO.SENHA, CLIENTE.ALTURA, CLIENTE.PESO FROM PESSOA, CADASTRO, ENDERECO, TELEFONES, CLIENTE  WHERE PESSOA.CPF = ? AND TELEFONES.CPF= ? AND  CLIENTE.CPF= ? AND CADASTRO.CPF= ? AND ENDERECO.CPF = ? ";
+    String sql = "SELECT PESSOA.NOME, PESSOA.CPF, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.CEP, TELEFONES.NUMERO, CADASTRO.EMAIL , CADASTRO.SENHA, CLIENTE.ALTURA, CLIENTE.PESO, PESSOA.FOTO FROM PESSOA, CADASTRO, ENDERECO, TELEFONES, CLIENTE  WHERE PESSOA.CPF = ? AND TELEFONES.CPF= ? AND  CLIENTE.CPF= ? AND CADASTRO.CPF= ? AND ENDERECO.CPF = ? ";
     
     try {
         conn = new ConexaoBd().conectaBd();
@@ -374,6 +378,7 @@ public void buscarDados(String cpf){
         pstm.setString(5, cpf);
         rs= pstm.executeQuery();
         while(rs.next()){
+       
             txtNome.setText(rs.getString(1));
             txtCpf.setText(rs.getString(2));
             txtLogradouro.setText(rs.getString(3));
@@ -386,7 +391,10 @@ public void buscarDados(String cpf){
             txtAltura.setText(String.valueOf(rs.getFloat(10)));
             txtPeso.setText(String.valueOf(rs.getFloat(11)));
             double calculo= cliente.calculoImc(rs.getFloat(11), rs.getFloat(10));
-            System.out.println(calculo);
+            
+            ImageIcon icon = new ImageIcon(rs.getBytes(12));
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
             txtImc.setText(String.valueOf(roundAvoid(calculo, 1)));
         }
         
@@ -404,23 +412,29 @@ public static double roundAvoid(double v, int p)    {
     
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
         // TODO add your handling code here:JFileChooser pegandoImagem = new JFileChooser();
-        
+        imagem = selecionarImagem();
+        abrirImagem(imagem);
     }//GEN-LAST:event_btnUploadActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        updatePessoa(txtNome.getText(), txtCpf.getText());
+        cliente.setImagem(getImagem());
+        
+        updatePessoa(txtNome.getText(), txtCpf.getText(), cliente.getImagem());
+
         updateEndereco(txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtCpf.getText());
         updateTelefone(txtTelefone.getText(), txtCpf.getText());
         updateCadastro(txtEmail.getText(), txtSenha.getText(), txtCpf.getText());
         updateCliente(txtPeso.getText(), txtAltura.getText(), txtCpf.getText());
     }//GEN-LAST:event_btnSalvarActionPerformed
-    public void updatePessoa(String nome, String cpf){
-        String sql = "UPDATE PESSOA SET NOME = ? WHERE CPF =?";
+    public void updatePessoa(String nome, String cpf, byte[]foto ){
+        String sql = "UPDATE PESSOA SET NOME = ? ,FOTO =? WHERE CPF =?";
         try {
            conn = new ConexaoBd().conectaBd();
            pstm = conn.prepareStatement(sql);
            pstm.setString(1, txtNome.getText());
-           pstm.setString(2, cpf);
+           pstm.setString(3, cpf);
+           pstm.setBytes(2, foto);
+           
            pstm.execute();
            JOptionPane.showMessageDialog(null, "Dados Atualizados");
         } catch (Exception e) {
@@ -543,6 +557,8 @@ public static double roundAvoid(double v, int p)    {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JPanel iconBackground;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -555,8 +571,6 @@ public static double roundAvoid(double v, int p)    {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel pnl;
-    private javax.swing.JLabel pnlFoto;
     private javax.swing.JLabel txtAlterarSenha;
     private javax.swing.JTextField txtAltura;
     private javax.swing.JTextField txtBairro;
@@ -571,4 +585,63 @@ public static double roundAvoid(double v, int p)    {
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void abrirImagem(Object source) {
+        if (source instanceof File) {
+            ImageIcon icon = new ImageIcon(imagem.getAbsolutePath());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        } else if (source instanceof byte[]) {
+            ImageIcon icon = new ImageIcon(cliente.getImagem());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        }
+    }
+    public File selecionarImagem() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGEM EM JPEG E PNG", "jpeg", "png");
+        fileChooser.addChoosableFileFilter(filtro);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        fileChooser.showOpenDialog(this);
+        return fileChooser.getSelectedFile();
+
+    }
+
+    private byte[] getImagem() {
+        boolean isPng = false;
+        if (imagem != null) {
+            isPng = imagem.getName().endsWith("png");
+            try {
+                BufferedImage image = ImageIO.read(imagem);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                int type = BufferedImage.TYPE_INT_RGB;
+                if (isPng) {
+                    type = BufferedImage.BITMASK;
+                }
+                BufferedImage novaImagem = new BufferedImage(iconBackground.getWidth(), iconBackground.getHeight(), type);
+                Graphics2D g = novaImagem.createGraphics();
+                g.setComposite(AlphaComposite.Src);
+                g.drawImage(image, 0, 0, iconBackground.getWidth(), iconBackground.getHeight(), null);
+
+                if (isPng) {
+                    ImageIO.write(novaImagem, "png", out);
+                } else {
+                    ImageIO.write(novaImagem, "jpeg", out);
+                }
+                out.flush();
+                byte[] byteArray = out.toByteArray();
+                out.close();
+                return byteArray;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
+
+
+
 }

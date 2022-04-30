@@ -5,8 +5,13 @@
 package telas;
 
 import classes.*;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,16 +20,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.sql.*;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author arthur
  */
 public class ConfigPersonal extends javax.swing.JFrame {
-    String getImagemSelecionada;
     public Connection conn;
     public PreparedStatement pstm;
     public ResultSet rs;
+    private File imagem;
+    Funcionario fun= new Funcionario();
+//    byte[] byteArray;
+    
     FuncionarioDAO funcionario = new FuncionarioDAO();
     
     /**
@@ -33,32 +42,34 @@ public class ConfigPersonal extends javax.swing.JFrame {
     public ConfigPersonal() {
         initComponents();
         
-        buscarDados(TelaInicio.cpfEscolhido);
-        
+        System.out.println(TelaInicio.infos_login.get(1) +"meu deus do ceu linha 44");
+        buscarDados(TelaInicio.infos_login.get(1));
+        System.out.println("meu deus do ceu linha 46");
         txtCpf.setEditable(false);
+        System.out.println("txt cpf "+ txtCpf.getText());
         
         String especialidades = funcionario.carregarEspecialidadeNaConfiguracao(txtCpf.getText());
-
-        if(Character.compare(especialidades.charAt(0),'1')==0)
-        {
-            checkBoxAbdomen.setSelected(true);
-        }
-        if(Character.compare(especialidades.charAt(1),'1')==0)
-        {
-            checkBoxPeito.setSelected(true);
-        }
-        if(Character.compare(especialidades.charAt(2),'1')==0)
-        {
-            checkBoxBracos.setSelected(true);
-        }
-        if(Character.compare(especialidades.charAt(3),'1')==0)
-        {
-            checkBoxPernas.setSelected(true);
-        }
-        if(Character.compare(especialidades.charAt(4),'1')==0)
-        {
-            checkBoxOmbros.setSelected(true);
-        }
+        System.out.println("meu deus do ceu linha 51 "+ especialidades);
+//        if(Character.compare(especialidades.charAt(0),'1')==0)
+//        {
+//            checkBoxAbdomen.setSelected(true);
+//        }
+//        if(Character.compare(especialidades.charAt(1),'1')==0)
+//        {
+//            checkBoxPeito.setSelected(true);
+//        }
+//        if(Character.compare(especialidades.charAt(2),'1')==0)
+//        {
+//            checkBoxBracos.setSelected(true);
+//        }
+//        if(Character.compare(especialidades.charAt(3),'1')==0)
+//        {
+//            checkBoxPernas.setSelected(true);
+//        }
+//        if(Character.compare(especialidades.charAt(4),'1')==0)
+//        {
+//            checkBoxOmbros.setSelected(true);
+//        }
         /*      
         ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
         Image imFit = imcon.getImage();                
@@ -77,8 +88,8 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        pnlFoto = new javax.swing.JLabel();
+        iconBackground = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -92,7 +103,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         btnUpload = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         txtAlterarSenha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JTextField();
@@ -107,6 +117,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
         checkBoxBracos = new javax.swing.JCheckBox();
         checkBoxPernas = new javax.swing.JCheckBox();
         checkBoxOmbros = new javax.swing.JCheckBox();
+        btnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuração Personal");
@@ -115,19 +126,19 @@ public class ConfigPersonal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 58, 122));
         jPanel3.setPreferredSize(new java.awt.Dimension(900, 700));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        iconBackground.setBackground(new java.awt.Color(255, 255, 255));
 
-        pnlFoto.setBackground(new java.awt.Color(102, 255, 204));
+        image.setBackground(new java.awt.Color(102, 255, 204));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+        javax.swing.GroupLayout iconBackgroundLayout = new javax.swing.GroupLayout(iconBackground);
+        iconBackground.setLayout(iconBackgroundLayout);
+        iconBackgroundLayout.setHorizontalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+        iconBackgroundLayout.setVerticalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
         );
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -165,14 +176,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUploadActionPerformed(evt);
-            }
-        });
-
-        btnSalvar.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
-        btnSalvar.setText("Salvar alterações");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -233,6 +236,13 @@ public class ConfigPersonal extends javax.swing.JFrame {
         checkBoxOmbros.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
         checkBoxOmbros.setForeground(new java.awt.Color(255, 255, 255));
         checkBoxOmbros.setText("Ombros");
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -295,10 +305,11 @@ public class ConfigPersonal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(371, 371, 371)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
                                 .addComponent(btnSalvar)
-                                .addGap(18, 18, 18)
+                                .addGap(44, 44, 44)
                                 .addComponent(btnExcluir)))
                         .addGap(30, 30, 30))))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -347,7 +358,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnUpload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -376,9 +387,9 @@ public class ConfigPersonal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(checkBoxOmbros)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,51 +409,9 @@ public class ConfigPersonal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       
-        funcionario.atualizarCadastroFuncionario(TelaInicio.cpfEscolhido, txtNome.getText(), txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtTelefone.getText(), txtEmail.getText(),txtSenha.getText());
-        
-        String ans="";
-
-        if(checkBoxAbdomen.isSelected()==true)
-        {
-            ans+="Abdomen\n";
-        }
-        if(checkBoxPeito.isSelected()==true)
-        {
-            ans+="Peito\n";
-        }
-        if(checkBoxBracos.isSelected()==true)
-        {
-            ans+="Braços\n";
-        }
-        if(checkBoxPernas.isSelected()==true)
-        {
-            ans+="Pernas\n";
-        }
-        if(checkBoxOmbros.isSelected()==true)
-        {
-            ans+="Ombros";
-        }
-                
-        funcionario.atualizaEspecialidade(ans, TelaInicio.cpfEscolhido);
-        /*    
-        if(TelaInicio.flag2==1){
-            TelaInicio.cadastrosPersonal.get(i).setFoto(getImagemSelecionada);
-            ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
-            Image imFit = imcon.getImage();
-            Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-            pnlFoto.setIcon(new ImageIcon(imgFit));
-            TelaInicio.flag2 =0;
-        }*/
-                
-        JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
-        
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
-        funcionario.excluirFuncionario(TelaInicio.cpfEscolhido);
+        funcionario.excluirFuncionario(TelaInicio.infos_login.get(1));
         
         JOptionPane.showMessageDialog(null, "Sua conta foi deletada.","Concluído", JOptionPane.INFORMATION_MESSAGE);
         
@@ -451,33 +420,8 @@ public class ConfigPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
-        /*
-        
-        JFileChooser pegandoImagem = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("4 extenções suportadas", "jpg", "png", "jpeg", "gif");
-        
-        pegandoImagem.setFileFilter(filtro);
-        
-        int selecionado = pegandoImagem.showOpenDialog(this);
-        
-        if(selecionado == JFileChooser.APPROVE_OPTION){
-            File arquivo = pegandoImagem.getSelectedFile();
-            
-            getImagemSelecionada = arquivo.getAbsolutePath();
-            
-            JOptionPane.showMessageDialog(null, getImagemSelecionada);
-            
-            ImageIcon imIco= new ImageIcon(getImagemSelecionada);
-            Image imFit = imIco.getImage();
-            Image imgFit = imFit.getScaledInstance(pnlFoto.getWidth(), pnlFoto.getHeight(), Image.SCALE_SMOOTH);
-            
-            pnlFoto.setIcon(new ImageIcon(imgFit));
-            
-            System.out.println(getImagemSelecionada +"veremos aqui");
-            TelaInicio.flag2 =1;
-            
-        }*/
-        
+        imagem = selecionarImagem();
+        abrirImagem(imagem);
         
     }//GEN-LAST:event_btnUploadActionPerformed
 
@@ -486,6 +430,43 @@ public class ConfigPersonal extends javax.swing.JFrame {
         this.setVisible(false);
         new TelaAcaoPersonalMenu().setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    
+        System.out.println("estou aqui antes");
+        //System.out.println(getImagem());
+       fun.setImagem(getImagem());
+       getImagem();
+        
+       //fun.setImagem();
+        System.out.println("misericordiaaaaaaaaaaaaaaaaaaaa 438");
+
+        
+
+        funcionario.atualizarCadastroFuncionario(TelaInicio.infos_login.get(1), fun.getImagem() , txtNome.getText(), txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtTelefone.getText(), txtEmail.getText(), txtSenha.getText());
+        System.out.println("rodei duda");
+        String ans = "";
+
+        if (checkBoxAbdomen.isSelected() == true) {
+            ans += "1";
+        }
+        if (checkBoxPeito.isSelected() == true) {
+            ans += "1";
+        }
+        if (checkBoxBracos.isSelected() == true) {
+            ans += "1";
+        }
+        if (checkBoxPernas.isSelected() == true) {
+            ans += "1";
+        }
+        if (checkBoxOmbros.isSelected() == true) {
+            ans += "";
+        }
+
+        funcionario.atualizaEspecialidade(ans, TelaInicio.infos_login.get(1));
+        JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!", "Dados Salvos", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,6 +513,8 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxOmbros;
     private javax.swing.JCheckBox checkBoxPeito;
     private javax.swing.JCheckBox checkBoxPernas;
+    private javax.swing.JPanel iconBackground;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -541,9 +524,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel pnlFoto;
     private javax.swing.JLabel txtAlterarSenha;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCep;
@@ -557,7 +538,7 @@ public class ConfigPersonal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void buscarDados(String cpf) {
-        String sql = "SELECT PESSOA.NOME, PESSOA.CPF, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.CEP, TELEFONES.NUMERO, CADASTRO.EMAIL , CADASTRO.SENHA FROM PESSOA, CADASTRO, ENDERECO, TELEFONES, FUNCIONARIO WHERE (PESSOA.ID = 1 AND PESSOA.CPF = ?) AND (TELEFONES.ID=1 AND TELEFONES.CPF= ?) AND (FUNCIONARIO.ID=1 AND FUNCIONARIO.CPF= ?) AND (CADASTRO.ID=1 AND CADASTRO.CPF= ?) AND (ENDERECO.ID=1 AND ENDERECO.CPF = ?)";
+        String sql = "SELECT PESSOA.NOME, PESSOA.CPF, ENDERECO.LOGRADOURO, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.CEP, TELEFONES.NUMERO, CADASTRO.EMAIL , CADASTRO.SENHA, PESSOA.FOTO FROM PESSOA, CADASTRO, ENDERECO, TELEFONES, FUNCIONARIO WHERE (PESSOA.ID = 1 AND PESSOA.CPF = ?) AND (TELEFONES.ID=1 AND TELEFONES.CPF= ?) AND (FUNCIONARIO.ID=1 AND FUNCIONARIO.CPF= ?) AND (CADASTRO.ID=1 AND CADASTRO.CPF= ?) AND (ENDERECO.ID=1 AND ENDERECO.CPF = ?)";
 
         try {
             conn = new ConexaoBd().conectaBd();
@@ -580,10 +561,70 @@ public class ConfigPersonal extends javax.swing.JFrame {
                 txtTelefone.setText(rs.getString(7));
                 txtEmail.setText(rs.getString(8));
                 txtSenha.setText(rs.getString(9));
+                ImageIcon icon = new ImageIcon(rs.getBytes(10));
+                icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+                image.setIcon(icon);
             }
         
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "não consegui carregar os dados do funcionario para tela configuração " + e);
         }    
+   }
+    
+    private void abrirImagem(Object source) {
+        if (source instanceof File) {
+            ImageIcon icon = new ImageIcon(imagem.getAbsolutePath());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        } else if (source instanceof byte[]) {
+            ImageIcon icon = new ImageIcon(fun.getImagem());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        }
     }
+
+    public File selecionarImagem() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGEM EM JPEG E PNG", "jpeg", "png");
+        fileChooser.addChoosableFileFilter(filtro);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        fileChooser.showOpenDialog(this);
+        return fileChooser.getSelectedFile();
+
+    }
+
+    private byte[] getImagem() {
+        boolean isPng = false;
+        if (imagem != null) {
+            isPng = imagem.getName().endsWith("png");
+            try {
+                BufferedImage image = ImageIO.read(imagem);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                int type = BufferedImage.TYPE_INT_RGB;
+                if (isPng) {
+                    type = BufferedImage.BITMASK;
+                }
+                BufferedImage novaImagem = new BufferedImage(iconBackground.getWidth(), iconBackground.getHeight(), type);
+                Graphics2D g = novaImagem.createGraphics();
+                g.setComposite(AlphaComposite.Src);
+                g.drawImage(image, 0, 0, iconBackground.getWidth(), iconBackground.getHeight(), null);
+
+                if (isPng) {
+                    ImageIO.write(novaImagem, "png", out);
+                } else {
+                    ImageIO.write(novaImagem, "jpeg", out);
+                }
+                out.flush();
+                byte[] byteArray = out.toByteArray();
+                out.close();
+                return byteArray;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
 }

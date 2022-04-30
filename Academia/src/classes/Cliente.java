@@ -4,25 +4,15 @@
  */
 package classes;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.*;
-import telas.TelaInicio;
-import java.util.ArrayList;
 
-/*
- * @author arthur
-maioria dos atributos herdados pela classe mae pessoa e depois tem esses atributos
-peso e altura para poder calcular o imc
-Cliente que irá contratar 
-o método ajuda é para mostrar pro cliente quando ele aperta no botao ajuda na tela de menu
- */
 public class Cliente extends Pessoa {
     private float peso;
     private float altura;
     Connection conn;
+    private byte[] imagem;
     private ClienteDao clienteDAO = new ClienteDao();
     public Cliente() {
     }
@@ -32,8 +22,21 @@ public class Cliente extends Pessoa {
             
         return clienteDAO.pesquisarCliente();
     }
-    
-    
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public Cliente(float peso, float altura, Connection conn, byte[] imagem) {
+        this.peso = peso;
+        this.altura = altura;
+        this.conn = conn;
+        this.imagem = imagem;
+    }
     
     
     

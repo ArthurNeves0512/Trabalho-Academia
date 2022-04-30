@@ -12,6 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import static telas.TelaInicio.cadastrosPersonal;
 
 /**
@@ -22,6 +28,8 @@ public class RegistroPersonal extends javax.swing.JFrame {
 
     String cBAbdomen, cBPeito, cBBracos, cBPernas, cBOmbros;
     String getImagemSelecionada;
+    private File imagem;
+    private Funcionario fun;
 
     /**
      * Creates new form RegistroPersonal
@@ -81,8 +89,8 @@ public class RegistroPersonal extends javax.swing.JFrame {
         btnUpload = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        icon = new javax.swing.JLabel();
+        iconBackground = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
         txtCidade = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -177,20 +185,20 @@ public class RegistroPersonal extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        iconBackground.setBackground(new java.awt.Color(255, 255, 255));
+        iconBackground.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        icon.setBackground(new java.awt.Color(255, 51, 51));
+        image.setBackground(new java.awt.Color(255, 51, 51));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+        javax.swing.GroupLayout iconBackgroundLayout = new javax.swing.GroupLayout(iconBackground);
+        iconBackground.setLayout(iconBackgroundLayout);
+        iconBackgroundLayout.setHorizontalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+        iconBackgroundLayout.setVerticalGroup(
+            iconBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
         );
 
         txtBairro.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +232,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
                 checkBoxAbdomenActionPerformed(evt);
             }
         });
+        checkBoxAbdomen.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkBoxAbdomenPropertyChange(evt);
+            }
+        });
 
         checkBoxPeito.setBackground(new java.awt.Color(0, 58, 122));
         checkBoxPeito.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
@@ -232,6 +245,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
         checkBoxPeito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkBoxPeitoActionPerformed(evt);
+            }
+        });
+        checkBoxPeito.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkBoxPeitoPropertyChange(evt);
             }
         });
 
@@ -244,6 +262,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
                 checkBoxBracosActionPerformed(evt);
             }
         });
+        checkBoxBracos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkBoxBracosPropertyChange(evt);
+            }
+        });
 
         checkBoxPernas.setBackground(new java.awt.Color(0, 58, 122));
         checkBoxPernas.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
@@ -254,6 +277,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
                 checkBoxPernasActionPerformed(evt);
             }
         });
+        checkBoxPernas.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkBoxPernasPropertyChange(evt);
+            }
+        });
 
         checkBoxOmbros.setBackground(new java.awt.Color(0, 58, 122));
         checkBoxOmbros.setFont(new java.awt.Font("Century", 0, 13)); // NOI18N
@@ -262,6 +290,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
         checkBoxOmbros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkBoxOmbrosActionPerformed(evt);
+            }
+        });
+        checkBoxOmbros.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkBoxOmbrosPropertyChange(evt);
             }
         });
 
@@ -327,7 +360,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkBoxAbdomen)
@@ -339,7 +372,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(checkBoxBracos))
                             .addComponent(checkBoxPeito))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +390,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(iconBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnNovo)
@@ -419,7 +452,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(checkBoxBracos)
                             .addComponent(jLabel13))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnvoltar)
                 .addGap(21, 21, 21))
         );
@@ -428,11 +461,15 @@ public class RegistroPersonal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -440,19 +477,8 @@ public class RegistroPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
-        JFileChooser pegandoImagem = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("4 extenções suportadas", "jpg", "png", "jpeg", "gif");
-        pegandoImagem.setFileFilter(filtro);
-        int selecionado = pegandoImagem.showOpenDialog(this);
-        if (selecionado == JFileChooser.APPROVE_OPTION) {
-            File arquivo = pegandoImagem.getSelectedFile();
-            getImagemSelecionada = arquivo.getAbsolutePath();
-            JOptionPane.showMessageDialog(null, getImagemSelecionada);
-            ImageIcon imIco = new ImageIcon(getImagemSelecionada);
-            Image imFit = imIco.getImage();
-            Image imgFit = imFit.getScaledInstance(icon.getWidth(), icon.getHeight(), Image.SCALE_SMOOTH);
-            icon.setIcon(new ImageIcon(imgFit));
-        }
+        imagem = selecionarImagem();
+        abrirImagem(imagem);
     }//GEN-LAST:event_btnUploadActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -531,11 +557,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-
-            ////INSERINDO NO BANCO DE DADOS SÓ UM PERSONAL COM SENHA E CPF//////
+                
+            
             Funcionario funcionario = new Funcionario();
             FuncionarioDAO personalDao = new FuncionarioDAO();
-            ////////////////////////////////////
+            
 
             funcionario.setNome(txtNome.getText());
             funcionario.setCpf(txtCpf.getText());
@@ -544,7 +570,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
             funcionario.setSexo(String.valueOf(cmbSexo.getSelectedItem()));
             funcionario.setEmail(txtEmail.getText());
             funcionario.setSenha(txtSenha.getText());
+            
+            
             funcionario.setEspecialidade(cBAbdomen + cBPeito + cBBracos + cBPernas + cBOmbros);
+            
+            funcionario.setImagem(getImagem());
 
             personalDao.cadastrarFuncionarioFinal(funcionario);
 
@@ -563,7 +593,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
             checkBoxBracos.setSelected(false);
             checkBoxPernas.setSelected(false);
             checkBoxOmbros.setSelected(false);
-            icon.setIcon(null);
+            image.setIcon(null);
 
         }
 
@@ -590,7 +620,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
         btnSalvar.setEnabled(true);
         btnNovo.setEnabled(false);
         btnUpload.setEnabled(true);
-        icon.setIcon(null);
+        image.setIcon(null);
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
@@ -606,6 +636,30 @@ public class RegistroPersonal extends javax.swing.JFrame {
     private void checkBoxAbdomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAbdomenActionPerformed
         // TODO add your handling code here:
 
+    }//GEN-LAST:event_checkBoxAbdomenActionPerformed
+
+    private void checkBoxPeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPeitoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_checkBoxPeitoActionPerformed
+
+    private void checkBoxBracosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxBracosActionPerformed
+        // TODO add your handling code here:
+
+      
+    }//GEN-LAST:event_checkBoxBracosActionPerformed
+
+    private void checkBoxPernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPernasActionPerformed
+
+    }//GEN-LAST:event_checkBoxPernasActionPerformed
+
+    private void checkBoxOmbrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxOmbrosActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_checkBoxOmbrosActionPerformed
+
+    private void checkBoxAbdomenPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkBoxAbdomenPropertyChange
+        
         int cBAbdomenInt;
 
         if (checkBoxAbdomen.isSelected()) {
@@ -615,11 +669,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
         }
 
         cBAbdomen = Integer.toString(cBAbdomenInt);
-    }//GEN-LAST:event_checkBoxAbdomenActionPerformed
+    }//GEN-LAST:event_checkBoxAbdomenPropertyChange
 
-    private void checkBoxPeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPeitoActionPerformed
+    private void checkBoxPeitoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkBoxPeitoPropertyChange
         // TODO add your handling code here:
-
+        
         int cBPeitoInt;
 
         if (checkBoxPeito.isSelected()) {
@@ -629,25 +683,12 @@ public class RegistroPersonal extends javax.swing.JFrame {
         }
 
         cBPeito = Integer.toString(cBPeitoInt);
-    }//GEN-LAST:event_checkBoxPeitoActionPerformed
+    }//GEN-LAST:event_checkBoxPeitoPropertyChange
 
-    private void checkBoxBracosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxBracosActionPerformed
+    private void checkBoxPernasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkBoxPernasPropertyChange
         // TODO add your handling code here:
-
-        int cBBracosInt;
-
-        if (checkBoxBracos.isSelected()) {
-            cBBracosInt = 1;
-        } else {
-            cBBracosInt = 0;
-        }
-
-        cBBracos = Integer.toString(cBBracosInt);
-    }//GEN-LAST:event_checkBoxBracosActionPerformed
-
-    private void checkBoxPernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPernasActionPerformed
+        
         // TODO add your handling code here:
-
         int cBPernasInt;
 
         if (checkBoxPernas.isSelected()) {
@@ -657,11 +698,11 @@ public class RegistroPersonal extends javax.swing.JFrame {
         }
 
         cBPernas = Integer.toString(cBPernasInt);
-    }//GEN-LAST:event_checkBoxPernasActionPerformed
+    }//GEN-LAST:event_checkBoxPernasPropertyChange
 
-    private void checkBoxOmbrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxOmbrosActionPerformed
+    private void checkBoxOmbrosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkBoxOmbrosPropertyChange
         // TODO add your handling code here:
-
+        
         int cBOmbrosInt;
 
         if (checkBoxOmbros.isSelected()) {
@@ -671,7 +712,20 @@ public class RegistroPersonal extends javax.swing.JFrame {
         }
 
         cBOmbros = Integer.toString(cBOmbrosInt);
-    }//GEN-LAST:event_checkBoxOmbrosActionPerformed
+    }//GEN-LAST:event_checkBoxOmbrosPropertyChange
+
+    private void checkBoxBracosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkBoxBracosPropertyChange
+        // TODO add your handling code here:
+        int cBBracosInt;
+
+        if (checkBoxBracos.isSelected()) {
+            cBBracosInt = 1;
+        } else {
+            cBBracosInt = 0;
+        }
+
+        cBBracos = Integer.toString(cBBracosInt);
+    }//GEN-LAST:event_checkBoxBracosPropertyChange
 
     /**
      * @param args the command line arguments
@@ -720,7 +774,8 @@ public class RegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxPeito;
     private javax.swing.JCheckBox checkBoxPernas;
     private javax.swing.JComboBox<String> cmbSexo;
-    private javax.swing.JLabel icon;
+    private javax.swing.JPanel iconBackground;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -734,7 +789,6 @@ public class RegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCidade;
@@ -745,4 +799,62 @@ public class RegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    public File selecionarImagem() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGEM EM JPEG E PNG", "jpeg", "png");
+        fileChooser.addChoosableFileFilter(filtro);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        fileChooser.showOpenDialog(this);
+        return fileChooser.getSelectedFile();
+
+    }
+    private byte[] getImagem() {
+        boolean isPng = false;
+        if (imagem != null) {
+            isPng = imagem.getName().endsWith("png");
+            try {
+                BufferedImage image = ImageIO.read(imagem);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                int type = BufferedImage.TYPE_INT_RGB;
+                if (isPng) {
+                    type = BufferedImage.BITMASK;
+                }
+                BufferedImage novaImagem = new BufferedImage(iconBackground.getWidth(), iconBackground.getHeight(), type);
+                Graphics2D g = novaImagem.createGraphics();
+                g.setComposite(AlphaComposite.Src);
+                g.drawImage(image, 0, 0, iconBackground.getWidth(), iconBackground.getHeight(), null);
+
+                if (isPng) {
+                    ImageIO.write(novaImagem, "png", out);
+                } else {
+                    ImageIO.write(novaImagem, "jpeg", out);
+                }
+                out.flush();
+                byte[] byteArray = out.toByteArray();
+                out.close();
+                return byteArray;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }   
+
+    private void abrirImagem(Object source) {
+        if (source instanceof File) {
+            ImageIcon icon = new ImageIcon(imagem.getAbsolutePath());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        } else if (source instanceof byte[]) {
+            ImageIcon icon = new ImageIcon(fun.getImagem());
+            icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
+            image.setIcon(icon);
+        }
+    }
+    
+    
+
 }

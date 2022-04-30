@@ -22,7 +22,7 @@ public class ClienteDao {
     
     public void cadastrarClienteFinal(Cliente objCliente){
         try {
-            cadastrarPessoa(objCliente.getCpf(), objCliente.getNome(), objCliente.getSexo());
+            cadastrarPessoa(objCliente.getCpf(), objCliente.getNome(), objCliente.getSexo(), objCliente.getImagem());
             cadastrarEndereco(objCliente);
             cadastroCadastro(objCliente);
             cadastroTelefone(objCliente);
@@ -98,15 +98,15 @@ public class ClienteDao {
         }
         
     }
-    public void cadastrarPessoa(String cpf, String nome, String sexo ){
+    public void cadastrarPessoa(String cpf, String nome, String sexo ,byte[] foto){
         try {
-            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO,SALDO_BANCARIO) VALUES(?,0,?,?,0)";
+            String sql = "INSERT INTO PESSOA(CPF,ID,NOME,SEXO,FOTO,SALDO_BANCARIO) VALUES(?,0,?,?,?,0)";
             conn= new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
             pstm.setString(1,cpf);
-//            pstm.setString(2,"0");
             pstm.setString(2, nome);
             pstm.setString(3, sexo);
+            pstm.setBytes(4, foto);
             
             pstm.execute();
                        

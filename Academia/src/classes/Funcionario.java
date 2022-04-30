@@ -24,6 +24,7 @@ public class Funcionario extends Pessoa {
     private double valorServico=0.00;
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     private String especialidade;
+    private byte[] imagem;
     
     
     Connection conn;
@@ -32,15 +33,6 @@ public class Funcionario extends Pessoa {
 
     public Funcionario() {
     }
-    /*
-    public void especialidade(String cpf ){
-        String sql = "SELECT ESPECIALIDADE FROM TABELA FUNCIONARIO WHERE CPF = ?";
-        try {
-            
-        } catch (Exception e) {
-        }
-    }*/
-    
     
     public ResultSet autenticacaoFuncionario() {
       
@@ -59,6 +51,14 @@ public class Funcionario extends Pessoa {
         return chave;
     }
 
+    public byte[] getImagem() {
+        return this.imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+    
     public void setChave(String chave) {
         this.chave = chave;
     }
