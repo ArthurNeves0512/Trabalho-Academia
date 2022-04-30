@@ -574,6 +574,7 @@ public class RegistroPersonal extends javax.swing.JFrame {
             
             funcionario.setEspecialidade(cBAbdomen + cBPeito + cBBracos + cBPernas + cBOmbros);
             
+            
             funcionario.setImagem(getImagem());
 
             personalDao.cadastrarFuncionarioFinal(funcionario);

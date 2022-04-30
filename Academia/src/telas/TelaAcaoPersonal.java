@@ -19,13 +19,12 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
      * Creates new form TelaAcaoPersonal
      */
     public TelaAcaoPersonal() {
-        System.out.println(TelaInicio.cpfEscolhido);
-       
+        
         if(TelaInicio.flagF !=1){
             
       
         initComponents();
-            if (objFuncionarioDao.isTrabalhando(TelaInicio.cpfEscolhido)) {
+            if (objFuncionarioDao.isTrabalhando(TelaInicio.infos_login.get(1))) {
                 btnOnAndOff.setSelected(true);
                 btnOnAndOff.setText("Desativar");
             } else {
@@ -136,20 +135,12 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
 
 
     private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
-     for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(true);
-            }
-        }
+     
     }//GEN-LAST:event_btnOnActionPerformed
 
     private void btnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffActionPerformed
         // TODO add your handling code here:
-        for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(false);
-            }
-        }
+        
     }//GEN-LAST:event_btnOffActionPerformed
 
 
@@ -160,20 +151,16 @@ public class TelaAcaoPersonal extends javax.swing.JFrame {
         if(btnOnAndOff.isSelected())
         {
             //dizer que o personal esta online
-            objFuncionarioDao.isTrabalhando(1,TelaInicio.cpfEscolhido);
+            objFuncionarioDao.isTrabalhando(1,TelaInicio.infos_login.get(1));
             btnOnAndOff.setText("Desativar");
             btnOnAndOff.setSelected(true);
         }
         else
         {
             //dizer que o personal esta online
-            objFuncionarioDao.isTrabalhando(0, TelaInicio.cpfEscolhido);
+            objFuncionarioDao.isTrabalhando(0, TelaInicio.infos_login.get(1));
             btnOnAndOff.setText("Ativar");
-            for(int i =1; i<TelaInicio.cadastrosPersonal.size(); i ++){
-            if(TelaInicio.cadastrosPersonal.get(i).getCpf().equals(TelaInicio.cpfEscolhido)){
-                TelaInicio.cadastrosPersonal.get(i).setTrabalhando(false);
-            }
-        }
+         
         }
     }//GEN-LAST:event_btnOnAndOffActionPerformed
 

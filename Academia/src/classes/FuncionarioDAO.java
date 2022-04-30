@@ -31,6 +31,7 @@ public class FuncionarioDAO {
             pstm.setString(3, cpf);
             pstm.execute();
             pstm.close();
+            JOptionPane.showMessageDialog(null, "DEU TUDO CERTO AQUI NO ATUALIZA NOME");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "nao consegui atualizar o nome");
@@ -58,7 +59,7 @@ public class FuncionarioDAO {
     
     public void atualizaTelefone(String cpf, String telefone)
     {
-        String sql = "UPDATE TELEFONE SET TELEFONE=? WHERE (ID=1 AND CPF= ?)";
+        String sql = "UPDATE TELEFONES SET NUMERO=? WHERE (ID=1 AND CPF= ?)";
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
@@ -151,6 +152,7 @@ public class FuncionarioDAO {
     {
         String especialidade="";
         String sql = "SELECT ESPECIALIDADE FROM FUNCIONARIO WHERE CPF= ?";
+        System.out.println("fiquei bem aqui meu cumpade");
         try {
             conn = new ConexaoBd().conectaBd();
             pstm = conn.prepareStatement(sql);
@@ -159,8 +161,9 @@ public class FuncionarioDAO {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                especialidade=rs.getString("ESPECIALIDADE");
+                especialidade= rs.getString(1);
             }
+            return especialidade;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "nao deu pra pegar a especialidade do banco de dados" + e);
         }

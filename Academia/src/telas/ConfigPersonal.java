@@ -47,29 +47,30 @@ public class ConfigPersonal extends javax.swing.JFrame {
         System.out.println("meu deus do ceu linha 46");
         txtCpf.setEditable(false);
         System.out.println("txt cpf "+ txtCpf.getText());
-        
-        String especialidades = funcionario.carregarEspecialidadeNaConfiguracao(txtCpf.getText());
+        System.out.println("será que vai mostrar algo? "+funcionario.carregarEspecialidadeNaConfiguracao(TelaInicio.infos_login.get(1)));
+        String especialidades = funcionario.carregarEspecialidadeNaConfiguracao(TelaInicio.infos_login.get(1));
         System.out.println("meu deus do ceu linha 51 "+ especialidades);
-//        if(Character.compare(especialidades.charAt(0),'1')==0)
-//        {
-//            checkBoxAbdomen.setSelected(true);
-//        }
-//        if(Character.compare(especialidades.charAt(1),'1')==0)
-//        {
-//            checkBoxPeito.setSelected(true);
-//        }
-//        if(Character.compare(especialidades.charAt(2),'1')==0)
-//        {
-//            checkBoxBracos.setSelected(true);
-//        }
-//        if(Character.compare(especialidades.charAt(3),'1')==0)
-//        {
-//            checkBoxPernas.setSelected(true);
-//        }
-//        if(Character.compare(especialidades.charAt(4),'1')==0)
-//        {
-//            checkBoxOmbros.setSelected(true);
-//        }
+        especialidades.length();
+        if(Character.compare(especialidades.charAt(0),'1')==0)
+        {
+            checkBoxAbdomen.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(1),'1')==0)
+        {
+            checkBoxPeito.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(2),'1')==0)
+        {
+            checkBoxBracos.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(3),'1')==0)
+        {
+            checkBoxPernas.setSelected(true);
+        }
+        if(Character.compare(especialidades.charAt(4),'1')==0)
+        {
+            checkBoxOmbros.setSelected(true);
+        }
         /*      
         ImageIcon imcon = new ImageIcon(TelaInicio.cadastrosPersonal.get(i).getFoto());
         Image imFit = imcon.getImage();                
@@ -422,6 +423,8 @@ public class ConfigPersonal extends javax.swing.JFrame {
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
         imagem = selecionarImagem();
         abrirImagem(imagem);
+        fun.setImagem(getImagem());
+        funcionario.atualizaNome(txtNome.getText(),TelaInicio.infos_login.get(1),fun.getImagem());
         
     }//GEN-LAST:event_btnUploadActionPerformed
 
@@ -432,17 +435,6 @@ public class ConfigPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-    
-        System.out.println("estou aqui antes");
-        //System.out.println(getImagem());
-       fun.setImagem(getImagem());
-       getImagem();
-        
-       //fun.setImagem();
-        System.out.println("misericordiaaaaaaaaaaaaaaaaaaaa 438");
-
-        
-
         funcionario.atualizarCadastroFuncionario(TelaInicio.infos_login.get(1), fun.getImagem() , txtNome.getText(), txtLogradouro.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtTelefone.getText(), txtEmail.getText(), txtSenha.getText());
         System.out.println("rodei duda");
         String ans = "";
@@ -450,17 +442,30 @@ public class ConfigPersonal extends javax.swing.JFrame {
         if (checkBoxAbdomen.isSelected() == true) {
             ans += "1";
         }
+        else{ans+="0";}
         if (checkBoxPeito.isSelected() == true) {
             ans += "1";
+        }
+        else {
+            ans += "0";
         }
         if (checkBoxBracos.isSelected() == true) {
             ans += "1";
         }
+        else {
+            ans += "0";
+        }
         if (checkBoxPernas.isSelected() == true) {
             ans += "1";
         }
+        else {
+            ans += "0";
+        }
         if (checkBoxOmbros.isSelected() == true) {
-            ans += "";
+            ans += "1";
+        }
+        else {
+            ans += "0";
         }
 
         funcionario.atualizaEspecialidade(ans, TelaInicio.infos_login.get(1));

@@ -21,7 +21,7 @@ public FuncionarioDAO fd;
     
     public TelaContratacaoServico() {
         initComponents();
-        System.out.println("A COR DE SUA PELE");
+        System.out.println(TelaAcaoCliente.cpfFuncionarioEscolhido);
         CarregarDados(TelaAcaoCliente.cpfFuncionarioEscolhido);
         
     }
@@ -46,13 +46,8 @@ public FuncionarioDAO fd;
                 ImageIcon icon= new ImageIcon(rs.getBytes(9));
                 icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
                 image.setIcon(icon);
-                
-                //ERRO NO RS.GETSTRING(7)
-                if(rs.getString(7).isEmpty()){
-                    System.out.println("oporra");
-                }
-                System.out.println(fd.carregarEspecialidade2(rs.getString(7)));
-                InputEspecialidade.setText(fd.carregarEspecialidade2(rs.getString(7)));
+                      
+                InputEspecialidade.setText(fd.carregarEspecialidadeNaConfiguracao(rs.getString(7)));
                 
             }
         } catch (SQLException e) {
@@ -91,6 +86,7 @@ public FuncionarioDAO fd;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contratar serviço");
+        setPreferredSize(new java.awt.Dimension(650, 600));
 
         ContratacaoServicoWhiteBackground.setBackground(new java.awt.Color(255, 255, 255));
         ContratacaoServicoWhiteBackground.setMinimumSize(new java.awt.Dimension(600, 500));
@@ -260,7 +256,7 @@ public FuncionarioDAO fd;
                     .addGroup(ContratacaoServicoWhiteBackgroundLayout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(ConfirmacaoServicoText)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         ContratacaoServicoWhiteBackgroundLayout.setVerticalGroup(
             ContratacaoServicoWhiteBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
