@@ -20,8 +20,8 @@ public ResultSet rs;
 public FuncionarioDAO fd;
     
     public TelaContratacaoServico() {
+        fd= new FuncionarioDAO();
         initComponents();
-        System.out.println(TelaAcaoCliente.cpfFuncionarioEscolhido);
         CarregarDados(TelaAcaoCliente.cpfFuncionarioEscolhido);
         
     }
@@ -34,6 +34,9 @@ public FuncionarioDAO fd;
             pstm.setString(1, cpf);
             rs = pstm.executeQuery();
             while(rs.next()){
+                
+                
+                
                 InputNomePersonalContratacaoTexto.setText(rs.getString(2));
                 InputLogradouro.setText(rs.getString(3));
                 InputBairro.setText(rs.getString(4));
@@ -46,8 +49,9 @@ public FuncionarioDAO fd;
                 ImageIcon icon= new ImageIcon(rs.getBytes(9));
                 icon.setImage(icon.getImage().getScaledInstance(iconBackground.getWidth(), iconBackground.getHeight(), 100));
                 image.setIcon(icon);
-                      
-                InputEspecialidade.setText(fd.carregarEspecialidadeNaConfiguracao(rs.getString(7)));
+                System.out.println(rs.getString(7));      
+                
+                InputEspecialidade.setText(fd.carregarEspecialidade2(rs.getString(7)));
                 
             }
         } catch (SQLException e) {

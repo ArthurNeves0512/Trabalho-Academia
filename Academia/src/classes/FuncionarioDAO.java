@@ -16,6 +16,7 @@ public class FuncionarioDAO {
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
+    String especialidade = "meu deus";
     //PreparedStatment ps;/*
 
     
@@ -122,7 +123,7 @@ public class FuncionarioDAO {
         
     }
     
-
+    
     public String carregarEspecialidade2(String e){
         String ans= new String(); 
         if (e.charAt(0) =='1') {
